@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FkForRoleUserAdsCatComLikeInfo < ActiveRecord::Migration[7.0]
   def change
     add_foreign_key :users, :roles
