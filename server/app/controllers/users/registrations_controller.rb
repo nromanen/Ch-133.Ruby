@@ -10,27 +10,26 @@ module Users
     end
 
     private
+      def user_params
+        params.require(:user).permit(
+          :password,
+          :email,
+          :nick_name
+        )
+      end
 
-    def user_params
-      params.require(:user).permit(
-        :password,
-        :email,
-        :nick_name
-      )
-    end
+      def respond_with(user, _opts = {})
+        register_success && return if user.persisted?
 
-    def respond_with(user, _opts = {})
-      register_success && return if user.persisted?
+        register_failed(user)
+      end
 
-      register_failed(user)
-    end
+      def register_success
+        render json: { message: "Signed up sucessfully." }
+      end
 
-    def register_success
-      render json: { message: 'Signed up sucessfully.' }
-    end
-
-    def register_failed(user)
-      render json: user.errors.full_messages, status: :unprocessable_entity
-    end
+      def register_failed(user)
+        render json: user.errors.full_messages, status: :unprocessable_entity
+      end
   end
 end
