@@ -22,7 +22,12 @@ Bundler.require(*Rails.groups)
 
 module AdvertApp
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
+ 
+    config.i18n.available_locales = %i[en ru ukr]
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
+    config.i18n.default_locale = :ru
+
+
     config.load_defaults 7.0
 
     # Configuration for the application, engines, and railties goes here.

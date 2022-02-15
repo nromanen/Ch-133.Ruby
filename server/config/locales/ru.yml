@@ -1,0 +1,5 @@
+ru:
+  categories:
+    create:
+      success: "Успех"
+      wrongway: "Ой, что-то пошло не так"

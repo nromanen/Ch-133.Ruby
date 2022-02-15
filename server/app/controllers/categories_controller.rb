@@ -1,5 +1,43 @@
-# frozen_string_literal: true
-
 class CategoriesController < ApplicationController
-  def index; end
+  #before_action :authenticate_user!
+  before_action :set_category, except: %i[ create index ]
+
+  def index
+    @categories = Category.all
+    render json: @categories
+  end
+
+
+  def create
+    @category = Category.new(category_params)
+    puts (t'.success')
+    if @category.save
+      render json: { message: t('.success') }, status: :created
+    else
+      render json: @category.errors, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @category.update(advert_params)
+      render json: { message: I18n.t(".success") }, status: :ok
+    else
+      render json: { message: I18n.t(".wrongway") }, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @category.destroy
+  end
+
+  private
+
+  def set_category
+    @category = Category.find(params[:id])
+  end
+
+  def category_params
+    params.require(:category).permit(:name)
+  end
+
 end
