@@ -26,7 +26,7 @@ class User < ApplicationRecord
   validates :nick_name, presence: true, uniqueness: true, length: { minimum: 3, maximum: 15 }
 
   def set_default
-    user = Role.find_by(name: "User")
-    self.role_id = user.id
+    role_user = Role.find_by(name: "User")
+    self.role_id = role_user.id
   end
 end
