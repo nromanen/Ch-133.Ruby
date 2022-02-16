@@ -10,9 +10,8 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    puts (t'.success')
     if @category.save
-      render json: { message: t('.success') }, status: :created
+      render json: { message: I18n.t(".category.created") }, status: :created
     else
       render json: @category.errors, status: :unprocessable_entity
     end
@@ -20,9 +19,9 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update(advert_params)
-      render json: { message: I18n.t(".success") }, status: :ok
+      render json: { message: I18n.t(".category.updated") }, status: :ok
     else
-      render json: { message: I18n.t(".wrongway") }, status: :unprocessable_entity
+      render json: @category.errors, status: :unprocessable_entity
     end
   end
 

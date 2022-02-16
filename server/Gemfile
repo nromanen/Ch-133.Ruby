@@ -19,6 +19,7 @@ gem "rubocop-rails", "~> 2.13", ">= 2.13.2"
 gem "rubocop-rails_config"
 gem 'uuid', '~> 2.3', '>= 2.3.9'
 gem 'rails-i18n', '~> 7.0', '>= 7.0.1'
+gem 'i18n', '~> 1.10'
 
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "bootsnap", require: false

@@ -1,14 +1,11 @@
-en: 
-  activerecord:
-    models:
-      category: 
-        uniqueness: 'as'
+en:
+  validation:
+    uniqueness: "Uniqueness check failed"
+    presence: "Must be presence"
+    length: "Not suitable for the allowed length"
+    format: "Only english letters allowed"
 
+  category:
+    created: "Category was successfully created"
+    updated: "Category was successfully updated"
 
-  categories:
-    create:
-      category_created: "Category was succesfully created"
-      wrongway: "Category creating error"
-    update:
-      category_updated: "Category was succesfully updated"
-      category_updated_err: "Category updating error"

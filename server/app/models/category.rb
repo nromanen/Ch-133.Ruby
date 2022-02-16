@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 class Category < ApplicationRecord
-  before_validation :uppercase_name
+  before_validation :capitalize_name
 
-  validates :name, uniqueness: {message: t('.uniqueness')} #presence: {message: "Title can't be blank." },                    
-                   #length:{ minimum: 3, maximum: 20 }#, message: "#{t(':length_allow')}"},
-                   #format: { with: /\A[a-zA-Z]+\z/, message: "only allows english letters" }
+  validates :name, uniqueness: {message: I18n.t('.validation.uniqueness') }, 
+  presence: {message: I18n.t('.validation.presence') },                    
+  length:{ minimum: 3, maximum: 20, message: I18n.t('.validation.length') },
+  format: { with: /\A[a-zA-Z]+\z/, message:  I18n.t('.validation.format')}
                    
-  def uppercase_name
-    name.upcase!  
+  def capitalize_name
+    name.capitalize!  
   end
 
 end
