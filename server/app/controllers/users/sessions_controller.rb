@@ -5,7 +5,7 @@ module Users
     respond_to :json
 
     private
-      def respond_with(_resource, _opts = {})
+      def respond_with(resource, _opts = {})
         if current_user.nil?
           render json: {
             message: "Wrong email or password"

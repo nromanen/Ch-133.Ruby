@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # devise_for :users
   devise_for :users,
              controllers: {
                sessions: "users/sessions",
                registrations: "users/registrations"
              }
+  get 'user_infos', to: 'user_infos#index'
+  get 'user_infos/:id(.:format)', to: 'user_infos#show'
+  post 'user_infos', to: 'user_infos#create'
+  put 'user_infos', to: 'user_infos#update'
   resources :adverts do
     resources :comments
   end

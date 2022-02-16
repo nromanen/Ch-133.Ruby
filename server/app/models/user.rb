@@ -13,5 +13,6 @@ class User < ApplicationRecord
   has_many :adverts
   has_many :likes
   has_one :role
-  has_one :user_info
+  has_one :user_info, dependent: :destroy
+
 end
