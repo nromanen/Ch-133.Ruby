@@ -19,13 +19,13 @@ module Users
       end
 
       def respond_with(user, _opts = {})
-        register_success && return if user.persisted?
+        register_success(user) && return if user.persisted?
 
         register_failed(user)
       end
 
-      def register_success
-        render json: { message: "Signed up sucessfully." }
+      def register_success(user)
+        render json: { message: I18n.t('created', name: user.nick_name) }
       end
 
       def register_failed(user)

@@ -1,4 +1,6 @@
 en:
   created: "%{name} was successfully created"
   updated: "%{name} was successfully updated"
-
+  wronglogin: "Wrong Email or Password"
+  success: "The action was successful"
+  wrongway: "Hmm, something went wrong"
