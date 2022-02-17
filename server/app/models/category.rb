@@ -3,6 +3,8 @@
 class Category < ApplicationRecord
   before_validation :capitalize_name
 
+  has_many :adverts, dependent: :nullify
+
   validates :name, uniqueness: true,
   presence: true,
   length: { minimum: 3, maximum: 20 },
