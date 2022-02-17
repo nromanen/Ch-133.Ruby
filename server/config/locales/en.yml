@@ -1,11 +1,4 @@
 en:
-  validation:
-    uniqueness: "Uniqueness check failed"
-    presence: "Must be presence"
-    length: "Not suitable for the allowed length"
-    format: "Only english letters allowed"
-
-  category:
-    created: "Category was successfully created"
-    updated: "Category was successfully updated"
+  created: "%{name} was successfully created"
+  updated: "%{name} was successfully updated"
 

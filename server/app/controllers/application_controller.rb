@@ -14,4 +14,8 @@ class ApplicationController < ActionController::API
   	return locale if I18n.available_locales.map(&:to_s).include?(locale)
   end
 
+  def default_url_options(options={})
+    { locale: I18n.locale }
+  end
+
 end
