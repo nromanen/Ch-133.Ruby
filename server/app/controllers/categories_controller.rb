@@ -20,7 +20,7 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    if @category.update(advert_params)
+    if @category.update(category_params)
       render json: { message: I18n.t("updated", name: @category.name) }, status: :ok
     else
       render json: @category.errors, status: :unprocessable_entity
