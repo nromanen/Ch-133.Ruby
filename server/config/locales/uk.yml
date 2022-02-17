@@ -1,4 +1,4 @@
-ukr:
+uk:
   created: "%{name} було успішно створено"
   updated: "%{name} було успішно перезаписано"
   wronglogin: "Неправильний Email чи пароль"
