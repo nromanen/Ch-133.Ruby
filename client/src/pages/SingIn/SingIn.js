@@ -1,5 +1,4 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 import FormInput from '../../components/form-input/form-input'
@@ -34,7 +33,7 @@ class SignIn extends React.Component {
         };
         fetch(window.singInUrl, requestOptions)
         .then((response) => {
-          if (response.status != 200)
+          if (response.status !== 200)
             this.setState({ ShowMessage: true });
           else {
             this.setState({ ShowMessage: false });
