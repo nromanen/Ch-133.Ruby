@@ -1,11 +1,13 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
-import FormInput from '../components/form-input'
-import CustomButton from '../components/custom-button'
-import Message from '../components/message'
+import FormInput from '../../components/form-input/form-input'
+import CustomButton from '../../components/custom-button/custom-button'
+import Message from '../../components/message/message'
 
 import './SingIn.scss'
+import '../../consts.js'
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -20,7 +22,6 @@ class SignIn extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        const url = 'http://localhost:3000/users/sign_in'
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -31,19 +32,27 @@ class SignIn extends React.Component {
               }
            })
         };
-        fetch(url, requestOptions)
+        fetch(window.singInUrl, requestOptions)
         .then((response) => {
-          if (response.status == 422)
+          if (response.status != 200)
             this.setState({ ShowMessage: true });
           else {
             this.setState({ ShowMessage: false });
-            window.location = '/HomePage';
           }
           return response.json();
         })
         .then((data) => {
-          this.setState({ text: data.message });
-          console.log(data.token);
+          if(this.state.ShowMessage){
+            this.setState({ text: data.message });
+          } else {
+            const cookies = new Cookies();
+            cookies.set('user-info', data.token, {
+              path: '/',
+              sameSite: 'none',
+              secure: true,
+            });
+            window.location = '/HomePage';
+          }
        });
     }
 

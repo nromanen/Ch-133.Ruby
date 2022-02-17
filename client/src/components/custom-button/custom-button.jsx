@@ -1,4 +1,3 @@
-// custom-button.component.jsx
 import React from 'react';
 
 import './custom-button.scss'
@@ -8,6 +7,5 @@ const CustomButton = ({ children, ...otherProps }) => (
         {children}
     </button>
 )
-
 
 export default CustomButton;
