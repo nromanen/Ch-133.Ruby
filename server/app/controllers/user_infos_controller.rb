@@ -9,10 +9,14 @@ class UserInfosController < ApplicationController
   end
 
   def show
-    user = User.find(params[:id])
-    show_user_info = user.user_info
-    render json: show_user_info.to_json(:only => [ :id, :first_name,
-                                                   :last_name, :phone, :user_id ])
+    if User.exists?(params[:id])
+      user = User.find(params[:id])
+      show_user_info = user.user_info
+      render json: show_user_info.to_json(:only => [ :id, :first_name,
+                                                     :last_name, :phone, :user_id ])
+    else
+      render json: { message: "Info doesn't exist" }, status: 404
+    end
   end
 
   def create
