@@ -8,7 +8,7 @@ module Users
       def respond_with(_resource, _opts = {})
         if current_user.nil?
           render json: {
-            message: I18n.t('wronglogin')
+            message: I18n.t("wronglogin")
           }, status: :unprocessable_entity
         else
           render json: request.env["warden-jwt_auth.token"], status: :ok
@@ -22,11 +22,11 @@ module Users
       end
 
       def log_out_success
-        render json: { message: I18n.t('success') }, status: :ok
+        render json: { message: I18n.t("success") }, status: :ok
       end
 
       def log_out_failure
-        render json: { message: I18n.t('wrongway') }, status: :unauthorized
+        render json: { message: I18n.t("wrongway") }, status: :unauthorized
       end
   end
 end

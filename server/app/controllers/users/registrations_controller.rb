@@ -25,7 +25,7 @@ module Users
       end
 
       def register_success(user)
-        render json: { message: I18n.t('created', name: user.nick_name) }
+        render json: { message: I18n.t("created", name: user.nick_name) }
       end
 
       def register_failed(user)

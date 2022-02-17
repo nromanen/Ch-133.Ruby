@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CategoriesController < ApplicationController
-  #before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_action :set_category, except: %i[ create index ]
 
   def index
@@ -30,13 +32,11 @@ class CategoriesController < ApplicationController
   end
 
   private
+    def set_category
+      @category = Category.find(params[:id])
+    end
 
-  def set_category
-    @category = Category.find(params[:id])
-  end
-
-  def category_params
-    params.require(:category).permit(:name)
-  end
-
+    def category_params
+      params.require(:category).permit(:name)
+    end
 end
