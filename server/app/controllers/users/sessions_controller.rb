@@ -11,7 +11,7 @@ module Users
             message: "Wrong email or password"
           }, status: :unprocessable_entity
         else
-          render json: request.env["warden-jwt_auth.token"], status: :ok
+          render json: {"token": request.env["warden-jwt_auth.token"]}, status: :ok
         end
       end
 

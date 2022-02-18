@@ -25,7 +25,7 @@ module Users
       end
 
       def register_success
-        render json: { message: "Signed up sucessfully." }
+        render json: { message: "Signed up sucessfully. Please confirm your email." }
       end
 
       def register_failed(user)
