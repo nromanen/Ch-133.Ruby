@@ -11,11 +11,6 @@ gem "rails", "~> 7.0.1"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
-gem "devise"
-gem "devise-jwt"
-gem "rails", "~> 7.0.1"
-gem "puma", "~> 5.0"
-
 gem "devise", "~> 4.8", ">= 4.8.1"
 gem "devise-jwt", "~> 0.9.0"
 gem "fast_jsonapi"
