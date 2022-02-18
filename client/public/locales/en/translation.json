@@ -1,0 +1,13 @@
+{
+  "header" : {
+    "main" : "About the project",
+    "contact": "Contact us",
+    "language": "Language"
+  },
+  "singIn" : {
+    "head" : "Sing In",
+    "email": "email",
+    "password": "password",
+    "button": "SING IN"
+  }
+}

@@ -1,10 +1,13 @@
 import React from 'react';
 import Cookies from 'universal-cookie';
+import { useTranslation } from 'react-i18next';
 
 import FormInput from '../../components/form-input/form-input'
 import CustomButton from '../../components/custom-button/custom-button'
 import Message from '../../components/message/message'
+import { withTranslation } from 'react-i18next';
 
+import "../../i18n";
 import './SingIn.scss'
 import '../../consts.js'
 
@@ -59,23 +62,23 @@ class SignIn extends React.Component {
         const { value, name } = event.target;
         this.setState({ [name]: value });
     }
-
     render() {
+      const { t } = this.props;
         return (
           <div className='sign-in'>
             { this.state.ShowMessage ? <Message text={this.state.text}/> : null }
-            <h2>Sign In</h2>
+            <h2>{t("singIn.head")}</h2>
             <form onSubmit={this.handleSubmit}>
               <FormInput name='email' type='email' value={this.state.email}
-               required handleChange={this.handleChange} label='email' />
+               required handleChange={this.handleChange} label={t("singIn.email")} />
               <FormInput name='password' type='password'
               value={this.state.password} required
-              handleChange={this.handleChange} label='password' />
-              <CustomButton type='submit'>SIGN IN</CustomButton>
+              handleChange={this.handleChange} label={t("singIn.password")} />
+              <CustomButton type='submit'>{t("singIn.button")}</CustomButton>
             </form>
           </div>
         );
     }
 }
 
-export default SignIn;
+export default withTranslation()(SignIn)

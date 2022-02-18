@@ -1,0 +1,13 @@
+{
+  "header" : {
+    "main" : "Про нас",
+    "contact": "Контакти",
+    "language": "Мова"
+  },
+  "singIn" : {
+    "head" : "Увійти",
+    "email": "пошта",
+    "password": "пароль",
+    "button": "Відправити"
+  }
+}
