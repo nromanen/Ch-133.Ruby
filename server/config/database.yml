@@ -17,16 +17,16 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: postgres
-  password: DgefKlipsa
-  host: localhost
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  username: postgres
+  password: passwd
+  host: localhost
+  port: 5432
 
 development:
   <<: *default
-  database: advert_app
+  database: Adv-app
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
