@@ -1,15 +1,14 @@
 import React from 'react';
 import Cookies from 'universal-cookie';
-import { useTranslation } from 'react-i18next';
 
-import FormInput from '../../components/form-input/form-input'
-import CustomButton from '../../components/custom-button/custom-button'
-import Message from '../../components/message/message'
+import FormInput from 'components/form-input/form-input'
+import CustomButton from 'components/custom-button/custom-button'
+import Message from 'components/message/message'
 import { withTranslation } from 'react-i18next';
 
-import "../../i18n";
+import "i18n";
 import './SingIn.scss'
-import '../../consts.js'
+import 'consts.js'
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -62,6 +61,7 @@ class SignIn extends React.Component {
         const { value, name } = event.target;
         this.setState({ [name]: value });
     }
+
     render() {
       const { t } = this.props;
         return (
