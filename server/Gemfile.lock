@@ -173,7 +173,7 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
-    rails-i18n (7.0.1)
+    rails-i18n (7.0.2)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 8)
     railties (7.0.1)
@@ -252,8 +252,6 @@ GEM
     timeout (0.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    tzinfo-data (1.2021.5)
-      tzinfo (>= 1.0.0)
     unicode-display_width (2.1.0)
     uuid (2.3.9)
       macaddr (~> 1.0)
@@ -267,10 +265,10 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    will_paginate (3.3.1)
     zeitwerk (2.5.4)
 
 PLATFORMS
-  x64-mingw32
   x86_64-linux
 
 DEPENDENCIES
@@ -286,12 +284,14 @@ DEPENDENCIES
   rack-cors
   rails (~> 7.0.1)
   rails-i18n (~> 7.0, >= 7.0.1)
-  rspec (~> 3.5)
+  rspec-rails (~> 5.0, >= 5.0.1)
   rubocop
   rubocop-rails (~> 2.13, >= 2.13.2)
   rubocop-rails_config
+  simplecov (~> 0.21.2)
   tzinfo-data
-  uuid (~> 2.3, >= 2.3.9)
+  uuid
+  will_paginate (~> 3.3, >= 3.3.1)
 
 RUBY VERSION
    ruby 3.0.3p157

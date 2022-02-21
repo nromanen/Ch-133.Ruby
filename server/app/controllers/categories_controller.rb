@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      render json: { message: I18n.t("created", name: @category.name) }, status: :created
+      render json: { message: I18n.t("created", name: I18n.t("category")) }, status: :created
     else
       render json: @category.errors, status: :unprocessable_entity
     end
@@ -21,7 +21,7 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update(category_params)
-      render json: { message: I18n.t("updated", name: @category.name) }, status: :ok
+      render json: { message: I18n.t("updated", name: I18n.t("category")) }, status: :ok
     else
       render json: @category.errors, status: :unprocessable_entity
     end

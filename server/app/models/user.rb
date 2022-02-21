@@ -9,9 +9,9 @@ class User < ApplicationRecord
          :jwt_authenticatable,
          :registerable,
          jwt_revocation_strategy: JwtDenylist
-  has_many :comments
-  has_many :adverts
-  has_many :likes
+  has_many :comments, dependent: :destroy
+  has_many :adverts, dependent: :destroy
+  has_many :likes, dependent: :destroy
   has_one :role
-  has_one :user_info
+  has_one :user_info, dependent: :destroy
 end

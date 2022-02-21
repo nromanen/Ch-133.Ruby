@@ -4,4 +4,5 @@ uk:
   wronglogin: "Неправильний Email чи пароль"
   success: "Дія пройшла успішно"
   wrongway: "Хмм, щось пішло не так"
-
+  category: "Категорію"
+  comment: "Коментар"

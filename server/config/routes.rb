@@ -11,5 +11,5 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  resources :categories
+  resources :categories, :comments
 end
