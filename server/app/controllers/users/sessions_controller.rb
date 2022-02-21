@@ -11,7 +11,7 @@ module Users
             message: I18n.t("wronglogin")
           }, status: :unprocessable_entity
         else
-          render json: request.env["warden-jwt_auth.token"], status: :ok
+          render json: {"token": request.env["warden-jwt_auth.token"]}, status: :ok
         end
       end
 
