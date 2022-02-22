@@ -26,7 +26,7 @@ class PasswordsController < Devise::PasswordsController
     def token_valid?
       @user = User.find_by(params[user: :reset_password_token])
       if @user.reset_password_token.present?
-        nil
+        return
       else
         render json: { message: "Reset period expired" }, status: :forbidden
       end
