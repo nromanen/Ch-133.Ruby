@@ -16,9 +16,9 @@ class PasswordsController < Devise::PasswordsController
 
   def update
     if @user.update(reset_params)
-      render json: @user, status: :ok
+      render json: { message: "Password for #{@user.nick_name} updated" }, status: :ok
     else
-      render json: @user.errors.full_message, status: :bad_request
+      render json: { message: "Can't update #{@user.nick_name} password" }, status: :bad_request
     end
   end
 
