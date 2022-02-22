@@ -6,9 +6,9 @@ class Category < ApplicationRecord
   has_many :adverts, dependent: :nullify
 
   validates :name, uniqueness: true,
-  presence: true,
-  length: { minimum: 3, maximum: 20 },
-  format: { with: /\A[a-zA-Z]+\z/ }
+                   presence: true,
+                   length: { minimum: 3, maximum: 20 },
+                   format: { with: /\A[a-zA-Z]+\z/ }
 
   def capitalize_name
     name.capitalize!
