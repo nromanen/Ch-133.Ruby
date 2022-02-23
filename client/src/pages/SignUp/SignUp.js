@@ -45,7 +45,7 @@ class SignUp extends React.Component {
         })
         .then((data) => {
           if(this.state.ShowMessage){
-            this.setState({ text: data.message });
+            this.setState({ text: data.message});
           } else {
             const cookies = new Cookies();
             cookies.set('user-info', data.token, {
@@ -70,7 +70,7 @@ class SignUp extends React.Component {
             <h2>Sign Up</h2>
             <form onSubmit={this.handleSubmit}>
                 <FormInput name='nick_name' type='text' value={this.state.nick_name}
-                           required handleChange={this.handleChange} label='nickName' />
+                           required handleChange={this.handleChange} label='nick' />
               <FormInput name='email' type='email' value={this.state.email}
                required handleChange={this.handleChange} label='email' />
               <FormInput name='password' type='password'
