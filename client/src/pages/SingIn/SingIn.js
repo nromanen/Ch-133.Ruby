@@ -67,7 +67,7 @@ class SignIn extends React.Component {
         return (
           <div className='sign-in'>
             { this.state.showMessage ? <Message text={this.state.text}/> : null }
-            { this.state.token ? <CookieRefresh/> : null } // if fetch returns token then we can render a component by first time and run UseEffect hook in component
+            { this.state.token ? <CookieRefresh/> : null } {/*if fetch returns token then we can render a component by first time and run UseEffect hook in component*/} 
             <h2>{t("singIn.head")}</h2>
             <form onSubmit={this.handleSubmit}>
               <FormInput name='email' type='email' value={this.state.email}

@@ -9,7 +9,7 @@ function CookieRefresh() {
   let promise = new Promise(function(resolve, reject) {
     setTimeout(() => resolve(
       cookies.remove('user-info'),
-      navigate("/log_in")
+      navigate("/sign_in")
     ), time);
   }).then(
     result => console.log(result),
