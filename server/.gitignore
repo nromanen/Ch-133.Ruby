@@ -224,4 +224,6 @@ modules.xml
 
 /db/migrate/0_enable_extensions.rb
 
+/config/cloudinary.yml
+
 /config/credentials.yml.enc
