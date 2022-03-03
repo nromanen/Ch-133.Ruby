@@ -16,14 +16,22 @@ class Advert < ApplicationRecord
     deleted: 3
   }
 
-  def liked?(user)
-    !!self.likes.find { |like| like.user_id == user.id }
+  def liked?
+    !!self.likes.find { |like| like.user_id == current_user.id }
   end
-
 
   validates :title, :text, presence: true
+  validates :image, blob: { content_type: %w[image/png image/jpg image/jpeg], size_range: 1..(10.megabytes) }
 
-  def get_image_url
+
+  def image_url
     url_for(self.image)
   end
+
+  def owner
+    { owner_id: self.user.id,
+     owner_name: self.user.nick_name }
+  end
+
+
 end

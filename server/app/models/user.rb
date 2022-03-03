@@ -14,4 +14,9 @@ class User < ApplicationRecord
   has_many :likes
   has_one :role
   has_one :user_info
+
+  def get_advert_count
+    self.adverts.length
+  end
+
 end
