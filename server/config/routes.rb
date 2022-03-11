@@ -6,6 +6,7 @@ Rails.application.routes.draw do
                sessions: "users/sessions",
                registrations: "users/registrations"
              }
+
   devise_scope :user do
     post "/send_email" => "passwords#create"
     put "users/password/edit(.:format)" => "passwords#update"
@@ -17,12 +18,10 @@ Rails.application.routes.draw do
   resources :users do
     resource :user_infos
   end
+
   resources :adverts do
     resources :comments
   end
-  resources :categories
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :categories
 end

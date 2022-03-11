@@ -19,10 +19,11 @@ module Users
       end
 
       def respond_with(user, _opts = {})
-        register_success && return if user.persisted?
+        register_success(user) && return if user.persisted?
 
         register_failed(user)
       end
+
 
       def register_success
         render json: { message: "Signed up successfully. Please confirm your email." }
