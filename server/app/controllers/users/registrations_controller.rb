@@ -26,11 +26,11 @@ module Users
 
 
       def register_success
-        render json: { message: "Signed up sucessfully. Please confirm your email." }
+        render json: { message: "Signed up successfully. Please confirm your email." }
       end
 
       def register_failed(user)
-        render json: user.errors.full_messages, status: :unprocessable_entity
+        render json: { message: "Data is not valid, please, change" }, status: :unprocessable_entity
       end
   end
 end
