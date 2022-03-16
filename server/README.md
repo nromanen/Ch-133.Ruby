@@ -3,13 +3,15 @@ Rails version -  7.0.1
 Postgres version - 14
 
 For using project:
-- $git clone https://github.com/nromanen/Ch-133.Ruby.git
-- $cd server
-- $bundle install
-- put password in file "database.yml"
-- $bundle exec rake secret
-- copy key -> $EDITOR=nano rails credentials:edit -> add to file
-  devise:
-  jwt_secret_key: <rake secret key>
-- $rails db:create and $rails db:migrate
-
+- clone the repository
+- $ cd server
+- $ bundle install
+- put the password and role name for postgres to the local variables
+- $ bundle exec rake secret
+- $ EDITOR=nano rails credentials:edit
+    devise:
+      jwt_secret_key: <generated key>
+- $ rails db:create
+- $ rails db:migrate
+- $ rails db:seed
+- $ rails s
