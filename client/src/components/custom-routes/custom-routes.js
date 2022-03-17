@@ -1,4 +1,3 @@
-import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "../../pages/Layout";
 import SingIn from "../../pages/SingIn/SingIn";
@@ -11,7 +10,7 @@ const CustomRoutes = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/sign_in" element={<SingIn />} />
-            <Route path="/sign_up" element={<SignUp />} />
+          <Route path="/sign_up" element={<SignUp />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
