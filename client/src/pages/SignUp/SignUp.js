@@ -2,12 +2,12 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
-import FormInput from '../../components/form-input/form-input'
-import CustomButton from '../../components/custom-button/custom-button'
-import Message from '../../components/message/message'
+import FormInput from 'components/form-input/form-input'
+import CustomButton from 'components/custom-button/custom-button'
+import Message from 'components/message/message'
 
 import './SignUp.scss'
-import '../../consts.js'
+import 'consts.js'
 
 class SignUp extends React.Component {
     constructor(props) {

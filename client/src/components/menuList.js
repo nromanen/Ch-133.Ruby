@@ -8,9 +8,11 @@ import jwt from 'jwt-decode'
 import Cookies from 'universal-cookie';
 import LoggedContext from 'context'
 import { useContext } from 'react';
+import { useTranslation } from "react-i18next";
 
 export default function MenuPopupState() {
-    const [email, setEmail] = useState("Loggin");
+    const { t } = useTranslation();
+    const [email, setEmail] = useState('LOGGIN');
     const navigate = useNavigate();
     const cookies = new Cookies();
     const { logged } = useContext(LoggedContext);
@@ -36,14 +38,14 @@ export default function MenuPopupState() {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    if (email !== "Loggin") {
+    if (email !== 'LOGGIN') {
       return(
         <>
           <PopupState variant="popover" popupId="demo-popup-menu">
             {(popupState) => (
               <React.Fragment>
                 <Button variant="contained" {...bindTrigger(popupState)}>
-                  {email}
+                  {t("header.button")}
                 </Button>
                 <Menu {...bindMenu(popupState)}>
                   <MenuItem onClick={()=>navigate("/user_info")}>User info</MenuItem>
