@@ -2,12 +2,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: #17592d;
+  color: #000000;
 }
 
 body {
-  color: #383f4d;
-  background-color: #fff;
   font-size: 100%;
   font-weight: 400;
   line-height: 1.45;
@@ -17,7 +15,7 @@ body {
 header {
   font-family: 'Fredoka';
   width: 100%;
-  background-color: #5AC69F;
+  background-color: #16796F;
 }
 
 .container {
@@ -37,6 +35,7 @@ header {
 }
 
 .brand {
+  color: #ffffff;
   font-size: 35px;
   line-height: 58px;
   font-weight: bold;
@@ -44,15 +43,16 @@ header {
 }
 
 nav ul {
+  color: #ffffff;
   display: flex;
   list-style: none;
 }
 
 nav ul li a {
+  color: #ffffff;
   padding: 22px 1em;
   font-size: 19px;
   font-weight: bold;
-  color: #383f4d;
   text-decoration: none;
 }
 
@@ -73,4 +73,8 @@ nav ul li a {
 
 .switcher-rignt {
   margin-right: 30px;
+}
+
+.switcher>span{
+  color: #ffffff;
 }

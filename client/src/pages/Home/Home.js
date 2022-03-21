@@ -35,7 +35,8 @@ const Home = () => {
             style={{
               width: '15em',
               height: '5em',
-              borderRadius: '25px'
+              borderRadius: '25px',
+              backgroundColor: '#16796F'
             }}>
           {homeInfo.button}
       </Button>
@@ -50,7 +51,7 @@ const Home = () => {
           display: 'flex',
           height: 600,
           pl: 2,
-          bgcolor: '#9EDEC6',
+          bgcolor: '#10564F',
         }}>
         <BigText/>
         <Carousel/>

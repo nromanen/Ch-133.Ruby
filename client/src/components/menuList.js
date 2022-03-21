@@ -44,7 +44,7 @@ export default function MenuPopupState() {
           <PopupState variant="popover" popupId="demo-popup-menu">
             {(popupState) => (
               <React.Fragment>
-                <Button variant="contained" {...bindTrigger(popupState)}>
+                <Button variant="contained" {...bindTrigger(popupState)} >
                   {t("header.button")}
                 </Button>
                 <Menu {...bindMenu(popupState)}>
@@ -59,7 +59,11 @@ export default function MenuPopupState() {
       );
     } else {
       return(
-        <Button variant="contained" onClick={()=>navigate("/sign_in")}>
+        <Button variant="contained" style={{
+          backgroundColor: '#5ba19a',
+          color: '#fffff'
+        }}
+            onClick={()=>navigate("/sign_in")}>
           {email}
         </Button>
       );

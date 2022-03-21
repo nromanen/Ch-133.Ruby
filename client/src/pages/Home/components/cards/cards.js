@@ -19,7 +19,7 @@ function InfoTilesContent () {
 
   const buttonColor = {
     text: "#ffffff",
-    background: '#5AC69F',
+    background: '#16796F',
     font: "font-family: 'Raleway', sans-serif",
   }
 
@@ -61,7 +61,7 @@ function InfoTilesContent () {
           component="h1"
           variant="h2"
           align="center"
-          color="text.primary"
+          color="#00000"
           fontFamily= "'Raleway', sans-serif"
           gutterBottom
         >

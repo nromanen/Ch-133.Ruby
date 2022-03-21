@@ -11,15 +11,16 @@ const Footer = (props) => {
       company: t("footer.company"),
       description: t("footer.description"),
       git: 'https://github.com/nromanen/Ch-133.Ruby',
-      color: '#5AC69F',
+      color: '#10564F',
       font: 'Fredoka',
+      textColor: "#ffffff"
   }
 
   function Copyright(props) {
     return (
-      <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      <Typography variant="body2" color="#ADC9C5" align="center" {...props}>
         {'Copyright © '}
-        <Link color="inherit" href="https://mui.com/">
+        <Link color="#ADC9C5" href="https://mui.com/">
           {footerData.git}
         </Link>{' '}
         {new Date().getFullYear()}
@@ -31,12 +32,12 @@ const Footer = (props) => {
   return (
     <>
       <Box sx={{ bgcolor: footerData.color, p: 6, marginTop: 20, fontFamily: footerData.font}} component="footer">
-        <Typography variant="h6" align="center" gutterBottom>
+        <Typography variant="h6" align="center" color="#ADC9C5" gutterBottom>
           {footerData.company}
         </Typography>
         <Typography variant="subtitle1"
           align="center"
-          color="text.secondary"
+          color="#ADC9C5"
           component="p"
         >
           {footerData.description}
