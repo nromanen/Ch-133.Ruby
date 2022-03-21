@@ -4,9 +4,10 @@ class CategoriesController < ApplicationController
   # before_action :authenticate_user!
   before_action :set_category, except: %i[ create index ]
 
+
   def index
-    @categories = Category.all
-    render json: @categories
+    @categories = Category.paginate(page: params[:page], per_page: params[:per_page]).order('name ASC')
+    render json: { categories: @categories, pages: @categories.total_pages }
   end
 
 
@@ -37,6 +38,6 @@ class CategoriesController < ApplicationController
     end
 
     def category_params
-      params.require(:category).permit(:name)
+      params.permit(:name, :page, :per_page)
     end
 end
