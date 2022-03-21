@@ -33,15 +33,8 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-<<<<<<< Updated upstream
   config.active_storage.service = :cloudinary
   config.action_mailer.default_url_options = { host: "localhost", port: 3001 }
-=======
-
-  config.active_storage.service = :cloudinary
-  config.action_mailer.default_url_options = { host: "localhost", port: 3001 }
-
->>>>>>> Stashed changes
 
   config.action_mailer.perform_caching = false
 
