@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   devise_for :users,
              controllers: {
                sessions: "users/sessions",
-               registrations: "users/registrations"
+               registrations: "users/registrations",
+               confirmations: "users/confirmations",
+               unlocks: "users/unlocks"
              }
+
   devise_scope :user do
     post "/send_email" => "passwords#create"
     put "users/password/edit(.:format)" => "passwords#update"
@@ -17,20 +20,10 @@ Rails.application.routes.draw do
   resources :users do
     resource :user_infos
   end
+
   resources :adverts do
     resources :comments
   end
+
   resources :categories
-  resources :users,  only: %i[index] do
-    get "/posts", to: "adverts#posts"
-  end
-
-  get "/myposts", to: "adverts#myposts"
-
-  put "/advert/:id/like", to: "adverts#like", as: "like"
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end

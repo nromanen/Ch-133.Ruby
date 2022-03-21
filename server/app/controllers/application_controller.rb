@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+
   include Pundit::Authorization
   before_action :set_locale
 
@@ -19,5 +20,4 @@ class ApplicationController < ActionController::API
     def default_url_options(options = {})
       { locale: I18n.locale }
     end
-
 end

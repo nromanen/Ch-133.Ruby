@@ -1,5 +1,16 @@
 # frozen_string_literal: true
 
 class Category < ApplicationRecord
-  has_many :adverts
+  before_validation :capitalize_name
+
+  has_many :adverts, dependent: :nullify
+
+  validates :name, uniqueness: true,
+                   presence: true,
+                   length: { minimum: 3, maximum: 20 },
+                   format: { with: /\A[a-zA-Z]+\z/ }
+
+  def capitalize_name
+    name.capitalize!
+  end
 end
