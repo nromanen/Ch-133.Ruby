@@ -4,8 +4,8 @@ import FormInput from 'components/form-input/form-input'
 import CustomButton from 'components/custom-button/custom-button'
 import Message from 'components/message/message'
 import CookieRefresh from 'components/cookie-refresh.js'
+import LoggedContext from 'context'
 import { withTranslation } from 'react-i18next';
-
 import "i18n";
 import './SingIn.scss'
 import 'consts.js'
@@ -54,6 +54,7 @@ class SignIn extends React.Component {
               sameSite: 'Strict',
               secure: true,
             });
+            this.context.setLogged(true);
           }
        });
     }
@@ -63,24 +64,31 @@ class SignIn extends React.Component {
         this.setState({ [name]: value });
     }
 
+    static contextType = LoggedContext;
+
     render() {
       const { t } = this.props;
         return (
-          <div className='sign-in'>
-            { this.state.showMessage ? <Message text={this.state.text}/> : null }
-            { this.state.token ? <CookieRefresh/> : null } {/*if fetch returns token then we can render a component by first time and run UseEffect hook in component*/} 
-            <h2>{t("singIn.head")}</h2>
-            <form onSubmit={this.handleSubmit}>
-              <FormInput name='email' type='email' value={this.state.email}
-               required handleChange={this.handleChange} label={t("singIn.email")} />
-              <FormInput name='password' type='password'
-              value={this.state.password} required
-              handleChange={this.handleChange} label={t("singIn.password")} />
-              <CustomButton type='submit'>{t("singIn.button")}</CustomButton>
-            </form>
-          </div>
+          <LoggedContext.Consumer>
+            {({logged, setLogged}) => (
+              <div className='sign-in'>
+                { this.state.showMessage ? <Message text={this.state.text}/> : null }
+                { this.state.token ? <CookieRefresh/> : null } {/*if fetch returns token then we can render a component by first time and run UseEffect hook in component*/}
+                <h2>{t("singIn.head")}</h2>
+                <form onSubmit={this.handleSubmit}>
+                  <FormInput name='email' type='email' value={this.state.email}
+                   required handleChange={this.handleChange} label={t("singIn.email")} />
+                  <FormInput name='password' type='password'
+                  value={this.state.password} required
+                  handleChange={this.handleChange} label={t("singIn.password")} />
+                  <CustomButton type='submit'>{t("singIn.button")}</CustomButton>
+                </form>
+              </div>
+            )}
+         </LoggedContext.Consumer>
         );
     }
 }
 
+SignIn.contextType = LoggedContext
 export default withTranslation()(SignIn)
