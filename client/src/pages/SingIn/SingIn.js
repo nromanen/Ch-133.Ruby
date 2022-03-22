@@ -1,13 +1,14 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
-import FormInput from '../../components/form-input/form-input'
-import CustomButton from '../../components/custom-button/custom-button'
-import Message from '../../components/message/message'
+import FormInput from 'components/form-input/form-input'
+import CustomButton from 'components/custom-button/custom-button'
+import Message from 'components/message/message'
+import { withTranslation } from 'react-i18next';
 
+import "i18n";
 import './SingIn.scss'
-import '../../consts.js'
+import 'consts.js'
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -34,7 +35,7 @@ class SignIn extends React.Component {
         };
         fetch(window.singInUrl, requestOptions)
         .then((response) => {
-          if (response.status != 200)
+          if (response.status !== 200)
             this.setState({ ShowMessage: true });
           else {
             this.setState({ ShowMessage: false });
@@ -62,21 +63,22 @@ class SignIn extends React.Component {
     }
 
     render() {
+      const { t } = this.props;
         return (
           <div className='sign-in'>
             { this.state.ShowMessage ? <Message text={this.state.text}/> : null }
-            <h2>Sign In</h2>
+            <h2>{t("singIn.head")}</h2>
             <form onSubmit={this.handleSubmit}>
               <FormInput name='email' type='email' value={this.state.email}
-               required handleChange={this.handleChange} label='email' />
+               required handleChange={this.handleChange} label={t("singIn.email")} />
               <FormInput name='password' type='password'
               value={this.state.password} required
-              handleChange={this.handleChange} label='password' />
-              <CustomButton type='submit'>SIGN IN</CustomButton>
+              handleChange={this.handleChange} label={t("singIn.password")} />
+              <CustomButton type='submit'>{t("singIn.button")}</CustomButton>
             </form>
           </div>
         );
     }
 }
 
-export default SignIn;
+export default withTranslation()(SignIn)
