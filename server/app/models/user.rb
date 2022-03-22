@@ -10,6 +10,7 @@ class User < ApplicationRecord
          :jwt_authenticatable,
          :registerable,
          :confirmable,
+         :lockable,
          jwt_revocation_strategy: JwtDenylist
   has_many :comments
   has_many :adverts
@@ -28,5 +29,9 @@ class User < ApplicationRecord
   def set_default
     role_user = Role.find_by(name: "User")
     self.role_id = role_user.id
+  end
+  
+  def jwt_payload
+    { 'email' => self.email }
   end
 end

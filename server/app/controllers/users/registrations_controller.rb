@@ -19,7 +19,7 @@ module Users
       end
 
       def respond_with(user, _opts = {})
-        register_success(user) && return if user.persisted?
+        register_success() && return if user.persisted?
 
         register_failed(user)
       end
