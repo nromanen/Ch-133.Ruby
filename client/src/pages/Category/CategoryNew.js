@@ -6,7 +6,52 @@ import Message from '../../components/message/message'
 
 import './CategoryPage.scss'
 import '../../consts.js'
-import axios from "axios";
+
+
+export default function App() {
+    const [name, setName] = useState('');
+    const [message, setMessage] = useState('')
+    const [showMessage, setShowMessage] = useState(false)
+
+    const Submit = event => {
+        event.preventDefault();
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-lang': 'uk' },
+            body: JSON.stringify({
+                "name": name
+            })
+        };
+        fetch(window.createCategoryUrl, requestOptions)
+            .then((response) => {
+                setShowMessage(true);
+                return response.json();
+            })
+            .then((data) => {
+                if(showMessage) {
+                    setMessage(data.name);
+                }
+            });
+    }
+
+    return (
+            <div className='category'>
+                { !!showMessage? <Message text={message}/> :null }
+                <h2>Create category</h2>
+                <form onSubmit={Submit}>
+                    <FormInput name='name' type='name' value={name}
+                    handleChange={event => {setName(event.target.value)}}/>
+                    <CustomButton type='submit'>Create</CustomButton>
+                </form>
+            </div>
+        );
+}
+
+
+
+
+
+//import axios from "axios";
 
 // class Category extends React.Component {
 //     constructor(props) {
@@ -58,29 +103,3 @@ import axios from "axios";
 // }
 //
 // export default Category;
-
-export default function App() {
-    const [name, setName] = useState('');
-    const [message, setMessage] = useState('')
-    const [showMessage, setShowMessage] = useState(false)
-
-    const Submit = event => {
-        event.preventDefault();
-        axios.post(window.createCategoryUrl,{"name": name}).then(response => {setMessage(response.data.message)}).then(
-            setShowMessage(true)).catch((err) => {
-            console.log(err);
-        });
-    }
-
-    return (
-            <div className='category'>
-                { !!showMessage? <Message text={message}/> :null }
-                <h2>Create category</h2>
-                <form onSubmit={Submit}>
-                    <FormInput name='name' type='name' value={name}
-                    handleChange={event => {setName(event.target.value)}}/>
-                    <CustomButton type='submit'>Create</CustomButton>
-                </form>
-            </div>
-        );
-}

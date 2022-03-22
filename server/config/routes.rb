@@ -8,7 +8,6 @@ Rails.application.routes.draw do
                confirmations: "users/confirmations",
                unlocks: "users/unlocks"
              }
-<<<<<<<<< Temporary merge branch 1
 
   devise_scope :user do
     post "/send_email" => "passwords#create"

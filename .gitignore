@@ -225,3 +225,7 @@ modules.xml
 
 .idea
 /client/node_modules/*
+
+.gitignore
+/.idea
+.idea/dataSources.xml
