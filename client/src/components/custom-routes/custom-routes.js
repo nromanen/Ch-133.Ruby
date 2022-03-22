@@ -10,7 +10,7 @@ const CustomRoutes = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/sign_in" element={<SingIn />} />
-            <Route path="/sign_up" element={<SignUp />} />
+          <Route path="/sign_up" element={<SignUp />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

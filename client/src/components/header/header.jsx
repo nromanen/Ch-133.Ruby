@@ -6,7 +6,6 @@ import MenuList from 'components/menuList'
 
 const Header = (props) => {
   const { t } = useTranslation();
-
   const menu = [
     {
       title: t("header.main"),
