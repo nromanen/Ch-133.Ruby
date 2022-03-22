@@ -43,8 +43,8 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    user_name: "advertisements.smtp@gmail.com",
-    password: "Advert-smtp",
+    user_name: "#{ENV["SMTP_EMAIL"]}",
+    password: "#{ENV["SMTP_EMAIL_PASSWORD"]}",
     domain: "localhost:3000",
     address: "smtp.gmail.com",
     port: "587",
