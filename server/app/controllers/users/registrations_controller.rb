@@ -19,17 +19,18 @@ module Users
       end
 
       def respond_with(user, _opts = {})
-        register_success(user) && return if user.persisted?
+        register_success() && return if user.persisted?
 
         register_failed(user)
       end
 
-      def register_success(user)
-        render json: { message: I18n.t("created", name: user.nick_name) }
+
+      def register_success
+        render json: { message: "Signed up successfully. Please confirm your email." }
       end
 
       def register_failed(user)
-        render json: user.errors.full_messages, status: :unprocessable_entity
+        render json: { message: "Data is not valid, please, change" }, status: :unprocessable_entity
       end
   end
 end
