@@ -91,5 +91,4 @@ class SignIn extends React.Component {
 }
 
 SignIn.contextType = LoggedContext
-
 export default withTranslation()(SignIn)
