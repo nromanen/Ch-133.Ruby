@@ -33,5 +33,8 @@ class User < ApplicationRecord
 
   def get_advert_count
     self.adverts.length
+  
+  def jwt_payload
+    { 'email' => self.email }
   end
 end
