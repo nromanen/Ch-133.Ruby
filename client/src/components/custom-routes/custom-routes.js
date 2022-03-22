@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "pages/Layout";
 import SingIn from "pages/SingIn/SingIn";
 import NoPage from "pages/NoPage/NoPage";
+import SignUp from "../../pages/SignUp/SignUp";
 
 const CustomRoutes = () => {
   return (
