@@ -1,4 +1,3 @@
-import Carousel from './components/courosel/courosel';
 import InfoTiles from './components/cards/cards';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
@@ -54,7 +53,6 @@ const Home = () => {
           bgcolor: '#10564F',
         }}>
         <BigText/>
-        <Carousel/>
       </Paper>
       <InfoTiles/>
     </>
