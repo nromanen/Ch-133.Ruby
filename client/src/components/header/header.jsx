@@ -1,11 +1,12 @@
-import './header.scss'
-import 'consts.js'
+import './header.scss';
+import 'consts.js';
 import { useTranslation } from "react-i18next";
-import Switcher from 'components/switch-language/switch-language'
-import MenuList from 'components/menuList'
+import Switcher from 'components/switch-language/switch-language';
+import MenuList from 'components/menuList';
 
 const Header = (props) => {
   const { t } = useTranslation();
+
   const menu = [
     {
       title: t("header.main"),

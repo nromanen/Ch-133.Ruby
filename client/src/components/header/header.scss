@@ -2,23 +2,20 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: #000000;
 }
 
 body {
-  color: #383f4d;
-  background-color: #fff;
   font-size: 100%;
   font-weight: 400;
   line-height: 1.45;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
 }
 /* Header */
 
 header {
+  font-family: 'Fredoka';
   width: 100%;
-  background-color: #acddbc;
+  background-color: #16796F;
 }
 
 .container {
@@ -38,21 +35,24 @@ header {
 }
 
 .brand {
-  font-size: 30px;
+  color: #ffffff;
+  font-size: 35px;
   line-height: 58px;
   font-weight: bold;
   margin-right: 10px;
 }
 
 nav ul {
+  color: #ffffff;
   display: flex;
   list-style: none;
 }
 
 nav ul li a {
+  color: #ffffff;
   padding: 22px 1em;
-  font-size: 18px;
-  color: #383f4d;
+  font-size: 19px;
+  font-weight: bold;
   text-decoration: none;
 }
 
@@ -61,6 +61,10 @@ nav ul li a {
 }
 
 /* Switcher */
+.switcher {
+  font-family: 'Fredoka';
+  font-weight: bold;
+}
 
 .switcher select {
   width: 99px;
@@ -69,4 +73,8 @@ nav ul li a {
 
 .switcher-rignt {
   margin-right: 30px;
+}
+
+.switcher>span{
+  color: #ffffff;
 }
