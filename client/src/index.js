@@ -1,6 +1,8 @@
 import ReactDOM from "react-dom";
 import CustomRoutes from "./components/custom-routes/custom-routes";
-import React, { Component }  from 'react';
+import React, { Component, Suspense }  from 'react';
+import LoggedContext from 'context'
+import { createContext, useState, useContext, useMemo } from 'react';
 
 const styleLink = document.createElement("link");
 styleLink.rel = "stylesheet";
@@ -9,9 +11,25 @@ document.head.appendChild(styleLink);
 
 
 export default function App() {
+  const [logged, setLogged] = useState(false);
+
+  const value = useMemo(
+    () => ({ logged, setLogged }),
+    [logged]
+  );
+
   return (
-    <CustomRoutes/>
+    <LoggedContext.Provider value={value}>
+      <CustomRoutes/>
+    </LoggedContext.Provider>
   );
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <React.StrictMode>
+    <Suspense fallback={<div>Loading...</div>}>
+      <App />
+    </Suspense>
+  </React.StrictMode>,
+  document.getElementById("root")
+);
