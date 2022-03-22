@@ -6,6 +6,7 @@ import CustomButton from '../../components/custom-button/custom-button'
 import Cookies from 'universal-cookie';
 import Message from "../../components/message/message";
 import {baseUrlUsers} from "../../consts";
+import '../../components/message/message.scss'
 const cookies = new Cookies();
 
 const UserInfo = (props) => {
@@ -16,7 +17,7 @@ const UserInfo = (props) => {
     const [lastName, setLastName] = useState('');
     const [phone, setPhone] = useState('');
     const [disabled, setDisabled] = useState(false);
-    const [text, setText] = useState('');
+    const [text, setText] = useState(null);
 
     const handleSubmit = useCallback((event, value) => {
         event.preventDefault();
@@ -44,6 +45,7 @@ const UserInfo = (props) => {
             })
             .catch(function (error) {
                 if (error.response.status === 422){
+                    console.log('----------', error.response.data);
                     setText(error.response.data.join('<br>'));
                 }
             }).finally(() => setDisabled(false));
@@ -60,15 +62,44 @@ const UserInfo = (props) => {
             })
             .catch(function (error) {
                 setText(error.response.data.message);
-                if (error.response.status === 404) {
+                // console.log('----- ', error.response.data.message)
+                if ((error.response.status === 404) && (error.response.data.message === "User doesn't exist.")) {
                     window.location = '/HomePage';
                 }
             })
     }, [params.userId]);
 
+    // let errorMsg = text.map((el) => {
+    //     return <h1 key={el.name}> {el.name} </h1>;
+    // });
+    // let errorMsg = text.map((el, index) => {
+    //     return (
+    //         <h1 key={el.name}> {el.name} </h1>
+    //     );
+    // });
     return (
         <div className={'user-info-page'}>
             { !!text  ? <Message text={text}/> : null }
+            {/*{ !!text && <div className='message-style'>*/}
+            {/*    {Object.entries(text).forEach(([key, value]) => console.log(`${key}: ${value}`))}*/}
+            {/*    /!*{text.map(function(first_name, last_name, phone) {*!/*/}
+            {/*    /!*    return (*!/*/}
+            {/*    /!*        <div>*!/*/}
+            {/*    /!*            <h1>{first_name}</h1>*!/*/}
+            {/*    /!*            <h1>{last_name}</h1>*!/*/}
+            {/*    /!*            <h1>{phone}</h1>*!/*/}
+            {/*    /!*        </div>*!/*/}
+            {/*    /!*    )*!/*/}
+            {/*    /!*})}*!/*/}
+            {/*    /!*{text.map(({ id, first_name, last_name, phone }) => (*!/*/}
+            {/*    /!*    <div key={id}>*!/*/}
+            {/*    /!*        <h1>{first_name}</h1>*!/*/}
+            {/*    /!*        <h1>{last_name}</h1>*!/*/}
+            {/*    /!*        <h1>{phone}</h1>*!/*/}
+            {/*    /!*    </div>*!/*/}
+            {/*    /!*))}*!/*/}
+            {/*    /!*<h1>{text}</h1>*!/*/}
+            {/*</div>  }*/}
             <h2>User info</h2>
             <form onSubmit={handleSubmit}>
                 <FormInput name='first_name' type='text' value={firstName}
