@@ -1,11 +1,12 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-
+import LoggedContext from 'context'
 import FormInput from 'components/form-input/form-input'
 import CustomButton from 'components/custom-button/custom-button'
 import Message from 'components/message/message'
-
+import { withTranslation } from 'react-i18next';
+import "i18n";
 import './SignUp.scss'
 import 'consts.js'
 
@@ -64,23 +65,25 @@ class SignUp extends React.Component {
     }
 
     render() {
+      const { t } = this.props;
         return (
           <div className='sign-up'>
             { this.state.ShowMessage ? <Message text={this.state.text}/> : null }
-            <h2>Sign Up</h2>
+            <h2>{t("singup.label")}</h2>
             <form onSubmit={this.handleSubmit}>
                 <FormInput name='nick_name' type='text' value={this.state.nick_name}
-                           required handleChange={this.handleChange} label='nick' />
+                           required handleChange={this.handleChange} label={t("singup.nick")} />
               <FormInput name='email' type='email' value={this.state.email}
-               required handleChange={this.handleChange} label='email' />
+               required handleChange={this.handleChange} label={t("singup.email")} />
               <FormInput name='password' type='password'
               value={this.state.password} required
-              handleChange={this.handleChange} label='password' />
-              <CustomButton type='submit'>SIGN UP</CustomButton>
+              handleChange={this.handleChange} label={t("singup.password")} />
+              <CustomButton type='submit'>{t("singup.button")}</CustomButton>
             </form>
           </div>
         );
     }
 }
 
-export default SignUp;
+SignUp.contextType = LoggedContext
+export default withTranslation()(SignUp)

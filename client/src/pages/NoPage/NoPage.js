@@ -3,7 +3,8 @@ import './NoPage.scss'
 const NoPage = () => {
   return (
     <div className='error-code'>
-      404
+      404<br/>
+      Page no found
     </div>
   );
 };
