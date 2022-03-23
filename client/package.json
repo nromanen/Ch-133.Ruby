@@ -17,12 +17,14 @@
     "js-cookie": "^3.0.1",
     "jwt-decode": "^3.1.2",
     "material-ui-popup-state": "^2.0.0",
-    "node-sass": "^7.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.2.1",
     "react-dom": "^17.0.2",
+    "react-pagination": "^1.0.0",
+    "react-rails-pagination": "^1.3.2",
     "react-i18next": "^11.15.4",
     "react-router-dom": "^6.2.1",
+    "semantic-ui-css": "^2.4.1",
     "react-scripts": "5.0.0",
     "react-swipeable-views": "^0.14.0",
     "universal-cookie": "^4.0.4",
@@ -30,7 +32,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "PORT=3001 react-scripts start",
+    "start": "set PORT=3001 && react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -54,5 +56,7 @@
     ]
   },
   "devDependencies": {
+    "sass": "^1.49.8",
+    "semantic-ui-react": "^2.1.2"
   }
 }
