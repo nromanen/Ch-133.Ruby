@@ -36,6 +36,14 @@ class ApplicationPolicy
     false
   end
 
+  def is_admin
+    @user.role.name == "Admin"
+  end
+
+  def is_moderator
+    @user.role.name == "Moderator"
+  end
+
   class Scope
     def initialize(user, scope)
       @user = user
