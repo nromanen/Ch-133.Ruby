@@ -4,8 +4,10 @@ import React, { Component }  from 'react';
 const NoPage = () => {
   return (
     <div className='error-code'>
-      404<br/>
-      Page no found
+      404
+      <p className='error-code'>
+        Page no found
+      </p>
     </div>
   );
 };

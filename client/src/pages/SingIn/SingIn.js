@@ -24,9 +24,11 @@ class SignIn extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        const cookies = new Cookies();
+        const language = cookies.get('i18next');
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'X-lang': language },
             body: JSON.stringify({
               "user":{
                   "email": this.state.email,
@@ -48,7 +50,6 @@ class SignIn extends React.Component {
             this.setState({ text: data.message });
           } else {
             this.setState({ token: true });
-            const cookies = new Cookies();
             cookies.set('user-info', data.token, {
               path: '/',
               sameSite: 'Strict',
