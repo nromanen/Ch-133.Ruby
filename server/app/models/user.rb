@@ -31,6 +31,10 @@ class User < ApplicationRecord
     self.role_id = role_user.id
   end
 
+  def get_advert_count
+    self.adverts.length
+  end
+  
   def jwt_payload
     { 'email' => self.email, 'id' => self.id }
   end
