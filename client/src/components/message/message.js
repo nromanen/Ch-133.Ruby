@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import './message.scss'
 
-class Message extends Component {
-  render() {
-    return (
+function Message(props) {
+  return (
       <div className='message-style'>
-        <h1>{this.props.text}</h1>
+        <h1 dangerouslySetInnerHTML={{__html: props.text}} />
       </div>
     )
-  }
 }
 
 export default Message;
