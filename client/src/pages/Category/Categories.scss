@@ -1,4 +1,5 @@
 .categories {
+  font-family: 'Red Hat Mono', monospace;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,6 +13,7 @@
 }
 
 .bold {
+  font-family: 'Red Hat Mono', monospace;
   border-bottom: 2px solid black;
   font-weight: bold;
   color: black;

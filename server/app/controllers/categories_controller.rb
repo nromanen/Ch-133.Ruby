@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CategoriesController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[index]
   before_action :set_category, except: %i[ create index ]
 
 
