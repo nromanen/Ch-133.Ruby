@@ -43,6 +43,10 @@ header {
   margin-right: 10px;
 }
 
+.brand:hover{
+  color: #ADC9C5;
+}
+
 nav ul {
   color: #ffffff;
   display: flex;
@@ -57,6 +61,9 @@ nav ul li a {
   text-decoration: none;
 }
 
+nav ul li a:hover{
+  color: #ADC9C5; 
+}
 .spacer {
   flex: 1;
 }
@@ -76,6 +83,6 @@ nav ul li a {
   margin-right: 30px;
 }
 
-.switcher>span{
+.switcher > span{
   color: #ffffff;
 }

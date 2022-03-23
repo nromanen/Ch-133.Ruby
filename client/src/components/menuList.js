@@ -40,7 +40,7 @@ export default function MenuPopupState() {
 
     const logout = () => {
       cookies.remove('user-info')
-      navigate("/sign_in")
+      navigate("/")
     }
 
     const goInfo = () => {
