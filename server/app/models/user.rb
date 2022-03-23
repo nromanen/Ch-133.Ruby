@@ -11,6 +11,7 @@ class User < ApplicationRecord
          :registerable,
          :confirmable,
          :lockable,
+         :recoverable,
          jwt_revocation_strategy: JwtDenylist
   has_many :comments
   has_many :adverts

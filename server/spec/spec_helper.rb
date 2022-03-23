@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+require 'dotenv'
+Dotenv.load('.env.local')
 
 require "simplecov"
 SimpleCov.start "rails"
