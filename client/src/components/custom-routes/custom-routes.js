@@ -13,9 +13,9 @@ const CustomRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Home />} />
           <Route path="/categories/new" element={<CategoryNew />} />
           <Route path="/categories" element={<Categories />} />
-          <Route path="/home" element={<Home />} />
           <Route path="/sign_in" element={<SingIn />} />
           <Route path="/sign_up" element={<SignUp />} />
           <Route path="*" element={<NoPage />} />
