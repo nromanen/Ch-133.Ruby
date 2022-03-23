@@ -19,7 +19,7 @@ function CookieRefresh() {
     const clear = async () => {
       await promise
     }
-    navigate("/Main")
+    navigate("/adverts")
     clear()
   }, []);
 

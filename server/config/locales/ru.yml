@@ -9,3 +9,5 @@ ru:
   phoneNotValid: "не верный формат телефона"
   nameNotValid: "разрешаються только буквы"
   userInfoValidError: "У Вас нету прав или инфо не существует."
+  category: "Категорию"
+  comment: "Коментарий"

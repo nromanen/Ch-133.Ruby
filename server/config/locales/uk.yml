@@ -9,3 +9,5 @@ uk:
   phoneNotValid: "не вірний формат телефону."
   nameNotValid: "допускаються тильки літери."
   userInfoValidError: "У Вас немає прав, або інфо не існує."
+  category: "Категорію"
+  comment: "Коментар"

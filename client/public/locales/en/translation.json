@@ -3,7 +3,8 @@
     "main": "About the project",
     "contact": "Contact us",
     "language": "Language",
-    "button": "LOGGIN"
+    "info": "User info",
+    "logout": "Logout"
   },
   "singIn" : {
     "head": "Sing In",
@@ -33,5 +34,12 @@
     "description1": "Create your own advert advertisement for others",
     "buttonText": "ADVERTS",
     "buttonText0": "GO"
+  },
+  "singup" : {
+    "label": "Sign Up",
+    "nick": "nick",
+    "email": "email",
+    "password": "password",
+    "button": "SIGN UP"
   }
 }

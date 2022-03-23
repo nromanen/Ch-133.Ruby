@@ -9,3 +9,5 @@ en:
   phoneNotValid: "does not match format requirements"
   nameNotValid: "only allows letters"
   userInfoValidError: "U have no rights or info doesn't exist"
+  category: "Category"
+  comment: "Comment"

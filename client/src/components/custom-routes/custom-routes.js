@@ -5,14 +5,18 @@ import SingIn from "../../pages/SingIn/SingIn";
 import NoPage from "../../pages/NoPage/NoPage";
 import SignUp from "../../pages/SignUp/SignUp";
 import Home from "../../pages/Home/Home";
-import UserInfo from "../../pages/UserInfo/UserInfo"
+import UserInfo from "../../pages/UserInfo/UserInfo";
+import CategoryNew from "../../pages/Category/CategoryNew";
+import Categories from "../../pages/Category/Categories";
 
 const CustomRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/categories/new" element={<CategoryNew />} />
+          <Route path="/categories" element={<Categories />} />
           <Route path="/sign_in" element={<SingIn />} />
           <Route path="/sign_up" element={<SignUp />} />
           <Route path="*" element={<NoPage />} />

@@ -21,7 +21,7 @@ const Header = (props) => {
   return (
     <header>
       <div className="container header_content">
-        <div className="brand">React&Rails</div>
+        <a href="/" className="brand">React&Rails</a>
         <nav>
           <ul>
             {
