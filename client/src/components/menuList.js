@@ -38,19 +38,33 @@ export default function MenuPopupState() {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const logout = () => {
+      cookies.remove('user-info')
+      navigate("/sign_in")
+    }
+
+    const goInfo = () => {
+      const decoded = jwt(token);
+      let token_id = decoded["id"];
+      let resultUrl = `/users/${token_id}/user_infos`
+      navigate(resultUrl)
+    }
+
     if (email !== 'LOGGIN') {
       return(
         <>
           <PopupState variant="popover" popupId="demo-popup-menu">
             {(popupState) => (
               <React.Fragment>
-                <Button variant="contained" {...bindTrigger(popupState)} >
-                  {t("header.button")}
+                <Button variant="contained" {...bindTrigger(popupState)} style={{
+                  backgroundColor: '#5ba19a',
+                  color: '#fffff'
+                }}>
+                  {email}
                 </Button>
                 <Menu {...bindMenu(popupState)}>
-                  <MenuItem onClick={()=>navigate("/user_info")}>User info</MenuItem>
-                  <MenuItem onClick={()=>navigate("/language_settings")}>Language</MenuItem>
-                  <MenuItem onClick={()=>navigate("/logout")}>Logout</MenuItem>
+                  <MenuItem onClick={goInfo}>{t("header.info")}</MenuItem>
+                  <MenuItem onClick={logout}>{t("header.logout")}</MenuItem>
                 </Menu>
               </React.Fragment>
             )}

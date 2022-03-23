@@ -4,3 +4,5 @@ en:
   wronglogin: "Wrong Email or Password"
   success: "The action was successful"
   wrongway: "Hmm, something went wrong"
+  category: "Category"
+  comment: "Comment"

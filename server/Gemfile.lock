@@ -306,11 +306,11 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    will_paginate (3.3.1)
     zeitwerk (2.5.4)
 
 PLATFORMS
   x64-mingw32
-
 DEPENDENCIES
   active_model_serializers
   activestorage-validator
@@ -336,9 +336,10 @@ DEPENDENCIES
   simplecov (~> 0.21.2)
   tzinfo-data
   uuid
+  will_paginate (~> 3.3, >= 3.3.1)
 
 RUBY VERSION
    ruby 3.0.3p157
 
-BUNDLED WITH
+BUNDLED WITH  
    2.3.5

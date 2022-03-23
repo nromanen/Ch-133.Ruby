@@ -1,12 +1,18 @@
 import ReactDOM from "react-dom";
-import React, { Suspense } from "react";
 import CustomRoutes from "./components/custom-routes/custom-routes";
+import React, { Component, Suspense }  from 'react';
 import LoggedContext from 'context'
 import { createContext, useState, useContext, useMemo } from 'react';
 
+const styleLink = document.createElement("link");
+styleLink.rel = "stylesheet";
+styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+document.head.appendChild(styleLink);
+
+
 export default function App() {
   const [logged, setLogged] = useState(false);
-  
+
   const value = useMemo(
     () => ({ logged, setLogged }),
     [logged]

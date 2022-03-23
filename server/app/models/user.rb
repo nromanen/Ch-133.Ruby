@@ -12,9 +12,9 @@ class User < ApplicationRecord
          :confirmable,
          :lockable,
          jwt_revocation_strategy: JwtDenylist
-  has_many :comments
-  has_many :adverts
-  has_many :likes
+  has_many :comments, dependent: :destroy
+  has_many :adverts, dependent: :destroy
+  has_many :likes, dependent: :destroy
   has_one :role
   has_one :user_info, dependent: :destroy
 
@@ -33,8 +33,9 @@ class User < ApplicationRecord
 
   def get_advert_count
     self.adverts.length
+  end
   
   def jwt_payload
-    { 'email' => self.email }
+    { 'email' => self.email, 'id' => self.id }
   end
 end

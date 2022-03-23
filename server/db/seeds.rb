@@ -9,3 +9,5 @@
 #   Character.create(name: "Luke", movie: movies.first)
 Role.create(name: "User")
 Role.create(name: "Admin")
+User.create(password: "Qwerty123", email:"seedUser@gmail.com", nick_name:"seedUser" )
+#UPDATE "users" SET "confirmed_at"='2022-03-22 17:19:40.342358' WHERE "nick_name"='seedUser';
