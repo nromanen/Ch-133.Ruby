@@ -1,4 +1,5 @@
 
+
 # Created by https://www.toptal.com/developers/gitignore/api/ruby,rubymine+all,rails
 # Edit at https://www.toptal.com/developers/gitignore?templates=ruby,rubymine+all,rails
 
@@ -218,8 +219,13 @@ modules.xml
 
 # Sonarlint plugin
 .idea/sonarlint
+
+config/credentials.yml.enc
+
 node_modules
 .idea
 .env.local
 
 # End of https://www.toptal.com/developers/gitignore/api/ruby,rubymine+all,rails
+server/log
+package-lock.json

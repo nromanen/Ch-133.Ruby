@@ -1,11 +1,12 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-
+import LoggedContext from 'context'
 import FormInput from 'components/form-input/form-input'
 import CustomButton from 'components/custom-button/custom-button'
 import Message from 'components/message/message'
-
+import { withTranslation } from 'react-i18next';
+import "i18n";
 import './SignUp.scss'
 import 'consts.js'
 
@@ -23,9 +24,11 @@ class SignUp extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        const cookies = new Cookies();
+        const language = cookies.get('i18next');
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'X-lang': language },
             body: JSON.stringify({
               "user":{
                   "nick_name": this.state.nick_name,
@@ -47,7 +50,6 @@ class SignUp extends React.Component {
           if(this.state.ShowMessage){
             this.setState({ text: data.message});
           } else {
-            const cookies = new Cookies();
             cookies.set('user-info', data.token, {
               path: '/',
               sameSite: 'none',
@@ -64,23 +66,25 @@ class SignUp extends React.Component {
     }
 
     render() {
+      const { t } = this.props;
         return (
           <div className='sign-up'>
             { this.state.ShowMessage ? <Message text={this.state.text}/> : null }
-            <h2>Sign Up</h2>
+            <h2>{t("singup.label")}</h2>
             <form onSubmit={this.handleSubmit}>
                 <FormInput name='nick_name' type='text' value={this.state.nick_name}
-                           required handleChange={this.handleChange} label='nick' />
+                           required handleChange={this.handleChange} label={t("singup.nick")} />
               <FormInput name='email' type='email' value={this.state.email}
-               required handleChange={this.handleChange} label='email' />
+               required handleChange={this.handleChange} label={t("singup.email")} />
               <FormInput name='password' type='password'
               value={this.state.password} required
-              handleChange={this.handleChange} label='password' />
-              <CustomButton type='submit'>SIGN UP</CustomButton>
+              handleChange={this.handleChange} label={t("singup.password")} />
+              <CustomButton type='submit'>{t("singup.button")}</CustomButton>
             </form>
           </div>
         );
     }
 }
 
-export default SignUp;
+SignUp.contextType = LoggedContext
+export default withTranslation()(SignUp)

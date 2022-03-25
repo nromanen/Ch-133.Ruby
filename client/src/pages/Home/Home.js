@@ -1,11 +1,13 @@
 import InfoTiles from './components/cards/cards';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import {useNavigate} from "react-router-dom"
 import { useTranslation } from "react-i18next";
 import './Home.css'
 
 const Home = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const homeInfo = {
     slogan0: t("home.slogan0"),
@@ -17,7 +19,7 @@ const Home = () => {
     return (
       <>
         <div className='big-text'>
-            {homeInfo.slogan0}<br/>
+            {homeInfo.slogan0}
             {homeInfo.slogan1}
             <div className='button'>
               <ContainedButton/>
@@ -28,8 +30,12 @@ const Home = () => {
   };
 
   function ContainedButton() {
+    const goSignIn = () => {
+      navigate("/sign_up")
+    }
+
     return (
-      <Button variant="contained"
+      <Button variant="contained" onClick={goSignIn}
             size="large"
             style={{
               width: '15em',

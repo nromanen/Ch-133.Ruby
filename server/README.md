@@ -6,7 +6,6 @@ For using project:
 - clone the repository
 - $ cd server
 - $ bundle install
-- put the password and role name for postgres to the local variables
 - $ bundle exec rake secret
 - $ EDITOR=nano rails credentials:edit
     devise:
@@ -15,3 +14,4 @@ For using project:
 - $ rails db:migrate
 - $ rails db:seed
 - $ rails s
+Don't forget to put your environment variables in .env.local.example!

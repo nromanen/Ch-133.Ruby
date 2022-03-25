@@ -35,11 +35,16 @@ header {
 }
 
 .brand {
+  text-decoration: none;
   color: #ffffff;
   font-size: 35px;
   line-height: 58px;
   font-weight: bold;
   margin-right: 10px;
+}
+
+.brand:hover{
+  color: #ADC9C5;
 }
 
 nav ul {
@@ -56,6 +61,9 @@ nav ul li a {
   text-decoration: none;
 }
 
+nav ul li a:hover{
+  color: #ADC9C5; 
+}
 .spacer {
   flex: 1;
 }
@@ -75,6 +83,6 @@ nav ul li a {
   margin-right: 30px;
 }
 
-.switcher>span{
+.switcher > span{
   color: #ffffff;
 }

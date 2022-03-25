@@ -17,6 +17,8 @@ gem "fast_jsonapi"
 gem "oj", "~> 3.3", ">= 3.3.5"
 gem "pg", "1.3.0.rc3"
 gem "rack-cors"
+gem "cloudinary"
+gem 'activestorage-validator'
 gem "pundit"
 gem 'active_model_serializers'
 gem "uuid"
