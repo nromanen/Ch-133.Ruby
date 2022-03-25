@@ -30,7 +30,7 @@ module Users
       end
 
       def register_failed(user)
-        render json: { message: "Data is not valid, please, change" }, status: :unprocessable_entity
+        render json: { errors: user.errors }, status: :unprocessable_entity
       end
   end
 end

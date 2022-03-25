@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!, except: %i[index]
+  #before_action :authenticate_user!, except: %i[index]
   before_action :set_category, except: %i[ create index ]
 
 
@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
     if @category.save
       render json: { message: I18n.t("created", name: I18n.t("category")) }, status: :created
     else
-      render json: @category.errors, status: :unprocessable_entity
+      render json: {message: @category.errors.full_messages[0]}, status: :unprocessable_entity
     end
   end
 

@@ -23,16 +23,20 @@ export default function App() {
                 "name": name
             })
         };
+
         fetch(window.createCategoryUrl, requestOptions)
             .then((response) => {
                 setShowMessage(true);
+                console.log(response)
                 return response.json();
             })
             .then((data) => {
                 if(showMessage) {
-                    setMessage(data.name);
+                    setMessage(data.message);
                 }
-            });
+            }).catch((error) => {
+            console.error('Error:', error);
+        });
     }
 
     return (
@@ -52,7 +56,7 @@ export default function App() {
 
 
 
-//import axios from "axios";
+//
 
 // class Category extends React.Component {
 //     constructor(props) {

@@ -1,4 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import { useLocation } from "react-router";
 
 import './Categories.scss'
 import '../../consts.js'
@@ -11,6 +12,8 @@ export default function App() {
     const [pages, setPages] = useState(1)
     const perPageOptions = [10, 25, 50, 100]
     const [perPage, setPerPage] = useState(perPageOptions[0]);
+    const location = useLocation();
+    console.log(new URLSearchParams(location.search).get("page"))
 
     const apiUrl = useMemo(() => {
         return window.createCategoryUrl+`/?page=${page}&per_page=${perPage}`
@@ -44,7 +47,7 @@ export default function App() {
         <div className="categories">
             <div>
                 <Dropdown
-                    placeholder={perPageOptions[0]}
+                    placeholder={perPageOptions[0].toString()}
                     defaultValue={perPageOptions[0]}
                     fluid
                     selection
