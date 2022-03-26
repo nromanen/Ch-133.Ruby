@@ -1,13 +1,14 @@
-# frozen_string_literal: true
-
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-Role.create(name: "User")
-Role.create(name: "Admin")
+connection = ActiveRecord::Base.connection()
+@roleUser = Role.create(name: "User")
+@roleAdmin =  Role.create(name: "Admin")
 User.create(password: "Qwerty123", email:"seedUser@gmail.com", nick_name:"seedUser" )
-#UPDATE "users" SET "confirmed_at"='2022-03-22 17:19:40.342358' WHERE "nick_name"='seedUser';
+User.create(password: "Admin123", email:"admin@gmail.com", nick_name:"admin" )
+comands = [
+  "UPDATE \"users\" SET \"confirmed_at\"='2022-03-22 17:19:40.342358' WHERE \"nick_name\"='seedUser';",
+  "UPDATE \"users\" SET \"confirmed_at\"='2022-03-22 17:19:40.342358' WHERE \"nick_name\"='admin';",
+  "UPDATE \"users\" SET \"role_id\"='#{@roleAdmin.id}' WHERE \"nick_name\"='admin';"
+]
+
+comands.each do |i|
+   connection.execute(i)
+end
