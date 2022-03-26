@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import i18n from "i18next";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import 'components/header/header.scss';
+import '../../components/header/header.scss';
 
 const Switcher = () => {
 

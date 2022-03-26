@@ -9,7 +9,6 @@ import './SignUp.scss'
 import '../../consts.js'
 
 const SignUp = (props) => {
-
     const [nick_name, setNickName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

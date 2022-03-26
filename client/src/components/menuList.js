@@ -7,9 +7,9 @@ import {useNavigate} from "react-router-dom";
 import jwt from 'jwt-decode';
 import axios from "axios";
 import Cookies from 'universal-cookie';
-import LoggedContext from 'context';
+import LoggedContext from '../context';
 import { useContext } from 'react';
-import 'consts.js';
+import '../consts.js';
 import { useTranslation } from "react-i18next";
 
 export default function MenuPopupState() {

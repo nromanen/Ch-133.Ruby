@@ -1,14 +1,18 @@
 import React from 'react';
 import Cookies from 'universal-cookie';
-import FormInput from 'components/form-input/form-input'
-import CustomButton from 'components/custom-button/custom-button'
-import Message from 'components/message/message'
+import FormInput from '../../components/form-input/form-input'
+import CustomButton from '../../components/custom-button/custom-button'
+import Message from '../../components/toster/message'
 import CookieRefresh from '../../components/cookie-refresh.js'
-import LoggedContext from 'context'
+import LoggedContext from '../../context'
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
 import { withTranslation } from 'react-i18next';
-import "i18n";
+import "../../i18n";
 import './SingIn.scss'
-import 'consts.js'
+import '../../consts.js'
+import '../../interceptor.js'
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -73,7 +77,7 @@ class SignIn extends React.Component {
           <LoggedContext.Consumer>
             {({logged, setLogged}) => (
               <div className='sign-in'>
-                { this.state.showMessage ? <Message text={this.state.text}/> : null }
+                { this.state.showMessage ? <Message text={this.state.text} type={"error"}/> : null }
                 { this.state.token ? <CookieRefresh/> : null } {/*if fetch returns token then we can render a component by first time and run UseEffect hook in component*/}
                 <h2>{t("singIn.head")}</h2>
                 <form onSubmit={this.handleSubmit}>
