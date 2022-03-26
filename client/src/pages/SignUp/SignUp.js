@@ -1,90 +1,70 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import Cookies from 'universal-cookie';
-import LoggedContext from 'context'
-import FormInput from 'components/form-input/form-input'
-import CustomButton from 'components/custom-button/custom-button'
-import Message from 'components/message/message'
-import { withTranslation } from 'react-i18next';
-import "i18n";
+import React, {useCallback, useState} from "react";
+import axios from 'axios';
+
+import FormInput from '../../components/form-input/form-input'
+import CustomButton from '../../components/custom-button/custom-button'
+import Message from '../../components/message/message'
+import {signUpUrl} from "../../consts";
 import './SignUp.scss'
-import 'consts.js'
+import '../../consts.js'
 
-class SignUp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            nick_name: '',
-            email: '',
-            password: '',
-            ShowMessage: false,
-            text: '',
-        }
-    }
+const SignUp = (props) => {
 
-    handleSubmit = event => {
+    const [nick_name, setNickName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [password_confirmation, setPasswordConfirmation] = useState('');
+    const [text, setText] = useState('');
+
+    const handleSubmit = useCallback((event, value) => {
         event.preventDefault();
-        const cookies = new Cookies();
-        const language = cookies.get('i18next');
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-lang': language },
-            body: JSON.stringify({
-              "user":{
-                  "nick_name": this.state.nick_name,
-                  "email": this.state.email,
-                  "password": this.state.password,
-              }
-           })
+        console.log('values = ', nick_name, email, password, password_confirmation);
+
+        const bodyParameters = {
+            "user":
+                {
+                    "nick_name": nick_name,
+                    "email": email,
+                    "password": password,
+                    "password_confirmation": password_confirmation
+                }
         };
-        fetch(window.signUpUrl, requestOptions)
-        .then((response) => {
-          if (response.status !== 200)
-            this.setState({ ShowMessage: true });
-          else {
-            this.setState({ ShowMessage: true });
-          }
-          return response.json();
-        })
-        .then((data) => {
-          if(this.state.ShowMessage){
-            this.setState({ text: data.message});
-          } else {
-            cookies.set('user-info', data.token, {
-              path: '/',
-              sameSite: 'none',
-              secure: true,
+        axios.post(`${signUpUrl}`,
+            bodyParameters
+        )
+            .then(function (response) {
+                setText(response.data.message);
+
+            })
+            .catch(function (error) {
+                if (error.response.status === 422) {
+                    setText(error.response.data.join(', \n'));
+                }
             });
-          }
-       });
-    }
 
+    }, [nick_name, email, password, password_confirmation]);
 
-    handleChange = (event) => {
-        const { value, name } = event.target;
-        this.setState({ [name]: value });
-    }
-
-    render() {
-      const { t } = this.props;
-        return (
-          <div className='sign-up'>
-            { this.state.ShowMessage ? <Message text={this.state.text}/> : null }
-            <h2>{t("singup.label")}</h2>
-            <form onSubmit={this.handleSubmit}>
-                <FormInput name='nick_name' type='text' value={this.state.nick_name}
-                           required handleChange={this.handleChange} label={t("singup.nick")} />
-              <FormInput name='email' type='email' value={this.state.email}
-               required handleChange={this.handleChange} label={t("singup.email")} />
-              <FormInput name='password' type='password'
-              value={this.state.password} required
-              handleChange={this.handleChange} label={t("singup.password")} />
-              <CustomButton type='submit'>{t("singup.button")}</CustomButton>
+    return (
+        <div className={'sign-up'}>
+            { !!text  ? <Message text={text}/> : null }
+            <h2>Sign up</h2>
+            <form onSubmit={handleSubmit}>
+                <FormInput name='nick_name' type='text' value={nick_name}
+                           required  handleChange={event => { setNickName(event.target.value)}} label='nick' />
+                <FormInput name='email' type='email' value={email}
+                           required  handleChange={event => { setEmail(event.target.value)}} label='email' />
+                <FormInput name='password' type='password'
+                           value={password} required
+                           handleChange={event => { setPassword(event.target.value)}}
+                           label='password' />
+                <FormInput name='password_confirmation' type='password'
+                           value={password_confirmation} required
+                           handleChange={event => { setPasswordConfirmation(event.target.value)}}
+                           label='password confirmation' />
+                <CustomButton type='submit'>SIGN UP</CustomButton>
             </form>
-          </div>
-        );
-    }
+        </div>
+    )
 }
 
-SignUp.contextType = LoggedContext
-export default withTranslation()(SignUp)
+export default SignUp;

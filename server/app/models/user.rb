@@ -26,7 +26,10 @@ class User < ApplicationRecord
             format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/,
                       message: "must include upper and lowercase letters and digits" }
   validates :nick_name, presence: true, uniqueness: true, length: { minimum: 3, maximum: 15 }
-
+  validates :password_confirmation, length: { minimum: 8, maximum: 20 }, presence: true,
+            format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/,
+                      message: "must include upper and lowercase letters and digits" }
+  validates_confirmation_of  :password
   def set_default
     role_user = Role.find_by(name: "User")
     self.role_id = role_user.id
@@ -35,8 +38,8 @@ class User < ApplicationRecord
   def get_advert_count
     self.adverts.length
   end
-  
+
   def jwt_payload
-    { 'email' => self.email, 'id' => self.id }
+    { "email" => self.email, "id" => self.id }
   end
 end
