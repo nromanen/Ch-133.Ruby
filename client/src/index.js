@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import CustomRoutes from "./components/custom-routes/custom-routes";
 import React, { Component, Suspense }  from 'react';
-import LoggedContext from 'context'
+import LoggedContext from './context'
 import { createContext, useState, useContext, useMemo } from 'react';
 
 const styleLink = document.createElement("link");

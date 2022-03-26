@@ -1,12 +1,12 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import LoggedContext from 'context'
+import LoggedContext from '../../context'
 import FormInput from '../../components/form-input/form-input'
 import CustomButton from '../../components/custom-button/custom-button'
 import Message from '../../components/message/message'
 import { withTranslation } from 'react-i18next';
-import "i18n";
+import "../../i18n";
 import './SignUp.scss'
 import '../../consts.js'
 

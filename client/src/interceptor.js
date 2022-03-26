@@ -10,6 +10,7 @@ axios.defaults.headers.common['X-lang'] = `${language}`;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 axios.interceptors.request.use(req => {
-  req.headers.authorization = `Bearer ${token}`;
+  if (token)
+    req.headers.authorization = `Bearer ${token}`;
   return req;
 });

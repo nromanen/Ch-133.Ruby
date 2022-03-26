@@ -4,12 +4,12 @@ import FormInput from '../../components/form-input/form-input'
 import CustomButton from '../../components/custom-button/custom-button'
 import Message from '../../components/toster/message'
 import CookieRefresh from '../../components/cookie-refresh.js'
-import LoggedContext from 'context'
+import LoggedContext from '../../context'
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
 import { withTranslation } from 'react-i18next';
-import "i18n";
+import "../../i18n";
 import './SingIn.scss'
 import '../../consts.js'
 import '../../interceptor.js'
