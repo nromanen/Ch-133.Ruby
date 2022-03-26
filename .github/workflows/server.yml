@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [ heroku ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: pandoc/latex
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install mustache (to update the date)
+        run:  apk add ruby && gem install mustache
+      - name: creates output
+        run:  sh ./build.sh
+      - name: Pushes to another repository
+        id: push_directory
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: output/server
+          destination-github-username: 'advert-smtp'
+          destination-repository-name: 'test'
+          user-email: advertisements.smtp@gmail.com
+          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
+          target-branch: main
+      - name: Test get variable exported by push-to-another-repository
+        run: echo $DESTINATION_CLONED_DIRECTORY
