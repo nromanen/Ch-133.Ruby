@@ -2,7 +2,7 @@
 
 module Users
   class SessionsController < Devise::SessionsController
-    #respond_to :json
+    respond_to :json
 
     private
       def respond_with(_resource, _opts = {})
