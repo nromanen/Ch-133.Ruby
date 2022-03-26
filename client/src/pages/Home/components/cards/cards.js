@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
-import Footer from 'components/footer/footer';
+import Footer from '../../../../components/footer/footer';
 import { useTranslation } from "react-i18next";
 
 function InfoTilesContent () {
