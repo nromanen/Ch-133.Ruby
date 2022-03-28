@@ -6,7 +6,12 @@ module Users
 
     private
       def respond_with(_resource, _opts = {})
-        if current_user.nil?
+        unconfirmed = params[:user]
+        if unconfirmed.nil?
+          render json: {
+            message: I18n.t("unconfirmed")
+          }, status: :unprocessable_entity
+        elsif current_user.nil?
           render json: {
             message: I18n.t("wronglogin")
           }, status: :unprocessable_entity
