@@ -6,19 +6,21 @@ import Message from '../../components/message/message'
 
 import './CategoryPage.scss'
 import '../../consts.js'
-
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 export default function App() {
     const [name, setName] = useState('');
     const [message, setMessage] = useState('')
     const [showMessage, setShowMessage] = useState(false)
+    const token = cookies.get('user-info');
 
     const Submit = event => {
         event.preventDefault();
 
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-lang': 'uk' },
+            headers: { 'Content-Type': 'application/json', 'X-lang': 'uk', 'Authorization': `Bearer ${token}` },
             body: JSON.stringify({
                 "name": name
             })
@@ -26,14 +28,11 @@ export default function App() {
 
         fetch(window.createCategoryUrl, requestOptions)
             .then((response) => {
-                setShowMessage(true);
-                console.log(response)
                 return response.json();
             })
             .then((data) => {
-                if(showMessage) {
-                    setMessage(data.message);
-                }
+                setMessage(data.message);
+                setShowMessage(true);
             }).catch((error) => {
             console.error('Error:', error);
         });

@@ -311,6 +311,7 @@ GEM
 
 PLATFORMS
   x64-mingw32
+
 DEPENDENCIES
   active_model_serializers
   activestorage-validator
@@ -341,5 +342,5 @@ DEPENDENCIES
 RUBY VERSION
    ruby 3.0.3p157
 
-BUNDLED WITH  
-   2.3.5
+BUNDLED WITH
+   2.3.7
