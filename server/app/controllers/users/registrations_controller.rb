@@ -13,6 +13,7 @@ module Users
       def user_params
         params.require(:user).permit(
           :password,
+          :password_confirmation,
           :email,
           :nick_name
         )
@@ -26,11 +27,11 @@ module Users
 
 
       def register_success
-        render json: { message: "Signed up successfully. Please confirm your email." }
+        render json: {message: I18n.t("signed_up_and_unconfirmed") }, status: :created
       end
 
       def register_failed(user)
-        render json: { message: "Data is not valid, please, change" }, status: :unprocessable_entity
+        render json: user.errors.full_messages, status: :unprocessable_entity
       end
   end
 end
