@@ -21,5 +21,3 @@ comands = [
 comands.each do |i|
    connection.execute(i)
 end
-#UPDATE "users" SET "confirmed_at"='2022-03-22 17:19:40.342358' WHERE "nick_name"='seed0';
-#SELECT id FROM roles WHERE "name"='Admin'
