@@ -12,3 +12,4 @@ ru:
   userInfoValidError: "У Вас нету прав или инфо не существует."
   category: "Категорию"
   comment: "Коментарий"
+  not_allowed: "У вас недостаточно прав"

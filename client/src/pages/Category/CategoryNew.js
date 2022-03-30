@@ -7,6 +7,7 @@ import Message from '../../components/message/message'
 import './CategoryPage.scss'
 import '../../consts.js'
 import Cookies from 'universal-cookie';
+import axios from "axios";
 const cookies = new Cookies();
 
 export default function App() {
@@ -14,33 +15,35 @@ export default function App() {
     const [message, setMessage] = useState('')
     const [showMessage, setShowMessage] = useState(false)
     const token = cookies.get('user-info');
+    const lang = cookies.get('i18next');
+    const [status, setStatus] = useState('message-style-bad');
 
     const Submit = event => {
         event.preventDefault();
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-lang': 'uk', 'Authorization': `Bearer ${token}` },
-            body: JSON.stringify({
-                "name": name
-            })
+        const requestHeaders = {
+            headers: { 'Content-Type': 'application/json', 'X-lang': lang, 'Authorization': `Bearer ${token}` },
         };
 
-        fetch(window.createCategoryUrl, requestOptions)
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setMessage(data.message);
+        const requestBody = {
+            "name": name
+        };
+
+        axios.post(window.createCategoryUrl, requestBody, requestHeaders)
+            .then((res) => {
+                setMessage(res.data.message);
                 setShowMessage(true);
-            }).catch((error) => {
-            console.error('Error:', error);
-        });
+            })
+            .catch((err) => {
+                setShowMessage(true);
+                setMessage(err.response.data.message);
+            });
+
     }
 
     return (
             <div className='category'>
-                { !!showMessage? <Message text={message}/> :null }
+                { !!showMessage? <Message text={message} style={status}/> :null }
                 <h2>Create category</h2>
                 <form onSubmit={Submit}>
                     <FormInput name='name' type='name' value={name}
@@ -50,60 +53,3 @@ export default function App() {
             </div>
         );
 }
-
-
-
-
-
-//
-
-// class Category extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             name: ''
-//         }
-//     }
-//
-//     handleSubmit = event => {
-//         event.preventDefault();
-//         const requestOptions = {
-//             method: 'POST',
-//             headers: { 'Content-Type': 'application/json', 'X-lang': 'uk' },
-//             body: JSON.stringify({
-//                 "name": this.state.name
-//             })
-//         };
-//         fetch(window.createCategoryUrl, requestOptions)
-//             .then((response) => {
-//                 this.setState({ ShowMessage: true });
-//                 return response.json();
-//             })
-//             .then((data) => {
-//                 if(this.state.ShowMessage) {
-//                     this.setState({text: data.name});
-//                 }
-//             });
-//     }
-//
-//     handleChange = (event) => {
-//         const { value, name } = event.target;
-//         this.setState({ [name]: value });
-//     }
-//
-//     render() {
-//         return (
-//             <div className='category'>
-//                 { this.state.ShowMessage ? <Message text={this.state.text}/> : null }
-//                 <h2>Create category</h2>
-//                 <form onSubmit={this.handleSubmit}>
-//                     <FormInput name='name' type='name' value={this.state.name}
-//                                required handleChange={this.handleChange} label='Name of Category' />
-//                     <CustomButton type='submit'>Create</CustomButton>
-//                 </form>
-//             </div>
-//         );
-//     }
-// }
-//
-// export default Category;

@@ -39,23 +39,20 @@ export default function App() {
         } else setPage(1)
     };
 
+    const handleDelete = (e, Info) => {
+        console.log(Info);
+    }
+
     const items = categories.map((category) =>
         <li key={category.id}>
             {category.name}
+            <button onClick={(e) => handleDelete(e,category.id)}>delete</button>
         </li>
     );
 
     return (
         <div className="categories">
             <div>
-                <Dropdown
-                    placeholder={perPageOptions[0].toString()}
-                    defaultValue={perPageOptions[0]}
-                    fluid
-                    selection
-                    options={perPageOptions.map(numb => ({key: numb, text:numb, value: numb }))}
-                    onChange={handleOnChangeDropdown}
-                />
                 <h3 className="bold">All categories</h3>
                 <List>{items}</List>
             </div>
@@ -67,6 +64,14 @@ export default function App() {
                     activePage={page}
                     onPageChange={handleOnChange}
                     totalPages={pages}
+                />
+                <Dropdown
+                    placeholder={perPageOptions[0].toString()}
+                    defaultValue={perPageOptions[0]}
+                    fluid
+                    selection
+                    options={perPageOptions.map(numb => ({key: numb, text:numb, value: numb }))}
+                    onChange={handleOnChangeDropdown}
                 />
             </div>
         </div>

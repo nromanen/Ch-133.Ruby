@@ -3,7 +3,7 @@ import './message.scss'
 
 function Message(props) {
   return (
-      <div className='message-style'>
+      <div className={props.style}>
         <h1 dangerouslySetInnerHTML={{__html: props.text}} />
       </div>
     )

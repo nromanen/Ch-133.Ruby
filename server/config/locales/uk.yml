@@ -12,3 +12,4 @@ uk:
   userInfoValidError: "У Вас немає прав, або інфо не існує."
   category: "Категорію"
   comment: "Коментар"
+  not_allowed: "У вас недостатньо прав"

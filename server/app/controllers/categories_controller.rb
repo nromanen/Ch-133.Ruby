@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!, except: %i[index]
+  before_action :authenticate_user!, except: %i[ index ]
   before_action :set_category, except: %i[ create index ]
 
 
@@ -12,11 +10,15 @@ class CategoriesController < ApplicationController
 
 
   def create
-    @category = Category.new(category_params)
-    if @category.save
-      render json: { message: I18n.t("created", name: I18n.t("category")) }, status: :created
+    if current_user.has_role?(:admin)
+      @category = Category.new(category_params)
+      if @category.save
+        render json: { message: I18n.t("created", name: I18n.t("category")) }, status: :created
+      else
+        render json: {message: @category.errors.full_messages[0]}, status: :unprocessable_entity
+      end
     else
-      render json: {message: @category.errors.full_messages[0]}, status: :unprocessable_entity
+      render json: {message: I18n.t("not_allowed")}, status: :method_not_allowed
     end
   end
 
@@ -38,6 +40,6 @@ class CategoriesController < ApplicationController
     end
 
     def category_params
-      params.permit(:name, :page, :per_page)
+      params.require(:category).permit(:name, :page, :per_page)
     end
 end

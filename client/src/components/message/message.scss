@@ -1,4 +1,4 @@
-.message-style {
+.message-style-bad {
   display: block;
   border-style: solid;
   border-radius: 25px;
@@ -6,6 +6,18 @@
   border-color: #cd3c45;
   font-family: 'Lucida Console', 'Courier New', monospace;
   color: #cd3c45;
+  font-size: 10px;
+  margin-bottom: 50px;
+}
+
+.message-style-good {
+  display: block;
+  border-style: solid;
+  border-radius: 25px;
+  text-align: center;
+  border-color: green;
+  font-family: 'Lucida Console', 'Courier New', monospace;
+  color: green;
   font-size: 10px;
   margin-bottom: 50px;
 }

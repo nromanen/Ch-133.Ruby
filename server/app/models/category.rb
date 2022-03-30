@@ -3,6 +3,8 @@
 class Category < ApplicationRecord
   before_validation :capitalize_name
 
+  resourcify
+
   #will_paginate gem
   self.per_page = 10
 
