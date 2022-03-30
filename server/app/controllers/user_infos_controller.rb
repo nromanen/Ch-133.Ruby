@@ -18,16 +18,27 @@ class UserInfosController < ApplicationController
 
   def update
     user = current_user
-    user_inf = user.create_user_info(user_info_params)
-    if user.id == user_inf.user_id
-      if user_inf.update(user_info_params)
+
+    if user.user_info.nil?
+      user_inf = user.create_user_info(user_info_params)
+      if user_inf.save
         render json: user_inf, status: 200, serializer: UserInfosSerializer
       else
         render json: user_inf.errors.full_messages, status: :unprocessable_entity
       end
     else
-      render json: { message: I18n.t("userInfoValidError") }, status: 403
+      if user.id == user.user_info.user_id
+        if user.user_info.update(user_info_params)
+          render json: user.user_info, status: 200, serializer: UserInfosSerializer
+        else
+          render json: user.user_info.errors.full_messages, status: :unprocessable_entity
+        end
+      else
+        render json: { message: I18n.t("userInfoValidError") }, status: 403
+      end
     end
+
+
   end
 
   def user_info_params
