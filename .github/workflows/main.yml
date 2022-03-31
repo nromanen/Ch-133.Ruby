@@ -20,4 +20,4 @@ jobs:
       - name: Install dependencies
         run: cd server && bundle install
       - name: Run tests
-        run: bundle exec rake
+        run: cd server && bundle exec rake
