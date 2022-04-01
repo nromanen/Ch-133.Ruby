@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!, except: %i[index]
-  before_action :set_category, except: %i[ create index ]
+  before_action :authenticate_user!, except: %i[index all]
+  before_action :set_category, except: %i[ create index all]
 
 
   def index
@@ -10,6 +10,14 @@ class CategoriesController < ApplicationController
     render json: { categories: @categories, pages: @categories.total_pages }
   end
 
+  def all
+    response = []
+    @categories = Category.all.order('name ASC')
+    @categories.each do |category|
+      response << { 'key': category.name, 'text': category.name, 'value': category.id}
+    end
+    render json: response
+  end
 
   def create
     @category = Category.new(category_params)

@@ -8,6 +8,7 @@ import Home from "../../pages/Home/Home";
 import UserInfo from "../../pages/UserInfo/UserInfo";
 import CategoryNew from "../../pages/Category/CategoryNew";
 import Categories from "../../pages/Category/Categories";
+import CreateAdvertisement from "../../pages/Advertisement/CreateAdvertisement";
 
 const CustomRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const CustomRoutes = () => {
           <Route path="/sign_up" element={<SignUp />} />
           <Route path="*" element={<NoPage />} />
           <Route path="/users/:userId/user_infos" element={<UserInfo />} />
+          <Route path="/create_advert" element={<CreateAdvertisement/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
