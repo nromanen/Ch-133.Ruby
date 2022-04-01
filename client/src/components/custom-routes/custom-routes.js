@@ -9,9 +9,39 @@ import UserInfo from "../../pages/UserInfo/UserInfo";
 import CategoryNew from "../../pages/Category/CategoryNew";
 import Categories from "../../pages/Category/Categories";
 import RequireAuth from '../../signed_in.js';
+import { useState, useEffect } from 'react';
+import {useNavigate} from "react-router-dom";
+import Cookies from 'universal-cookie';
+import jwt from 'jwt-decode';
+import LoggedContext from '../../context';
+import { useContext } from 'react';
+
+const UserRole = () => {
+  const { logged, setLogged } = useContext(LoggedContext);
+  const [role, setRole] = useState('');
+  const cookies = new Cookies();
+
+  useEffect(() => {
+    let condion = localStorage.getItem('logged')
+    if(logged) {
+       let token = cookies.get('user-info');
+       setRole(jwt(token)["role"]);
+       localStorage.setItem('role', role);
+    } else {
+       localStorage.setItem('role', null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  });
+
+  return (
+    <></>
+  );
+}
 
 const CustomRoutes = () => {
   return (
+    <>
+    <UserRole/>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -33,6 +63,7 @@ const CustomRoutes = () => {
         </Route>
       </Routes>
     </BrowserRouter>
+    </>
   );
 };
 

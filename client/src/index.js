@@ -9,14 +9,10 @@ styleLink.rel = "stylesheet";
 styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
 document.head.appendChild(styleLink);
 
-
 export default function App() {
   const [logged, setLogged] = useState(false);
 
-  const value = useMemo(
-    () => ({ logged, setLogged }),
-    [logged]
-  );
+  const value = { logged, setLogged };
 
   return (
     <LoggedContext.Provider value={value}>

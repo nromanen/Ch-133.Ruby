@@ -1,99 +1,83 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import FormInput from '../../components/form-input/form-input'
 import CustomButton from '../../components/custom-button/custom-button'
 import Message from '../../components/toster/message'
 import CookieRefresh from '../../components/cookie-refresh.js'
 import LoggedContext from '../../context'
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import Stack from '@mui/material/Stack';
-import { withTranslation } from 'react-i18next';
+import { useContext } from "react";
+import { useTranslation } from "react-i18next";
+import axios from 'axios';
 import "../../i18n";
 import './SingIn.scss'
 import '../../consts.js'
-import '../../interceptor.js'
+import useInterceptor from '../../interceptor.js'
 
-class SignIn extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: '',
-            showMessage: false,
-            text: '',
-            token: false,
-        }
-    }
+const SignIn = () => {
+  const [message, setMessage] = useState(false);
+  const [text, setText] = useState('');
+  const [token, setToken] = useState(false);
+  const interseptor = useInterceptor();
+  const { t } = useTranslation();
+  const axios = require('axios');
+  const cookies = new Cookies();
+  const { logged, setLogged } = useContext(LoggedContext);
+  const [formValue, setFormValue] = useState({
+    email: "",
+    password: "",
+  });
 
-    handleSubmit = event => {
-        event.preventDefault();
-        const cookies = new Cookies();
-        const language = cookies.get('i18next');
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-lang': language },
-            body: JSON.stringify({
-              "user":{
-                  "email": this.state.email,
-                  "password": this.state.password,
-              }
-           })
-        };
-        fetch(window.singInUrl, requestOptions)
-        .then((response) => {
-          if (response.status !== 200)
-            this.setState({ showMessage: true });
-          else {
-            this.setState({ showMessage: false });
-          }
-          return response.json();
-        })
-        .then((data) => {
-          if(this.state.showMessage){
-            this.setState({ text: data.message });
-          } else {
-            this.setState({ token: true });
-            cookies.set('user-info', data.token, {
-              path: '/',
-              sameSite: 'Strict',
-              secure: true,
-            });
-            this.context.setLogged(true);
-          }
-       });
-    }
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormValue((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  };
 
-    handleChange = (event) => {
-        const { value, name } = event.target;
-        this.setState({ [name]: value });
-    }
+  const { email, password } = formValue;
 
-    static contextType = LoggedContext;
+  const handleSubmit = (event) => {
+    setMessage(false);
+    event.preventDefault();
+    axios.post('users/sign_in', {
+      "user": {
+        "email": email,
+        "password": password
+      }
+    })
+    .then(function (response) {
+      setToken(true);
+      cookies.set('user-info', response.data['token'], {
+        path: '/',
+        sameSite: 'Strict',
+        secure: true,
+      });
+      setLogged(true);
+    })
+    .catch(function (error) {
+      setMessage(true);
+      setText(error.response.data['message']);
+    });
+  }
 
-    render() {
-      const { t } = this.props;
-        return (
-          <LoggedContext.Consumer>
-            {({logged, setLogged}) => (
-              <div className='sign-in'>
-                { this.state.showMessage ? <Message text={this.state.text} type={"error"}/> : null }
-                { this.state.token ? <CookieRefresh/> : null } {/*if fetch returns token then we can render a component by first time and run UseEffect hook in component*/}
-                <h2>{t("singIn.head")}</h2>
-                <form onSubmit={this.handleSubmit}>
-                  <FormInput name='email' type='email' value={this.state.email}
-                   required handleChange={this.handleChange} label={t("singIn.email")} />
-                  <FormInput name='password' type='password'
-                  value={this.state.password} required
-                  handleChange={this.handleChange} label={t("singIn.password")} />
-                  <CustomButton type='submit'>{t("singIn.button")}</CustomButton>
-                </form>
-              </div>
-            )}
-         </LoggedContext.Consumer>
-        );
-    }
+  return(
+    <div className='sign-in'>
+      { message ? <Message text={text} type={"error"}/> : null }
+      { token ? <CookieRefresh/> : null }
+      <h2>{t("singIn.head")}</h2>
+      <form onSubmit={handleSubmit}>
+        <FormInput name='email' type='email' value={email}
+          required handleChange={handleChange} label={t("singIn.email")} />
+        <FormInput name='password' type='password'
+          value={password} required
+          handleChange={handleChange} label={t("singIn.password")} />
+        <CustomButton type='submit'>{t("singIn.button")}</CustomButton>
+      </form>
+    </div>
+  );
 }
 
-SignIn.contextType = LoggedContext
-export default withTranslation()(SignIn)
+export default SignIn

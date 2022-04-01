@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import Cookies from 'universal-cookie';
-import {useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom";
+import LoggedContext from '../context';
+import { useContext } from "react";
 const cookies = new Cookies();
 const token = cookies.get('user-info');
 const axios = require('axios');
@@ -15,6 +17,7 @@ function CookieRefresh() {
         'Authorization': `Bearer ${token}`
       }
     })
+    localStorage.setItem('logged', false);
   }
 
   let promise = new Promise(function(resolve, reject) {
@@ -33,6 +36,7 @@ function CookieRefresh() {
     }
     navigate("/adverts")
     clear()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <></>;
