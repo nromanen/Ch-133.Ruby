@@ -56,7 +56,7 @@ class AdvertsController < ApplicationController
 
   private
     def advert_params
-      params.permit(:title, :text, :category_id, :image)
+      params.permit(:title, :text, :category_id)
     end
 
 end

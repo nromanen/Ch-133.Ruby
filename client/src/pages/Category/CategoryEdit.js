@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import { useParams } from "react-router-dom";
 
 import FormInput from '../../components/form-input/form-input'
 import CustomButton from '../../components/custom-button/custom-button'
@@ -17,6 +18,14 @@ export default function App() {
     const token = cookies.get('user-info');
     const lang = cookies.get('i18next');
     const [status, setStatus] = useState('message-style-bad');
+    const [category, setCategory] = useState('');
+    const params = useParams();
+
+    useEffect( () => {
+        axios.get(window.createCategoryUrl+`/${params.id}`).then(response => {
+            setName(response.data.name);
+        }).then(console.log(category));
+    }, [params]);
 
     const Submit = event => {
         event.preventDefault();
@@ -29,7 +38,7 @@ export default function App() {
             "name": name
         };
 
-        axios.post(window.createCategoryUrl, requestBody, requestHeaders)
+        axios.patch(`/categories/${params.id}`, requestBody, requestHeaders)
             .then((res) => {
                 setMessage(res.data.message);
                 setShowMessage(true);
@@ -42,15 +51,15 @@ export default function App() {
     }
 
     return (
-            <div className='category'>
-                { !!showMessage? <Message text={message} style={status}/> :null }
-                <h2>Create category</h2>
-                <form onSubmit={Submit}>
-                    <FormInput name='name' type='name' value={name}
-                    handleChange={event => {setName(event.target.value)}}
-                    label = "name"/>
-                    <CustomButton type='submit'>Create</CustomButton>
-                </form>
-            </div>
-        );
+        <div className='category'>
+            { !!showMessage? <Message text={message} style={status}/> :null }
+            <h2>Create category</h2>
+            <form onSubmit={Submit}>
+                <FormInput name='name' type='text' value={name}
+                           handleChange={event => {setName(event.target.value)}}
+                           label='Name'/>
+                <CustomButton type='submit'>Create</CustomButton>
+            </form>
+        </div>
+    );
 }

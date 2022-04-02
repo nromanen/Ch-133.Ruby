@@ -1,24 +1,27 @@
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!, except: %i[ index ]
+  before_action :authenticate_user!, except: %i[ index show ]
   before_action :set_category, except: %i[ create index ]
 
 
   def index
     @categories = Category.paginate(page: params[:page], per_page: params[:per_page]).order('name ASC')
-    render json: { categories: @categories, pages: @categories.total_pages }
+    if params[:page]!=nil
+      render json: { categories: @categories, pages: @categories.total_pages }
+    else
+      render json: { categories: @categories}
+    end
   end
 
+  def show
+    render json: @category
+  end
 
   def create
-    if current_user.has_role?(:admin)
-      @category = Category.new(category_params)
-      if @category.save
-        render json: { message: I18n.t("created", name: I18n.t("category")) }, status: :created
-      else
-        render json: {message: @category.errors.full_messages[0]}, status: :unprocessable_entity
-      end
+    @category = Category.new(category_params)
+    if @category.save
+      render json: { message: I18n.t("created", name: I18n.t("category")) }, status: :created
     else
-      render json: {message: I18n.t("not_allowed")}, status: :method_not_allowed
+      render json: {message: @category.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
@@ -26,12 +29,16 @@ class CategoriesController < ApplicationController
     if @category.update(category_params)
       render json: { message: I18n.t("updated", name: I18n.t("category")) }, status: :ok
     else
-      render json: @category.errors, status: :unprocessable_entity
+      render json: {message: @category.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @category.destroy
+    if current_user.role_id == Role.find_by(name: "Admin").id
+      @category.destroy
+    else
+      render json: {message: I18n.t("not_allowed")}, status: :method_not_allowed
+    end
   end
 
   private
@@ -40,6 +47,6 @@ class CategoriesController < ApplicationController
     end
 
     def category_params
-      params.require(:category).permit(:name, :page, :per_page)
+      params.require(:category).permit(:name, :page, :per_page, :category_id)
     end
 end

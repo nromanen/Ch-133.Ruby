@@ -8,6 +8,7 @@ import Home from "../../pages/Home/Home";
 import UserInfo from "../../pages/UserInfo/UserInfo";
 import CategoryNew from "../../pages/Category/CategoryNew";
 import Categories from "../../pages/Category/Categories";
+import CategoryEdit from "../../pages/Category/CategoryEdit";
 
 const CustomRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const CustomRoutes = () => {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/categories/new" element={<CategoryNew />} />
+          <Route path="/categories/edit/:id" element={<CategoryEdit />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/sign_in" element={<SingIn />} />
           <Route path="/sign_up" element={<SignUp />} />

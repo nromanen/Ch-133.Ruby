@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  before_save :set_default
+  before_validation :set_default
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # devise :database_authenticatable, :registerable,
@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :adverts, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_one :role
+  belongs_to :role
   has_one :user_info, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true,
