@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import {useNavigate} from "react-router-dom";
-import LoggedContext from '../context';
-import { useContext } from "react";
 const cookies = new Cookies();
 const token = cookies.get('user-info');
 const axios = require('axios');
@@ -17,7 +15,7 @@ function CookieRefresh() {
         'Authorization': `Bearer ${token}`
       }
     })
-    localStorage.setItem('logged', false);
+    localStorage.clear();
   }
 
   let promise = new Promise(function(resolve, reject) {

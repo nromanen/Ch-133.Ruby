@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Cookies from 'universal-cookie';
 import FormInput from '../../components/form-input/form-input'
 import CustomButton from '../../components/custom-button/custom-button'
@@ -7,21 +7,22 @@ import CookieRefresh from '../../components/cookie-refresh.js'
 import LoggedContext from '../../context'
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import axios from 'axios';
 import "../../i18n";
 import './SingIn.scss'
 import '../../consts.js'
 import useInterceptor from '../../interceptor.js'
+import jwt from 'jwt-decode';
 
 const SignIn = () => {
   const [message, setMessage] = useState(false);
   const [text, setText] = useState('');
   const [token, setToken] = useState(false);
-  const interseptor = useInterceptor();
+  const interseptor = useInterceptor(true, false);
   const { t } = useTranslation();
   const axios = require('axios');
   const cookies = new Cookies();
   const { logged, setLogged } = useContext(LoggedContext);
+  const role = null;
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
@@ -40,6 +41,7 @@ const SignIn = () => {
   const { email, password } = formValue;
 
   const handleSubmit = (event) => {
+    let sign_in = false;
     setMessage(false);
     event.preventDefault();
     axios.post('users/sign_in', {
@@ -55,6 +57,8 @@ const SignIn = () => {
         sameSite: 'Strict',
         secure: true,
       });
+      localStorage.setItem('loged', true);
+      localStorage.setItem('role', jwt(response.data['token'])["role"]);
       setLogged(true);
     })
     .catch(function (error) {

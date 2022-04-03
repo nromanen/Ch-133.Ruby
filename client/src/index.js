@@ -1,8 +1,8 @@
 import ReactDOM from "react-dom";
 import CustomRoutes from "./components/custom-routes/custom-routes";
-import React, { Component, Suspense }  from 'react';
+import React, { Suspense }  from 'react';
 import LoggedContext from './context'
-import { createContext, useState, useContext, useMemo } from 'react';
+import { useState } from 'react';
 
 const styleLink = document.createElement("link");
 styleLink.rel = "stylesheet";
@@ -11,7 +11,6 @@ document.head.appendChild(styleLink);
 
 export default function App() {
   const [logged, setLogged] = useState(false);
-
   const value = { logged, setLogged };
 
   return (
