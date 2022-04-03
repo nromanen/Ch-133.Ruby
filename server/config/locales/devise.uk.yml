@@ -2,6 +2,7 @@ uk:
   activerecord:
     attributes:
       user:
+        nick_name: Нік
         confirmation_sent_at: Підтвердження надіслано о
         confirmation_token: Код підтвердження
         confirmed_at: Підтверджено
@@ -16,7 +17,7 @@ uk:
         last_sign_in_ip: IP останнього заходу
         locked_at: Заблокований
         password: Пароль
-        password_confirmation: Підтвердження пароля
+        password_confirmation: Підтвердження паролю
         remember_created_at: Нагадування створене
         remember_me: Запам'ятати мене
         reset_password_sent_at: Листа для скидання пароля надіслано
@@ -25,6 +26,9 @@ uk:
         unconfirmed_email: Не підтверджений email
         unlock_token: Токен розблокування
         updated_at: Змінений
+        errors:
+          messages:
+            password_validation: "має містити великі та малі букви, а також цифри"
     models:
       user: Користувач
   devise:
