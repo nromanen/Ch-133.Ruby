@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!, except: %i[ index show ]
-  before_action :set_category, except: %i[ create index ]
+  before_action :authenticate_user!, except: %i[ index show all ]
+  before_action :set_category, except: %i[ create index all ]
 
 
   def index
@@ -14,6 +16,14 @@ class CategoriesController < ApplicationController
 
   def show
     render json: @category
+  end
+  def all
+    response = []
+    @categories = Category.all.order('name ASC')
+    @categories.each do |category|
+      response << { 'key': category.name, 'text': category.name, 'value': category.id}
+    end
+    render json: response
   end
 
   def create
@@ -34,11 +44,7 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    if current_user.role_id == Role.find_by(name: "Admin").id
-      @category.destroy
-    else
-      render json: {message: I18n.t("not_allowed")}, status: :method_not_allowed
-    end
+    @category.destroy
   end
 
   private

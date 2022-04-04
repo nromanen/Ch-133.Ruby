@@ -7,11 +7,18 @@ class AdvertsController < ApplicationController
   # POST /adverts
   def create
     @advert = current_user.adverts.new(advert_params)
+    blob = ActiveStorage::Blob.create_and_upload!(
+      io: StringIO.new((Base64.decode64(params[:image][2]))),
+      filename: params[:image][1],
+      content_type: params[:image][0],)
+    @advert.image.attach(blob)
     authorize @advert
     if @advert.save
-      render json: @advert
+      render json: { message: I18n.t("created", name: I18n.t("advert"))
+                     # , advert: AdvertSerializer.new(@advert).as_json
+      }, status: 200
     else
-      render json: @advert.errors, status: :unprocessable_entity
+      render json: @advert.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -56,7 +63,7 @@ class AdvertsController < ApplicationController
 
   private
     def advert_params
-      params.permit(:title, :text, :category_id)
+      params.require(:advert).permit(:title, :text, :category_id, :image)
     end
 
 end

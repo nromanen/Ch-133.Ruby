@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AdvertPolicy < ApplicationPolicy
 
   def create?
@@ -13,11 +14,11 @@ class AdvertPolicy < ApplicationPolicy
   end
 
   def update?
-    is_moderator or is_admin or @record.user == @user
+    is_admin or is_moderator or @record.user == @user
   end
 
   def destroy?
-    is_moderator or is_admin or @record.user == @user
+    is_admin or is_moderator or @record.user == @user
   end
 
   class Scope < Scope

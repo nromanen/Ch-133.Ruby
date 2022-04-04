@@ -20,8 +20,10 @@ class Advert < ApplicationRecord
     !!self.likes.find { |like| like.user_id == current_user.id }
   end
 
-  validates :title, :text, presence: true
-  validates :image, blob: { content_type: %w[image/png image/jpg image/jpeg], size_range: 1..(10.megabytes) }
+  validates :title, :text, :image, presence: true
+  validates :image, blob: { content_type: %w[image/png image/jpg image/jpeg image/webp], message: I18n.t("imageNotValid") }
+  validates :image, blob: { size_range: 1..(5.megabytes), message: I18n.t("imageTooLarge") }
+  validates :title, uniqueness: true
 
 
   def image_url
