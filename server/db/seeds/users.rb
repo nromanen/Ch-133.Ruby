@@ -1,5 +1,4 @@
 connection = ActiveRecord::Base.connection()
-@adminRole = Role.where(name: 'Admin').first&.id
 admin_nick = 'admin'
 user_nick = 'seedUser'
 
