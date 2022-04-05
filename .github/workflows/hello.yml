@@ -1,0 +1,56 @@
+env:
+  RUBY_VERSION: 3.0.3
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_DB: postgres
+
+name: Rails tests
+on: [push]
+jobs:
+  rubocop-test:
+    name: Rubocop
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+      - name: Install Rubocop
+        run: cd server && gem install rubocop
+      - name: Check code
+        run: cd server && rubocop
+  rspec-test:
+    name: RSpec
+    needs: rubocop-test
+    runs-on: ubuntu-18.04
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+        - 5432:5432
+        env:
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+      - name: Install postgres client
+        run:  cd server && sudo apt-get install libpq-dev
+      - name: Install dependencies
+        run: |
+          cd server && gem install bundler
+          cd server && bundler install
+      - name: Create database
+        run: |
+          cd server && bundler exec rails db:create RAILS_ENV=test
+          cd server && bundler exec rails db:migrate RAILS_ENV=test
+      - name: Run tests
+        run: cd server && bundler exec rake
+      - name: Upload coverage results    
+        uses: actions/upload-artifact@master
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage
