@@ -27,8 +27,8 @@ jobs:
         run:  cd server && sudo apt-get install libpq-dev
       - name: Install dependencies
         run: |
-          gem install bundler
-          bundler install
+          cd server && gem install bundler
+          cd server && bundler install
       - name: Create database
         run: |
           bundler exec rails db:create RAILS_ENV=test
