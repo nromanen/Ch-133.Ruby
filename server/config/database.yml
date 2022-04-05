@@ -19,8 +19,8 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  username: <%= ENV["DB_USER"] %>
-  password: <%= ENV["DB_PASSWORD"] %>
+  username: postgres
+  password: postgres
   host: localhost
   port: 5432
 
