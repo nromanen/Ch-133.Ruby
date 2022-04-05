@@ -19,8 +19,6 @@ jobs:
           POSTGRES_DB: postgres
         ports:
           - 5432:5432
-    # needed because the postgres container does not provide a healthcheck
-    # tmpfs makes DB faster by using RAM
       options: >-
         --mount type=tmpfs,destination=/var/lib/postgresql/data
         --health-cmd pg_isready
