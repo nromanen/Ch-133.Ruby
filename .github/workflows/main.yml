@@ -33,6 +33,8 @@ jobs:
         uses: ruby/setup-ruby@359bebbc29cbe6c87da6bc9ea3bc930432750108
         with:
           ruby-version: '3.0.3'
+      - name: Create DB
+        run: cd server && bin/rails db:prepare
       - name: Install dependencies
         run: cd server && bundle install
       - name: Run tests
