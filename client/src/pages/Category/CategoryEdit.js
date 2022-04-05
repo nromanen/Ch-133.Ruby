@@ -29,8 +29,8 @@ export default function App() {
     let navigate = useNavigate();
 
     useEffect( () => {
-        if (tokentest!='Moderator'||tokentest!='Admin'){
-            navigate(`../404`);
+        if ((tokentest!=='Moderator')&&(tokentest!=='Admin')){
+            navigate(`/`, {replace: true});
         }
         axios.get(window.createCategoryUrl+`/${params.id}`).then(response => {
             setName(response.data.name);

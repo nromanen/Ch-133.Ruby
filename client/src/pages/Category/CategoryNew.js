@@ -25,14 +25,17 @@ export default function App() {
     const [status, setStatus] = useState('');
     const { t } = useTranslation();
     const decoded = jwt(token);
-    let tokentest = decoded['role'];
     let navigate = useNavigate();
 
     useEffect( () => {
-        if (tokentest!='Moderator'||tokentest!='Admin'){
-            navigate(`../404`);
+        checkrole(decoded['role']);
+    });
+
+    const checkrole = (tokentest) =>{
+        if((tokentest!=='Admin')&&(tokentest!=='Moderator')) {
+            navigate(`/`, {replace: true});
         }
-    },[]);
+    };
 
     const Submit = event => {
         event.preventDefault();
