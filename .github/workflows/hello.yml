@@ -10,6 +10,9 @@ jobs:
   rspec-test:
     name: RSpec
     runs-on: ubuntu-18.04
+    defaults:
+      run:
+        working-directory: server
     services:
       postgres:
         image: postgres:latest
@@ -27,8 +30,8 @@ jobs:
         run:  cd server && sudo apt-get install libpq-dev
       - name: Install dependencies
         run: |
-          cd server && gem install bundler
-          cd server && bundler install
+          gem install bundler
+          bundler install
       - name: Create database
         run: |
           bundler exec rails db:create RAILS_ENV=test
