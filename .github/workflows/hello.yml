@@ -27,14 +27,14 @@ jobs:
         run:  cd server && sudo apt-get install libpq-dev
       - name: Install dependencies
         run: |
-          cd server && gem install bundler
-          cd server && bundler install
+          gem install bundler
+          bundler install
       - name: Create database
         run: |
-          cd server && bundler exec rails db:create RAILS_ENV=test
-          cd server && bundler exec rails db:migrate RAILS_ENV=test
+          bundler exec rails db:create RAILS_ENV=test
+          bundler exec rails db:migrate RAILS_ENV=test
       - name: Run tests
-        run: cd server && bundler exec rake
+        run: bundler exec rake
       - name: Upload coverage results    
         uses: actions/upload-artifact@master
         if: always()
