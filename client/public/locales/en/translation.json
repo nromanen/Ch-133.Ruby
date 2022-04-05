@@ -36,11 +36,12 @@
     "buttonText0": "GO"
   },
   "singup" : {
-    "label": "Sign Up",
+    "head": "Sign Up",
     "nick": "nick",
     "email": "email",
     "password": "password",
-    "button": "SIGN UP"
+    "passwordConfirmation": "Password confirmation",
+    "button": "Sign Up"
   },
   "category" : {
     "create": "Create",
