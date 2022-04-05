@@ -27,7 +27,7 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
       - name: Install postgres client
-        run:  cd server && sudo apt-get install libpq-dev
+        run:  sudo apt-get install libpq-dev
       - name: Install dependencies
         run: |
           gem install bundler
