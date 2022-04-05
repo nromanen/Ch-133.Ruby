@@ -8,6 +8,9 @@ import {Dropdown, List, Pagination, Icon} from 'semantic-ui-react';
 import axios from "axios";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import "../../i18n";
+import { useTranslation } from "react-i18next";
+import jwt from 'jwt-decode';
 
 const cookies = new Cookies();
 
@@ -20,7 +23,10 @@ export default function App() {
     const [perPage, setPerPage] = useState(queryParams.get("per_page"));
     const token = cookies.get('user-info');
     const lang = cookies.get('i18next');
+    const { t } = useTranslation();
+    const decoded = jwt(token);
     let navigate = useNavigate();
+    let tokentest = decoded['role'];
 
     const apiUrl = useMemo(() => {
         return window.createCategoryUrl+`/?page=${page}&per_page=${perPage}`
@@ -78,15 +84,19 @@ export default function App() {
     const items = categories.map((category) =>
         <li key={category.id}>
             {category.name}
-            <button className="icon" onClick={(e) => handleDelete(e,category.id)}><Icon name ='delete'/></button>
-            <button className="icon" onClick={(e) => redirectToEdit(e,category.id)}><Icon name ='edit'/></button>
+            {tokentest=='Moderator'||tokentest=='Admin'&&
+                <div className="icon">
+                    <button className="icon" onClick={(e) => handleDelete(e, category.id)}><Icon name='delete'/></button>
+                    <button className="icon" onClick={(e) => redirectToEdit(e,category.id)}><Icon name ='edit'/></button>
+                </div>
+            }
         </li>
     );
 
     return (
         <div className="categories">
             <div>
-                <h3 className="bold">All categories</h3>
+                <h3 className="bold">{t("category.all")}</h3>
                 <List>{items}</List>
             </div>
 

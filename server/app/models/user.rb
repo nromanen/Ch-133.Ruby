@@ -40,6 +40,7 @@ class User < ApplicationRecord
   end
 
   def jwt_payload
-    { "email" => self.email, "id" => self.id }
+    @role = Role.find(self.role_id)
+    { "email" => self.email, "id" => self.id, "role" => @role.name }
   end
 end

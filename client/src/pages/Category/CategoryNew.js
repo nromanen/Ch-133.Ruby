@@ -1,13 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import { useNavigate } from "react-router-dom";
 
-import FormInput from '../../components/form-input/form-input'
-import CustomButton from '../../components/custom-button/custom-button'
-import Message from '../../components/message/message'
+import FormInput from '../../components/form-input/form-input';
+import CustomButton from '../../components/custom-button/custom-button';
+import Message from '../../components/toster/message'
 
-import './CategoryPage.scss'
-import '../../consts.js'
-import Cookies from 'universal-cookie';
+import './CategoryPage.scss';
+import '../../consts.js';
 import axios from "axios";
+import "../../i18n";
+import { useTranslation } from "react-i18next";
+import '../../interceptor.js';
+import jwt from 'jwt-decode';
+
+import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 export default function App() {
@@ -16,7 +22,17 @@ export default function App() {
     const [showMessage, setShowMessage] = useState(false)
     const token = cookies.get('user-info');
     const lang = cookies.get('i18next');
-    const [status, setStatus] = useState('message-style-bad');
+    const [status, setStatus] = useState('');
+    const { t } = useTranslation();
+    const decoded = jwt(token);
+    let tokentest = decoded['role'];
+    let navigate = useNavigate();
+
+    useEffect( () => {
+        if (tokentest!='Moderator'||tokentest!='Admin'){
+            navigate(`../404`);
+        }
+    },[]);
 
     const Submit = event => {
         event.preventDefault();
@@ -31,10 +47,12 @@ export default function App() {
 
         axios.post(window.createCategoryUrl, requestBody, requestHeaders)
             .then((res) => {
+                setStatus('success');
                 setMessage(res.data.message);
                 setShowMessage(true);
             })
             .catch((err) => {
+                setStatus('error');
                 setShowMessage(true);
                 setMessage(err.response.data.message);
             });
@@ -43,13 +61,13 @@ export default function App() {
 
     return (
             <div className='category'>
-                { !!showMessage? <Message text={message} style={status}/> :null }
-                <h2>Create category</h2>
+                { !!showMessage? <Message text={message} type={status}/> :null }
+                <h2>{t("category.createCategory")}</h2>
                 <form onSubmit={Submit}>
                     <FormInput name='name' type='name' value={name}
                     handleChange={event => {setName(event.target.value)}}
-                    label = "name"/>
-                    <CustomButton type='submit'>Create</CustomButton>
+                    label = {t("category.name")}/>
+                    <CustomButton type='submit'>{t("category.create")}</CustomButton>
                 </form>
             </div>
         );

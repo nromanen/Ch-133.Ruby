@@ -1,14 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import FormInput from '../../components/form-input/form-input'
 import CustomButton from '../../components/custom-button/custom-button'
-import Message from '../../components/message/message'
+import Message from '../../components/toster/message'
 
 import './CategoryPage.scss'
 import '../../consts.js'
 import Cookies from 'universal-cookie';
 import axios from "axios";
+import "../../i18n";
+import { useTranslation } from "react-i18next";
+import jwt from 'jwt-decode';
 const cookies = new Cookies();
 
 export default function App() {
@@ -17,11 +20,18 @@ export default function App() {
     const [showMessage, setShowMessage] = useState(false)
     const token = cookies.get('user-info');
     const lang = cookies.get('i18next');
-    const [status, setStatus] = useState('message-style-bad');
+    const [status, setStatus] = useState('');
+    const { t } = useTranslation();
+    const decoded = jwt(token);
     const [category, setCategory] = useState('');
     const params = useParams();
+    let tokentest = decoded['role'];
+    let navigate = useNavigate();
 
     useEffect( () => {
+        if (tokentest!='Moderator'||tokentest!='Admin'){
+            navigate(`../404`);
+        }
         axios.get(window.createCategoryUrl+`/${params.id}`).then(response => {
             setName(response.data.name);
         }).then(console.log(category));
@@ -40,10 +50,12 @@ export default function App() {
 
         axios.patch(`/categories/${params.id}`, requestBody, requestHeaders)
             .then((res) => {
+                setStatus('success')
                 setMessage(res.data.message);
                 setShowMessage(true);
             })
             .catch((err) => {
+                setStatus('error')
                 setShowMessage(true);
                 setMessage(err.response.data.message);
             });
@@ -53,12 +65,12 @@ export default function App() {
     return (
         <div className='category'>
             { !!showMessage? <Message text={message} style={status}/> :null }
-            <h2>Create category</h2>
+            <h2>{t("category.editCategory")}</h2>
             <form onSubmit={Submit}>
                 <FormInput name='name' type='text' value={name}
                            handleChange={event => {setName(event.target.value)}}
-                           label='Name'/>
-                <CustomButton type='submit'>Create</CustomButton>
+                           label={t("category.name")}/>
+                <CustomButton type='submit'>{t("category.edit")}</CustomButton>
             </form>
         </div>
     );

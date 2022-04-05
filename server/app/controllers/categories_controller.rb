@@ -6,10 +6,11 @@ class CategoriesController < ApplicationController
 
 
   def index
-    @categories = Category.paginate(page: params[:page], per_page: params[:per_page]).order('name ASC')
     if params[:page]!=nil
+      @categories = Category.paginate(page: params[:page], per_page: params[:per_page]).order('name ASC')
       render json: { categories: @categories, pages: @categories.total_pages }
     else
+      @categories = Category.all.order('name ASC')
       render json: { categories: @categories}
     end
   end
@@ -17,6 +18,7 @@ class CategoriesController < ApplicationController
   def show
     render json: @category
   end
+
   def all
     response = []
     @categories = Category.all.order('name ASC')

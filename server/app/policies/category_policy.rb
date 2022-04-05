@@ -1,7 +1,8 @@
-class CategoryPolicy < ApplicationPolicy
+# frozen_string_literal: true
+class AdvertPolicy < ApplicationPolicy
 
   def create?
-    @user.present?
+    is_admin or is_moderator
   end
 
   def index?
@@ -12,12 +13,12 @@ class CategoryPolicy < ApplicationPolicy
     true
   end
 
-  def update
-    user.admin?
+  def update?
+    is_admin or is_moderator
   end
 
   def destroy?
-    is_moderator or is_admin or @record.user == @user
+    is_admin or is_moderator
   end
 
   class Scope < Scope

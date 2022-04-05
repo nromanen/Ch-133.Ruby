@@ -41,5 +41,13 @@
     "email": "email",
     "password": "password",
     "button": "SIGN UP"
+  },
+  "category" : {
+    "create": "Create",
+    "createCategory": "Creating Category",
+    "name": "Name",
+    "edit": "Edit",
+    "editCategory": "Editing Category",
+    "all": "All Categories"
   }
 }
