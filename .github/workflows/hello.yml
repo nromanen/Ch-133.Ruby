@@ -32,6 +32,8 @@ jobs:
         run: |
           gem install bundler
           bundler install
+      - name: Install db
+        run: bin/rails db:create && bin/rails db:migrate
       - name: Run tests
         run: bundler exec rake
       - name: Upload coverage results    
