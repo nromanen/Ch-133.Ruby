@@ -5,7 +5,9 @@ env:
   POSTGRES_DB: postgres
 
 name: Rails tests
-on: [push]
+on: push
+env:
+  DEVISE_JWT_SECRET_KEY: ${{ secrets.DEVISE_JWT_SECRET_KEY }}
 jobs:
   rspec-test:
     name: RSpec
