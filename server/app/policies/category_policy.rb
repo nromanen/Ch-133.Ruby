@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class AdvertPolicy < ApplicationPolicy
+class CategoryPolicy < ApplicationPolicy
 
   def create?
     is_admin or is_moderator

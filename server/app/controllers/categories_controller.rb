@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!, except: %i[ index show all ]
+  #before_action :authenticate_user!, except: %i[ index show all ]
   before_action :set_category, except: %i[ create index all ]
 
 
@@ -30,6 +30,7 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
+    authorize @category
     if @category.save
       render json: { message: I18n.t("created", name: I18n.t("category")) }, status: :created
     else
@@ -38,6 +39,7 @@ class CategoriesController < ApplicationController
   end
 
   def update
+    authorize @category
     if @category.update(category_params)
       render json: { message: I18n.t("updated", name: I18n.t("category")) }, status: :ok
     else
@@ -46,6 +48,7 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+    authorize @category
     @category.destroy
   end
 

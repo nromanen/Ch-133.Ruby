@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
 class ApplicationPolicy
-  attr_reader :current_user, :resource
-  ADMIN = "Admin"
-  MODERATOR = "Moderator"
+  attr_reader :user, :record
 
-  def initialize(current_user:, resource:)
-    @user = current_user
-    @record = resource
+  def initialize(user, record)
+    @user = user
+    @record = record
   end
 
   def index?
@@ -39,11 +37,11 @@ class ApplicationPolicy
   end
 
   def is_admin
-    @user.role_id == '95be3e88-4ca1-4d12-b3ba-ddfb32103756'
+    @user.role.name == "Admin"
   end
 
   def is_moderator
-    @user.role_id == '4b34fc35-72c5-4a23-a713-64308eea1c1f'
+    @user.role.name == "Moderator"
   end
 
   class Scope
@@ -57,6 +55,6 @@ class ApplicationPolicy
     end
 
     private
-      attr_reader :user, :scope
+    attr_reader :user, :scope
   end
 end
