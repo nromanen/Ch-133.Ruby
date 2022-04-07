@@ -29,7 +29,7 @@ jobs:
       - name: Create env file
         run: |
           touch .env.local
-          echo DEVISE_JWT_SECRET_KEY="ac881e472c9b4af53b30058d53ff809bf43780e3e8c9141529e24ae3272d8038a30ef8c4923c4aa0fb4ddd6041c9ac0911daa11b11b10cb0d1f7c997177fd526" >> .env
+          echo DEVISE_JWT_SECRET_KEY=${{ secrets.DEVISE_JWT_SECRET_KEY }} >> .env
           cat .env
       - name: Install postgres client
         run:  sudo apt-get install libpq-dev
