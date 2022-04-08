@@ -7,7 +7,8 @@ RSpec.describe User, type: :model do
     described_class.new(
       nick_name: "tom",
       email: "t@example.com",
-      password: "Qwerty123"
+      password: "Qwerty123",
+      password_confirmation: "Qwerty123"
     )
   end
 
@@ -18,7 +19,6 @@ RSpec.describe User, type: :model do
   it "is valid with valid attributes" do
     expect(subject).to be_valid
   end
-
 
 
   it "is not valid without a nick_name" do

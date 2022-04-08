@@ -17,7 +17,7 @@ const SignIn = () => {
   const [message, setMessage] = useState(false);
   const [text, setText] = useState('');
   const [token, setToken] = useState(false);
-  const interseptor = useInterceptor(true, false);
+  const interseptor = useInterceptor(false);
   const { t } = useTranslation();
   const axios = require('axios');
   const cookies = new Cookies();
@@ -41,10 +41,9 @@ const SignIn = () => {
   const { email, password } = formValue;
 
   const handleSubmit = (event) => {
-    let sign_in = false;
     setMessage(false);
     event.preventDefault();
-    axios.post('users/sign_in', {
+    axios.post('/users/sign_in', {
       "user": {
         "email": email,
         "password": password
