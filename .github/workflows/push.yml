@@ -40,7 +40,7 @@ jobs:
         env:
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
       - name: Create branch
-        run: git subtree push --prefix server origin server-heroku
+        run: git subtree push --prefix server origin server-heroku0
           
       - name: Push to Heroku
-        run: git push heroku server-heroku:master
+        run: git push heroku server-heroku0:master
