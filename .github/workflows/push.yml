@@ -42,7 +42,7 @@ jobs:
       - name: Server push
         run: git subtree push --prefix server heroku main
       - name: Add Heroku remote client
-        run: heroku git:remote -a front5435345
+        run: heroku git:remote -a $HEROKU_APP_NAME_CLIENT
         env:
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME_CLIENT }}
       - name: client push
