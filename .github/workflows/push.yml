@@ -41,5 +41,4 @@ jobs:
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
       - name: Push to Heroku
         run: |
-          git subtree split --prefix server -b site-build
-          git push origin site-build:master
+          git subtree push --prefix server origin server-heroku
