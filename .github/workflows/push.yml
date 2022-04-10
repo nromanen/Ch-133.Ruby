@@ -17,9 +17,6 @@ jobs:
  # .github/workflows/custom-deploy.yml
   custom-deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: server
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -43,4 +40,6 @@ jobs:
         env:
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
       - name: Push to Heroku
-        run: git push heroku main
+        run: |
+          git subtree split --prefix server -b site-build
+          git push origin site-build:master
