@@ -45,7 +45,7 @@ jobs:
           gem install bundler
           bundler install
       - name: Install db
-        run: rake db:create RAILS_ENV=test && rake db:migrate RAILS_ENV=test
+        run: rake db:create RAILS_ENV=test && rake db:migrate RAILS_ENV=test&& rake db:seed RAILS_ENV=test
       - name: Run tests
         run: bundler exec rake
 
