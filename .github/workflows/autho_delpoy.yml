@@ -1,8 +1,4 @@
-env:
-  RUBY_VERSION: 3.0.3
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: postgres
-  POSTGRES_DB: postgres
+
 
 name: "Deploy & RSpec"
 on:
@@ -12,6 +8,11 @@ jobs:
   rspec-test:
     name: RSpec
     runs-on: ubuntu-18.04
+    env:
+      RUBY_VERSION: 3.0.3
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     defaults:
       run:
         working-directory: server
@@ -48,6 +49,7 @@ jobs:
         run: bundler exec rake
 
   custom-deploy:
+    needs: rspec-test
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
