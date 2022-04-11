@@ -48,7 +48,7 @@ jobs:
       - name: Run tests
         run: bundler exec rake
 
-  custom-deploy:
+  heroku-deploy:
     needs: rspec-test
     runs-on: ubuntu-latest
     steps:
