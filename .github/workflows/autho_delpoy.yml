@@ -1,5 +1,4 @@
-# run tests and linters.
-name: "Ruby on Rails CI"
+name: "Deploy & RSpec"
 on:
   push:
     branches: [ main ]
