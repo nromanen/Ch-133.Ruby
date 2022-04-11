@@ -12,9 +12,15 @@ RSpec.describe User, type: :model do
     )
   end
 
+  it "sends a confirmation email" do
+    expect { subject.save }.to change(ActionMailer::Base.deliveries, :count).by(1)
+  end
+
   it "is valid with valid attributes" do
     expect(subject).to be_valid
   end
+
+
 
   it "is not valid without a nick_name" do
     subject.nick_name = nil
@@ -46,8 +52,18 @@ RSpec.describe User, type: :model do
     expect(subject).to_not be_valid
   end
 
+  it "is not valid password_confirmation format" do
+    subject.password = "nilnil"
+    expect(subject).to_not be_valid
+  end
+
   it "is not valid password length" do
     subject.password = "nil"
     expect(subject).to_not be_valid
+  end
+
+  it "can't send confirmation email" do
+    subject.email = "nil"
+    expect { subject.save }.to change(ActionMailer::Base.deliveries, :count).by(0)
   end
 end
