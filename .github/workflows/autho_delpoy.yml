@@ -1,0 +1,76 @@
+# run tests and linters.
+name: "Ruby on Rails CI"
+on:
+  push:
+    branches: [ main ]
+jobs:
+  rspec-test:
+    name: RSpec
+    runs-on: ubuntu-18.04
+    defaults:
+      run:
+        working-directory: server
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+        - 5432:5432
+        env:
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+      - name: Create env file
+        run: |
+          touch .env.local
+          echo DEVISE_JWT_SECRET_KEY=${{ secrets.DEVISE_JWT_SECRET_KEY }} >> .env
+          echo DB_USER=${{ env.POSTGRES_USER }} >> .env
+          echo SMTP_EMAIL=${{ secrets.SMTP_EMAIL }} >> .env
+          echo SMTP_EMAIL_PASSWORD=${{ secrets.SMTP_EMAIL_PASSWORD }} >> .env
+          cat .env.local
+      - name: Install postgres client
+        run:  sudo apt-get install libpq-dev
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundler install
+      - name: Install db
+        run: rake db:create RAILS_ENV=test && rake db:migrate RAILS_ENV=test
+      - name: Run tests
+        run: bundler exec rake
+
+  custom-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Heroku login credentials
+        run: |
+          cat > ~/.netrc <<EOF
+            machine api.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+            machine git.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+          EOF
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+      - name: Add Heroku remote server
+        run: heroku git:remote --app $HEROKU_APP_NAME
+        env:
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+      - name: Server push
+        run: git subtree push --prefix server heroku main
+      - name: Add Heroku remote client
+        run: heroku git:remote -a $HEROKU_APP_NAME_CLIENT
+        env:
+          HEROKU_APP_NAME_CLIENT: ${{ secrets.HEROKU_APP_NAME_CLIENT }}
+      - name: client push
+        run: git subtree push --prefix client heroku main
