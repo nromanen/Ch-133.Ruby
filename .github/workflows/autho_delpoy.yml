@@ -1,3 +1,9 @@
+env:
+  RUBY_VERSION: 3.0.3
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_DB: postgres
+
 name: "Deploy & RSpec"
 on:
   push:
