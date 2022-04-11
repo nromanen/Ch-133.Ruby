@@ -43,4 +43,4 @@ jobs:
       - name: Install db
         run: rake db:create RAILS_ENV=test && rake db:migrate RAILS_ENV=test
       - name: Run tests
-        run: echo bundler exec rake
+        run: bundler exec rake
