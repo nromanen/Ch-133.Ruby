@@ -34,6 +34,7 @@ jobs:
           touch .env.local
           echo DEVISE_JWT_SECRET_KEY=${{ secrets.DEVISE_JWT_SECRET_KEY }} >> .env
           echo DB_USER=${{ env.POSTGRES_USER }} >> .env
+          echo DB_PASSWORD=${{ env.POSTGRES_PASSWORD }} >> .env
           echo SMTP_EMAIL=${{ secrets.SMTP_EMAIL }} >> .env
           echo SMTP_EMAIL_PASSWORD=${{ secrets.SMTP_EMAIL_PASSWORD }} >> .env
           cat .env.local
