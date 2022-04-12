@@ -83,5 +83,7 @@ jobs:
         run: heroku git:remote -a $HEROKU_APP_NAME_CLIENT
         env:
           HEROKU_APP_NAME_CLIENT: ${{ secrets.HEROKU_APP_NAME_CLIENT }}
+      - name: add lockfile for a client
+        run: npm install --package-lock
       - name: client push
         run: git subtree push --prefix client heroku main
