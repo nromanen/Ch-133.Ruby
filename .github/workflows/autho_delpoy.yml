@@ -84,6 +84,6 @@ jobs:
         env:
           HEROKU_APP_NAME_CLIENT: ${{ secrets.HEROKU_APP_NAME_CLIENT }}
       - name: add lockfile for a client
-        run: cd client && npm install --package-lock
+        run: cd client && npm install --package-lock-only
       - name: client push
         run: git subtree push --prefix client heroku main
