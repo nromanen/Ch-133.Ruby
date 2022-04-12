@@ -47,7 +47,7 @@ jobs:
       - name: Run tests
         run: bundler exec rake
       - name: Create branch for coverage
-        run: git subtree push --prefix coverage origin coverage
+        run: ~ && git subtree push --prefix server/coverage origin coverage
 
   heroku-deploy:
     needs: rspec-test
