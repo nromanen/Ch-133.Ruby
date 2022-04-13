@@ -51,7 +51,7 @@ jobs:
         if: always()
         with:
           name: coverage-report
-          path: sever/coverage
+          path: server/coverage
       - name: Deploy page🚀
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
