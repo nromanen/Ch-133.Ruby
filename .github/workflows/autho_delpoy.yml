@@ -41,7 +41,7 @@ jobs:
       - name: Install dependencies
         run: |
           gem install bundler
-          bundle install --jobs 4 --retry 3
+          bundle install
       - name: Install db
         run: rake db:create && rake db:migrate && rake db:seed 
       - name: Run tests
