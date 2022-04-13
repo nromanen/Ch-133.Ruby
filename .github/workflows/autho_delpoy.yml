@@ -41,17 +41,11 @@ jobs:
       - name: Install dependencies
         run: |
           gem install bundler
-          bundler install
+          bundle install --jobs 4 --retry 3
       - name: Install db
         run: rake db:create && rake db:migrate && rake db:seed 
       - name: Run tests
         run: bundler exec rake
-      - name: Upload coverage results
-        uses: actions/upload-artifact@master
-        if: always()
-        with:
-          name: coverage-report
-          path: server/coverage
       - name: Deploy page🚀
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
