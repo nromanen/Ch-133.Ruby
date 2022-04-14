@@ -35,11 +35,12 @@
     "buttonText": "ADVERTS",
     "buttonText0": "GO"
   },
-  "singup" : {
-    "label": "Sign Up",
-    "nick": "nick",
-    "email": "email",
-    "password": "password",
-    "button": "SIGN UP"
+  "signUp" : {
+    "head": "Sign Up",
+    "nick": "Nick",
+    "email": "Email",
+    "password": "Password",
+    "passwordConfirmation": "Password confirmation",
+    "button": "Sign Up"
   }
 }
