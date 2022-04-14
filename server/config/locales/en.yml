@@ -3,14 +3,28 @@ en:
   updated: "%{name} was successfully updated"
   wronglogin: "Wrong Email or Password"
   unconfirmed: "Please, confirm your email"
-  infoNotExist: "Info doesn't exist. Create it."
-  userNotExist: "User doesn't exist."
-  success: "The action was successful"
-  wrongway: "Hmm, something went wrong"
   phoneNotValid: "does not match format requirements"
   nameNotValid: "only allows letters"
-  userInfoValidError: "U have no rights or info doesn't exist"
+  lastNameNotValid: "only allows letters"
+  success: "The action was successful"
+  wrongway: "Hmm, something went wrong"
   category: "Category"
   comment: "Comment"
   signed_up_and_unconfirmed: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
-
+  infoNotExist: "Info doesn't exist. Create it."
+  userNotExist: "User doesn't exist."
+  userInfoValidError: "U have no rights or info doesn't exist"
+  activerecord:
+    models:
+      user_info: user_info
+    attributes:
+      user_info:
+        first_name: "First name"
+        last_name: "Last name"
+        phone: "Phone"
+    errors:
+      format: "%{attribute} %{message}"
+      messages:
+        invalid:
+          phone: "does not match format requirements."
+          letter: "only allows letters."

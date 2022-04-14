@@ -6,7 +6,7 @@ import Stack from '@mui/material/Stack';
 export default function DescriptionAlerts(props) {
   return (
       <Alert severity={props.type}>
-        {props.text}
+          <div dangerouslySetInnerHTML={{__html: props.text}} />
       </Alert>
   );
 }

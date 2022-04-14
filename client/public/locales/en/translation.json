@@ -12,6 +12,13 @@
     "password": "password",
     "button": "Send"
   },
+  "userInfo" : {
+    "head": "User info",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "phone": "Phone",
+    "button": "Send"
+  },
   "footer" : {
     "company": "Company",
     "description": "Softserve education system"

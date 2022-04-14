@@ -7,8 +7,8 @@ class Advert < ApplicationRecord
 
   belongs_to :user
   has_one :category
-  has_many :comments dependent: :destroy
-  has_many :likes dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   enum status: {
     unpublished: 0,
     published: 1,
@@ -32,5 +32,4 @@ class Advert < ApplicationRecord
     { owner_id: self.user.id,
      owner_name: self.user.nick_name }
   end
-
 end
