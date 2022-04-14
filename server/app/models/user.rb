@@ -16,7 +16,8 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :adverts, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_one :role
+  belongs_to :role, optional: true 
+  delegate :name, to: :role
   has_one :user_info, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true,
@@ -30,9 +31,10 @@ class User < ApplicationRecord
             format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/,
                       message: "must include upper and lowercase letters and digits" }
   validates_confirmation_of  :password
+
   def set_default
     role_user = Role.find_by(name: "User")
-    self.role_id = role_user.id
+    self.role = role_user
   end
 
   def get_advert_count
@@ -40,7 +42,6 @@ class User < ApplicationRecord
   end
 
   def jwt_payload
-    @role = Role.find(self.role_id)
-    { "email" => self.email, "id" => self.id, "role" => @role.name }
+    { "email" => self.email, "id" => self.id, "role" => self.name }
   end
 end
