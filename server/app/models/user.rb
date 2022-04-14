@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  before_save :set_default
+  before_validation :set_default
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # devise :database_authenticatable, :registerable,
@@ -16,20 +16,20 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :adverts, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_one :role
+  belongs_to :role
   has_one :user_info, dependent: :destroy
 
-  validates :email, presence: true, uniqueness: true,
+  validates :email, presence: true, uniqueness: { uniqueness: true, message: I18n.t("taken") },
             format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/,
-                      message: "Wrong format" }
+            message: I18n.t("email_format") }
   validates :password, length: { minimum: 8, maximum: 20 }, presence: true,
             format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/,
-                      message: "must include upper and lowercase letters and digits" }
+                      message: I18n.t("password_validation") }
   validates :nick_name, presence: true, uniqueness: true, length: { minimum: 3, maximum: 15 }
-  validates :password_confirmation, length: { minimum: 8, maximum: 20 }, presence: true,
+  validates :password_confirmation, length: { minimum: 8, maximum: 20,  message: I18n.t("password_confirm_length") }, presence: true,
             format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/,
-                      message: "must include upper and lowercase letters and digits" }
-  validates_confirmation_of  :password
+                      message: I18n.t("password_confirm_validation") }
+  validates_confirmation_of  :password, message: I18n.t("password_confirm")
   def set_default
     role_user = Role.find_by(name: "User")
     self.role_id = role_user.id
@@ -40,7 +40,6 @@ class User < ApplicationRecord
   end
 
   def jwt_payload
-    @role = Role.find(self.role_id)
-    { "email" => self.email, "id" => self.id, "role" => @role.name }
+    { "email" => self.email, "id" => self.id }
   end
 end
