@@ -27,7 +27,7 @@ module Users
 
 
       def register_success
-        render json: {message: I18n.t("signed_up_and_unconfirmed") }, status: :created
+        render json: { message: I18n.t("signed_up_and_unconfirmed") }, status: :created
       end
 
       def register_failed(user)

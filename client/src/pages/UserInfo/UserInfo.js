@@ -8,21 +8,27 @@ import Message from "../../components/message/message";
 import {baseUrlUsers} from "../../consts";
 import '../../components/message/message.scss'
 import './UserInfo.scss'
+import jwt from 'jwt-decode';
 const cookies = new Cookies();
+
+
 
 const UserInfo = (props) => {
     let params = useParams();
-
     let token = cookies.get('user-info');
+    const decoded = jwt(token);
+    let token_id = decoded["id"];
+
+
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [phone, setPhone] = useState('');
+    const [showBtnSend, setShowBtnSend] = useState(true);
     const [disabled, setDisabled] = useState(false);
     const [text, setText] = useState(null);
 
     const handleSubmit = useCallback((event, value) => {
         event.preventDefault();
-        console.log('values = ', firstName, lastName, phone, token);
 
         const config = {
             headers: { Authorization: `Bearer ${token}` }
@@ -37,28 +43,35 @@ const UserInfo = (props) => {
                 }
         };
         setDisabled(true);
-        axios.put(`${baseUrlUsers}/${params.userId}/user_infos`,
-            bodyParameters,
-            config
+        if (token_id === params.userId){
+            axios.put(`${baseUrlUsers}/${params.userId}/user_infos`,
+                bodyParameters,
+                config
             )
-            .then(function (response) {
-                setText('');
-            })
-            .catch(function (error) {
-                if (error.response.status === 422){
-                    setText(error.response.data.join('<br>'));
-                }
-            }).finally(() => setDisabled(false));
+                .then(function (response) {
+                    setText('');
+                })
+                .catch(function (error) {
+                    if (error.response.status === 422){
+                        setText(error.response.data.join('<br>'));
+                    }
+                }).finally(() => setDisabled(false));
+        }
+
 
     }, [firstName, lastName, phone, params.userId, token]);
 
     React.useEffect(()=>{
-
         axios.get(`${baseUrlUsers}/${params.userId}/user_infos`)
             .then((response)=>{
                 setFirstName(response.data.first_name);
                 setLastName(response.data.last_name);
                 setPhone(response.data.phone);
+                if (token_id === params.userId){
+                    setShowBtnSend(true)
+                } else {
+                    setShowBtnSend(false)
+                }
             })
             .catch(function (error) {
                 setText(error.response.data.message);
@@ -80,10 +93,11 @@ const UserInfo = (props) => {
                 <FormInput name='last_name' type='text' value={lastName}
                            handleChange={event => { setLastName(event.target.value)}}
                            label='Last name' />
-                <FormInput name='phone' type='text' value={phone}
-                           handleChange={event => { setPhone(event.target.value)}}
-                           label='Phone' />
-                <CustomButton disabled={disabled} type='submit'>Send</CustomButton>
+                { !!showBtnSend  ? <FormInput name='phone' type='text' value={phone}
+                                              handleChange={event => { setPhone(event.target.value)}}
+                                              label='Phone' /> : null }
+                { !!showBtnSend  ? <CustomButton disabled={disabled} type='submit'>Send</CustomButton> : null }
+
             </form>
         </div>
 

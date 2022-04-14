@@ -51,6 +51,11 @@ RSpec.describe User, type: :model do
     expect(subject).to_not be_valid
   end
 
+  it "is not valid password_confirmation format" do
+    subject.password = "nilnil"
+    expect(subject).to_not be_valid
+  end
+
   it "is not valid password length" do
     subject.password = "nil"
     expect(subject).to_not be_valid
