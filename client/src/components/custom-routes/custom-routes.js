@@ -10,6 +10,7 @@ import CategoryNew from "../../pages/Category/CategoryNew";
 import Categories from "../../pages/Category/Categories";
 import CategoryEdit from "../../pages/Category/CategoryEdit";
 import CreateAdvertisement from "../../pages/Advertisement/CreateAdvertisement";
+import RequireAuth from '../../signed_in.js';
 
 const CustomRoutes = () => {
   return (
@@ -23,8 +24,12 @@ const CustomRoutes = () => {
           <Route path="/sign_in" element={<SingIn />} />
           <Route path="/sign_up" element={<SignUp />} />
           <Route path="*" element={<NoPage />} />
-          <Route path="/users/:userId/user_infos" element={<UserInfo />} />
           <Route path="/create_advert" element={<CreateAdvertisement/>}/>
+          <Route path="/users/:userId/user_infos" element={
+            <RequireAuth>
+              <UserInfo/>
+            </RequireAuth>
+          } />
         </Route>
       </Routes>
     </BrowserRouter>

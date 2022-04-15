@@ -16,7 +16,8 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :adverts, dependent: :destroy
   has_many :likes, dependent: :destroy
-  belongs_to :role
+  belongs_to :role, optional: true
+  delegate :name, to: :role
   has_one :user_info, dependent: :destroy
 
   validates :email, presence: true, uniqueness: { uniqueness: true, message: I18n.t("taken") },
@@ -31,8 +32,8 @@ class User < ApplicationRecord
                       message: I18n.t("password_confirm_validation") }
   validates_confirmation_of  :password, message: I18n.t("password_confirm")
   def set_default
-    role_user = Role.find_by(name: "Admin")
-    self.role_id = role_user.id
+    role_user = Role.find_by(name: "User")
+    self.role = role_user
   end
 
   def get_advert_count
@@ -40,7 +41,6 @@ class User < ApplicationRecord
   end
 
   def jwt_payload
-    @role = Role.find(self.role_id)
-    { "email" => self.email, "id" => self.id, "role" => @role.name }
+    { "email" => self.email, "id" => self.id, "role" => self.name }
   end
 end
