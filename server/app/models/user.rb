@@ -31,7 +31,7 @@ class User < ApplicationRecord
                       message: I18n.t("password_confirm_validation") }
   validates_confirmation_of  :password, message: I18n.t("password_confirm")
   def set_default
-    role_user = Role.find_by(name: "User")
+    role_user = Role.find_by(name: "Admin")
     self.role_id = role_user.id
   end
 

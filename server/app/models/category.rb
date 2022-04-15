@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Category < ApplicationRecord
-  before_validation :capitalize_name
+  before_save :capitalize_name
 
   #will_paginate gem
   #self.per_page = 10
