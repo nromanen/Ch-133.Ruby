@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class AdvertsSerializer
-  include FastJsonapi::ObjectSerializer
-  attributes :id, :title, :owner, :image
+  include JSONAPI::Serializer
+  attributes :id, :title, :owner, :image_url
 
   def as_json
     super()

@@ -10,7 +10,8 @@ import {Dropdown} from "semantic-ui-react";
 import Cookies from 'universal-cookie';
 import '../../consts.js'
 import {useNavigate} from "react-router-dom";
-import DescriptionAlerts from '../../components/toster/message'
+import Message from '../../components/toster/message'
+import InstantMessaging from "../../components/toster/toster";
 
 const cookies = new Cookies();
 
@@ -27,6 +28,8 @@ document.head.appendChild(styleLink);
     const [disabled, setDisabled] = useState(false);
     const [message, setMessage] = useState(null);
     const [categories, setCategories] = useState(null);
+    const language = cookies.get('i18next');
+    const [open, setOpen] = React.useState(false);
 
       let token = cookies.get('user-info');
       let navigate = useNavigate();
@@ -52,7 +55,7 @@ document.head.appendChild(styleLink);
     const onCreatePost = useCallback((event, value) => {
        event.preventDefault();
           const config = {
-              headers: { Authorization: `Bearer ${token}`, 'X-lang': 'uk', 'Content-Type': 'application/json'
+              headers: { Authorization: `Bearer ${token}`, 'X-lang': language, 'Content-Type': 'application/json'
               }
           };
        const postData = {
@@ -66,19 +69,18 @@ document.head.appendChild(styleLink);
        )            .then((response) => {
            console.log(response)
            if (response.status === 200){
-               console.log(response.status)
-               navigate(`${getAllAdverts}`, {replace: true});
+               navigate("/adverts", {replace: true});
+               setOpen(true);
+               setMessage(response.data);
+               return Promise.reject(response);
            }
            setMessage(response.data.message());
        })
            .catch(function (error) {
-               console.log("asdasd")
                if (error.response.status === 422){
-                   setMessage(error.response.data.join('<br>'));
+                   console.log(error.response.data, "asdad")
+                   setMessage(error.response.data);
                }
-                if (error.response.status === 200){
-                    navigate(`${getAllAdverts}`, {replace: true});
-                }
            }).finally(() => {setDisabled(false)});
       }, [title, text, category_id, image, token]);
 
@@ -89,7 +91,7 @@ document.head.appendChild(styleLink);
 
      return (
             <div className='create-post'>
-                { !!message  ? <DescriptionAlerts text={message}/> : null }
+                { message  ? <Message text={message} type={"error"}/> : null }
                 <h2>Create your advertisement!</h2>
                 <form onSubmit={onCreatePost} >
                     <FormInput name='title' type='text' value={title}
@@ -113,6 +115,7 @@ document.head.appendChild(styleLink);
                     />
                     <CustomButton  disabled={disabled} type='submit'>Create Advert</CustomButton>
                 </form>
+                <InstantMessaging open = {open} type="success" text={message} />
             </div>
         );
     }

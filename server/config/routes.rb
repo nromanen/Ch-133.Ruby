@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   get "/all_categories", to: "categories#all"
-
+  get "/all_adverts", to: "adverts#all"
   resources :users do
     resource :user_infos
   end
