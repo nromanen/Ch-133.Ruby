@@ -8,6 +8,8 @@ import Home from "../../pages/Home/Home";
 import UserInfo from "../../pages/UserInfo/UserInfo";
 import CategoryNew from "../../pages/Category/CategoryNew";
 import Categories from "../../pages/Category/Categories";
+import ShowAdvertisement from "../../pages/Advertisement/ShowAdvertisement/ShowAdvertisement";
+import CreateComment from "../../pages/Advertisement/ShowAdvertisement/Comment/CreateComment";
 
 const CustomRoutes = () => {
   return (
@@ -21,6 +23,8 @@ const CustomRoutes = () => {
           <Route path="/sign_up" element={<SignUp />} />
           <Route path="*" element={<NoPage />} />
           <Route path="/users/:userId/user_infos" element={<UserInfo />} />
+          <Route path="/adverts/:advertId" element={<ShowAdvertisement />} />
+          <Route path="/adverts/:advertId/comments" element={<CreateComment />} />
         </Route>
       </Routes>
     </BrowserRouter>

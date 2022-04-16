@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
   def index
     if params[:advert_id].present?
       @comments = Comment.find_by(advert_id: params[:advert_id])
-      render json: @comments
+      render json: @comment, serializer: CommentSerializer
     end
   end
 

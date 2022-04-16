@@ -42,5 +42,8 @@
     "password": "Password",
     "passwordConfirmation": "Password confirmation",
     "button": "Sign Up"
+  },
+  "comment" : {
+    "comments": "Comments"
   }
 }

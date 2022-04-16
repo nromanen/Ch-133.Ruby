@@ -42,5 +42,8 @@
     "password": "Пароль",
     "passwordConfirmation": "Підтвердження паролю",
     "button": "Зареєструватись"
+  },
+  "comments" : {
+    "comments": "Коментарі"
   }
 }
