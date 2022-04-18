@@ -23,7 +23,11 @@ export default function InstantMessaging (props) {
   return (
     <>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} >
-        <Alert onClose={handleClose} severity={props.type}>
+        <Alert onClose={handleClose} severity={props.type}
+          style={{
+            backgroundColor: '#ffffff',
+          }}
+        >
           {props.text}
         </Alert>
       </Snackbar>

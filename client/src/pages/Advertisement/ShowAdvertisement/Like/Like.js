@@ -19,7 +19,7 @@ const Like = (props) => {
     const [liked, setLiked] = useState(false);
     const [numberOfLikes, setNumberOfLikes] = useState(0);
     const [showMessage, setShowMessage] = useState(false);
-    const [message, setMessage] = useState("Was liked");
+    const [message, setMessage] = useState("O-ops, something went wrong");
     const token = cookies.get('user-info');
     const config = {
         headers:{
@@ -37,35 +37,35 @@ const Like = (props) => {
     }, []);
 
     function Like () {
-        /*if (liked) {
+        if (liked) {
             deleteLike()
-            setLiked(false)
         } else {
             createLike()
-            setLiked(true)
         }
-        setShowMessage(true)*/
-        createLike()
+        setShowMessage(true)
     };
 
     function getIfLiked () {
-        axios.get(Url.LIKED_URL, config)
+       axios.get(Url.LIKED_URL, config)
         .then(function (response) {
-            setLiked(response.data["message"])
+            setLiked(!!response.data["message"])
         }) 
-    }
+    }   
 
     function createLike () {
-        axios.post(Url.LIKES_URL, config)
+       axios.post(Url.LIKES_URL, {}, config)
         .then(function (response) {
-            //setLiked(response.data["message"])
+            setMessage(response.data["message"])
+            setLiked(true)
+            getNumberOfLikes()
         }) 
-        console.log(token)
     }
 
     function deleteLike () {
-        axios.get(Url.LIKES_URL, config).then(function (response) {
+        axios.delete(Url.LIKES_URL, config).then(function (response) {
             setMessage(response.data["message"])
+            setLiked(false)
+            getNumberOfLikes()
         }) 
     }
 
@@ -78,7 +78,7 @@ const Like = (props) => {
 
     return (
         <>
-         { showMessage ? <Message open={true} text={message}/> : null }
+           { showMessage ? <Message open={true} text={message}/> : null }
             <div className={'like'}>
                 <FormControlLabel
                     control={
