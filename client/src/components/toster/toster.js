@@ -1,6 +1,4 @@
-import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import React, {useState, useEffect} from "react";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
@@ -10,6 +8,10 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function InstantMessaging (props) {
   const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    setOpen(props.open)
+  }, [props]);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
