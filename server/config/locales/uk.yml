@@ -3,6 +3,7 @@ uk:
   updated: "%{name} було успішно перезаписано"
   wronglogin: "Неправильний Email чи пароль"
   unconfirmed: "Будь ласка, підтвердіть вашу пошту"
+  noauth: "Ви не авторизовані"
   infoNotExist: "Інфо не існує."
   userNotExist: "Користувача не існує."
   success: "Дія пройшла успішно"
