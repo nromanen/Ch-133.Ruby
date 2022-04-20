@@ -23,20 +23,14 @@ class AdvertsController < ApplicationController
     end
   end
 
-  def all
+  # GET /adverts
+  def index
     response = []
     @adverts = paginate Advert.all.order("created_at ASC")
     @adverts.each do |advert|
       response << { title: advert.title, body: advert.text, imgUrl: advert.image_url, author: advert.user.nick_name, id: advert.id }
     end
     render json: response
-  end
-
-  # GET /adverts
-  def index
-    adverts = paginate Advert.all.includes(:user).order(created_at: :desc)
-    authorize adverts
-    render json: adverts
   end
 
   # GET /adverts/1
@@ -57,7 +51,7 @@ class AdvertsController < ApplicationController
     @advert = Advert.find(params[:id])
     authorize @advert
     if advert.update(advert_params)
-      render json: @advert, serializer: AdvertSerializer
+      render json: { message: I18n.t("updated", name: I18n.t("advert")) }, status: :ok
     else
       render json: @advert.errors, status: :unprocessable_entity
     end

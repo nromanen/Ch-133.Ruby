@@ -10,15 +10,6 @@ class CategoriesController < ApplicationController
     render json: { categories: @categories, pages: @categories.total_pages }
   end
 
-  def all
-    response = []
-    @categories = Category.all.order('name ASC')
-    @categories.each do |category|
-      response << { 'key': category.name, 'text': category.name, 'value': category.id}
-    end
-    render json: response
-  end
-
   def create
     @category = Category.new(category_params)
     if @category.save

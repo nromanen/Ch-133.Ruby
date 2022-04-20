@@ -3,8 +3,8 @@ import FormInput from '../../components/form-input/form-input'
 import CustomButton from '../../components/custom-button/custom-button'
 import axios from 'axios';
 import './CreateAdvertisement.scss';
-import {createAdvertUrl, getAllAdverts} from '../../consts';
-import {getAllCategories} from '../../consts';
+import {baseAdvertUrl, createAdvertUrl, getAllAdverts} from '../../consts';
+import '../../consts.js'
 import ImageUploader from "react-images-upload";
 import {Dropdown} from "semantic-ui-react";
 import Cookies from 'universal-cookie';
@@ -35,8 +35,10 @@ document.head.appendChild(styleLink);
       let navigate = useNavigate();
 
      React.useEffect(()=> {
-         axios.get(`${getAllCategories}`).then(function(response){
-             setCategories(response.data);
+         axios.get(`${window.createCategoryUrl}`).then(function(response){
+             const result = [];
+             response.data.categories.forEach(element => result.push({'key': element.name, 'text': element.name, 'value': element.id}))
+             setCategories(result);
          });
      },[JSON.stringify(categories)]);
 
@@ -65,7 +67,7 @@ document.head.appendChild(styleLink);
                image,
        };
        setDisabled(true);
-       axios.post(`${createAdvertUrl}`, postData, config
+       axios.post(`${baseAdvertUrl}`, postData, config
        )            .then((response) => {
            console.log(response)
            if (response.status === 200){

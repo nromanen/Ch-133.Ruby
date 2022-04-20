@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import PostCard from "../../components/Post/PostV2";
 import axios from "axios";
-import {getAllAdverts} from "../../consts";
+import {baseAdvertUrl} from "../../consts";
 import { StyledEngineProvider } from '@mui/material/styles';
 import { Grid } from '@material-ui/core'
 import { makeStyles } from "@material-ui/core/styles";
@@ -24,7 +24,7 @@ const Adverts = (props) => {
     useEffect( ()=> {
         if (fetching && hasMore) {
             console.log("fetching")
-             axios.get(`${getAllAdverts}` + `?page=${page}&per_page=${4}`).then(function (response) {
+             axios.get(`${baseAdvertUrl}` + `?page=${page}&per_page=${4}`).then(function (response) {
                 setAdv([...advertisements, ...response.data]);
                 setPage(prevState => prevState + 1);
                 setHasMore(response.data.length > 0);
