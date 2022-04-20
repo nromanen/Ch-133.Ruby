@@ -17,7 +17,7 @@ class User < ApplicationRecord
   has_many :adverts, dependent: :destroy
   has_many :likes, dependent: :destroy
   belongs_to :role, optional: true 
-  delegate :name, to: :role
+  delegate :name, to: :role, prefix: true
   has_one :user_info, dependent: :destroy
 
   validates :email, presence: true, uniqueness: { uniqueness: true, message: I18n.t("taken") },
@@ -41,6 +41,6 @@ class User < ApplicationRecord
   end
 
   def jwt_payload
-    { "email" => self.email, "id" => self.id, "role" => self.name }
+    { "email" => self.email, "id" => self.id, "role" => self.role_name }
   end
 end
