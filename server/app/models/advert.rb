@@ -4,11 +4,11 @@ class Advert < ApplicationRecord
   include Rails.application.routes.url_helpers
 
   has_one_attached :image
+
   belongs_to :user
   has_one :category
-
-  has_many :comments
-  has_many :likes
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   enum status: {
     unpublished: 0,
     published: 1,
