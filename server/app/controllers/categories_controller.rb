@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 class CategoriesController < ApplicationController
-  #before_action :authenticate_user!, except: %i[ index show all ]
   before_action :set_category, except: %i[ create index all ]
 
 
   def index
-    if params[:page]!=nil
+    if params.has_key?(:page)
       @categories = Category.paginate(page: params[:page], per_page: params[:per_page]).order('name ASC')
       render json: { categories: @categories, pages: @categories.total_pages }, status: :ok
     else
@@ -17,15 +16,6 @@ class CategoriesController < ApplicationController
 
   def show
     render json: @category
-  end
-
-  def all
-    response = []
-    @categories = Category.all.order('name ASC')
-    @categories.each do |category|
-      response << { 'key': category.name, 'text': category.name, 'value': category.id}
-    end
-    render json: response
   end
 
   def create

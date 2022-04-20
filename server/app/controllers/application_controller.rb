@@ -3,9 +3,16 @@
 class ApplicationController < ActionController::API
 
   include Pundit::Authorization
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   before_action :set_locale
 
   private
+
+    def user_not_authorized
+      render json: {message: "not allowed"}, status: :forbidden
+    end
+
     def set_locale
       # locale = locale_from_url || I18n.default_locale
       # use this with routes.rb: scope "(:locale)", locale /#{I18n.available_locales.join("|")}/ do

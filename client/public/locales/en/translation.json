@@ -49,6 +49,11 @@
     "name": "Name",
     "edit": "Edit",
     "editCategory": "Editing Category",
-    "all": "All Categories"
+    "all": "All Categories",
+    "delete": "Category deleting",
+    "yes": "Yes",
+    "no": "No",
+    "sure?": "Are you sure to do this?",
+    "successDelete": "Deleted successfully!"
   }
 }

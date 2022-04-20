@@ -22,7 +22,6 @@ export default function App() {
     const perPageOptions = [10, 25, 50, 100]
     const [perPage, setPerPage] = useState(queryParams.get("per_page"));
     const token = cookies.get('user-info');
-    const lang = cookies.get('i18next');
     const { t } = useTranslation();
     const decoded = jwt(token);
     let navigate = useNavigate();
@@ -33,8 +32,8 @@ export default function App() {
     }, [page, perPage])
 
     useEffect( () => {
-        if (queryParams.get("page")==null) setPage(1);
-        if (queryParams.get("per_page")==null) setPerPage(perPageOptions[0]);
+        if (!queryParams.get("page")) setPage(1);
+        if (!queryParams.get("per_page")) setPerPage(perPageOptions[0]);
         navigate(`./?page=${page}&per_page=${perPage}`)
         axios.get(apiUrl).then(response => {
             setPages(response.data.pages)
@@ -48,7 +47,7 @@ export default function App() {
     };
 
     const handleOnChange = (e, pageInfo) => {
-        if (pageInfo.activePage != null){
+        if (pageInfo.activePage){
             setPage(pageInfo.activePage);
         } else setPage(1)
     };
@@ -60,8 +59,10 @@ export default function App() {
     const categoryDelete = (categoryID) => {
         axios.delete(window.createCategoryUrl+`/${categoryID.toString()}`, requestHeaders)
             .then((res) => {
-                alert('Deleted successfully');
-                window.location.reload();
+                alert(t("category.successDelete"));
+                if (!categories.length){
+                    setPage(1)
+                }else window.location.reload();
             })
             .catch((err) => {
                 alert(err.response.data.message);
@@ -70,9 +71,9 @@ export default function App() {
 
     const handleDelete = (e, Info) => {
         confirmAlert({
-            title: 'Delete',
-            message: 'Are you sure to do this?',
-            buttons: [ {label: 'Yes', onClick: () => categoryDelete(Info)}, {label: 'No'} ]
+            title: t("category.delete"),
+            message: t("category.sure?"),
+            buttons: [ {label: t("category.yes"), onClick: () => categoryDelete(Info)}, {label: t("category.no")} ]
         });
     }
 
@@ -84,7 +85,7 @@ export default function App() {
     const items = categories.map((category) =>
         <li key={category.id}>
             {category.name}
-            {tokentest=='Moderator'||tokentest=='Admin'&&
+            {(tokentest==='Moderator'||tokentest==='Admin')&&
                 <div className="icon">
                     <button className="icon" onClick={(e) => handleDelete(e, category.id)}><Icon name='delete'/></button>
                     <button className="icon" onClick={(e) => redirectToEdit(e,category.id)}><Icon name ='edit'/></button>

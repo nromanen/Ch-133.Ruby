@@ -31,9 +31,12 @@ class User < ApplicationRecord
             format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/,
                       message: I18n.t("password_confirm_validation") }
   validates_confirmation_of  :password, message: I18n.t("password_confirm")
+
   def set_default
-    role_user = Role.find_by(name: "User")
-    self.role = role_user
+    if self.role.nil?
+      role_user = Role.find_by(name: "User")
+      self.role = role_user
+    end
   end
 
   def get_advert_count

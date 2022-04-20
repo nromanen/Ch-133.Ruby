@@ -23,7 +23,6 @@ export default function App() {
     const [status, setStatus] = useState('');
     const { t } = useTranslation();
     const decoded = jwt(token);
-    const [category, setCategory] = useState('');
     const params = useParams();
     let tokentest = decoded['role'];
     let navigate = useNavigate();
@@ -34,7 +33,7 @@ export default function App() {
         }
         axios.get(window.createCategoryUrl+`/${params.id}`).then(response => {
             setName(response.data.name);
-        }).then(console.log(category));
+        });
     }, [params]);
 
     const Submit = event => {
@@ -48,16 +47,16 @@ export default function App() {
             "name": name
         };
 
-        axios.patch(`/categories/${params.id}`, requestBody, requestHeaders)
+        axios.patch(window.createCategoryUrl+`/${params.id}`, requestBody, requestHeaders)
             .then((res) => {
-                setStatus('success')
+                setStatus('success');
                 setMessage(res.data.message);
                 setShowMessage(true);
             })
             .catch((err) => {
-                setStatus('error')
+                setStatus('error');
+                setMessage(err.response.data.message[0]);
                 setShowMessage(true);
-                setMessage(err.response.data.message);
             });
 
     }

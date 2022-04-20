@@ -56,8 +56,8 @@ export default function App() {
             })
             .catch((err) => {
                 setStatus('error');
+                setMessage(err.response.data.message[0]);
                 setShowMessage(true);
-                setMessage(err.response.data.message);
             });
 
     }
