@@ -12,7 +12,6 @@ import Like from "../../../pages/Advertisement/ShowAdvertisement/Like/Like"
 import Advert from "../../../pages/Advertisement/ShowAdvertisement/Advert/Advert"
 import Comment from "../../../pages/Advertisement/ShowAdvertisement/Comment/Comment"
 import CreateComment from "../../../pages/Advertisement/ShowAdvertisement/Comment/CreateComment"
-import "../../../i18n";
 import './ShowAdvertisement.scss'
 
 const ShowAdvertisement = (props) => {
@@ -28,19 +27,7 @@ const ShowAdvertisement = (props) => {
             .then((response)=>{
                 setResp(response.data.advert)
                 setOwner(response.data.advert.owner)
-                setComments(response.data.advert.comments.map(function (comment, i) {
-                         return (
-                             <ListItem alignItems="flex-start">
-                                 <ListItemAvatar>
-                                     <Avatar alt={comment.author.author_name} src="/static/images/avatar/3.jpg" sx={{ bgcolor: teal[500] }}/>
-                                 </ListItemAvatar>
-                                 <ListItemText
-                                     primary={comment.author.author_name}
-                                     secondary={comment.text}/>
-                             </ListItem>
-                         )
-                         })
-                    );
+                setComments(response.data.advert.comments)
             })
     }, [params.advertId]);
 
