@@ -2,7 +2,7 @@
 
 class AdvertsController < ApplicationController
 
-  before_action :authenticate_user!, only: %i[update destroy create]
+  before_action :authenticate_user!, only: %i[update destroy create liked]
 
   # POST /adverts
   def create
@@ -11,7 +11,7 @@ class AdvertsController < ApplicationController
     if @advert.save
       render json: @advert
     else
-      render json: @advert.errors, status: :unprocessable_entity
+      render json: current_user, status: :unprocessable_entity
     end
   end
 
@@ -46,6 +46,12 @@ class AdvertsController < ApplicationController
     authorize @advert
     @advert.destroy if @advert.present?
     render json: { message: "Post has been deleted successfully." }
+  end
+
+  def liked
+    @advert = Advert.find(params[:id])
+    was_liked = !@advert.likes.where(user_id: current_user.id).blank? if current_user
+    render json: {  message: was_liked, amount: @advert.likes.size }
   end
 
   private

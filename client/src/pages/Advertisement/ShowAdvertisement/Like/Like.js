@@ -4,15 +4,15 @@ import Message from '../../../../components/toster/toster'
 import Cookies from 'universal-cookie';
 import { useParams } from "react-router-dom";
 import {baseShowAdvert} from "../../../../consts";
-import Checkbox from '@material-ui/core/Checkbox';
-import Favorite from '@material-ui/icons/Favorite';
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import "../../../../i18n";
 import  "../../../../consts";
 import  './Like.scss'
 const cookies = new Cookies();
-
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const Like = (props) => {
     let { advertId } = useParams();
@@ -32,7 +32,6 @@ const Like = (props) => {
     }
 
     useEffect(() => {
-        getNumberOfLikes();
         getIfLiked();
     }, []);
 
@@ -49,6 +48,7 @@ const Like = (props) => {
        axios.get(Url.LIKED_URL, config)
         .then(function (response) {
             setLiked(!!response.data["message"])
+            setNumberOfLikes(response.data["amount"])
         }) 
     }   
 
@@ -56,42 +56,35 @@ const Like = (props) => {
        axios.post(Url.LIKES_URL, {}, config)
         .then(function (response) {
             setMessage(response.data["message"])
+            setNumberOfLikes(response.data["amount"])
             setLiked(true)
-            getNumberOfLikes()
         }) 
     }
 
     function deleteLike () {
         axios.delete(Url.LIKES_URL, config).then(function (response) {
             setMessage(response.data["message"])
+            setNumberOfLikes(response.data["amount"])
             setLiked(false)
-            getNumberOfLikes()
-        }) 
-    }
-
-    function getNumberOfLikes () {
-        axios.get(Url.LIKES_URL)
-        .then(function (response) {
-            setNumberOfLikes(response.data["message"])
         }) 
     }
 
     return (
         <>
-           { showMessage ? <Message open={true} text={message}/> : null }
-            <div className={'like'}>
+           <Message open={showMessage} text={message}/> 
+           <div className="like">
                 <FormControlLabel
                     control={
-                        <Checkbox icon={<FavoriteBorder />}
-                            checked={liked}
-                            checkedIcon={<Favorite />}
-                            name="checkedH" 
+                        <Checkbox {...label} 
+                            icon={<FavoriteBorder />} 
+                            checkedIcon={<Favorite />} 
+                            checked={liked} 
                             onClick={Like}
                         />
                     }
                     label={numberOfLikes}
                 />
-            </div>
+           </div>
         </>
     )
 };

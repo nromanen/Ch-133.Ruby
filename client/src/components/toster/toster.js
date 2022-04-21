@@ -12,7 +12,7 @@ export default function InstantMessaging (props) {
   useEffect(() => {
     setOpen(props.open)
   }, [props]);
-
+  
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;

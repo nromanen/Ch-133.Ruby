@@ -23,8 +23,7 @@ Rails.application.routes.draw do
   end
 
   resources :categories, :comments
-  get 'adverts/:id/liked', to: 'likes#index'
-  get 'adverts/:id/likes', to: 'likes#amount'
+  get 'adverts/:id/liked', to: 'adverts#liked' 
   post 'adverts/:id/likes', to: 'likes#create'
   delete 'adverts/:id/likes', to: 'likes#destroy'
 end
