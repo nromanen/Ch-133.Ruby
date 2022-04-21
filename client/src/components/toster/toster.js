@@ -22,10 +22,12 @@ export default function InstantMessaging (props) {
 
   return (
     <>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} >
-        <Alert onClose={handleClose} severity={props.type}
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={props.type} 
           style={{
-            backgroundColor: '#ffffff',
+            color: '#232121',
+            backgroundColor: '#D3E6DB',
+            fontSize: '13px'
           }}
         >
           {props.text}

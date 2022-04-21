@@ -47,13 +47,6 @@ class AdvertsController < ApplicationController
     @advert.destroy if @advert.present?
     render json: { message: "Post has been deleted successfully." }
   end
-  
-  # It's temporary changes, because advert full logic is on another pull request, in future it will be replaced by advert.liked? from advert model
-  def liked 
-    @advert = Advert.find(params[:id])
-    was_liked = !@advert.likes.where(user_id: current_user.id).blank? if current_user
-    render json: {  message: was_liked, amount: @advert.likes.size }
-  end
 
   private
     def advert_params

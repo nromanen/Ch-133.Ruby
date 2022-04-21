@@ -20,10 +20,8 @@ Rails.application.routes.draw do
 
   resources :adverts do
     resources :comments
+    resources :likes, only: [:index, :create, :destroy]
   end
 
   resources :categories, :comments
-  get 'adverts/:id/liked', to: 'adverts#liked' 
-  post 'adverts/:id/likes', to: 'likes#create'
-  delete 'adverts/:id/likes', to: 'likes#destroy'
 end

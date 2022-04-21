@@ -16,10 +16,11 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const Like = (props) => {
     let { advertId } = useParams();
-    const [liked, setLiked] = useState(false);
+    const [liked, setLiked] = useState(null);
     const [numberOfLikes, setNumberOfLikes] = useState(0);
     const [showMessage, setShowMessage] = useState(false);
-    const [message, setMessage] = useState("O-ops, something went wrong");
+    const [message, setMessage] = useState();
+    const [likeId, setLikeId] = useState();
     const token = cookies.get('user-info');
     const config = {
         headers:{
@@ -27,7 +28,6 @@ const Like = (props) => {
         }
     };
     const Url = {
-        LIKED_URL: `${baseShowAdvert}/${advertId}/liked`,
         LIKES_URL: `${baseShowAdvert}/${advertId}/likes`
     }
 
@@ -37,37 +37,38 @@ const Like = (props) => {
 
     function Like () {
         if (liked) {
-            deleteLike()
-        } else {
-            createLike()
-        }
-        setShowMessage(true)
+            deleteLike();
+        }  else {
+            createLike();
+        } 
     };
 
-    function getIfLiked () {
-       axios.get(Url.LIKED_URL, config)
-        .then(function (response) {
+    const getIfLiked = async () => {
+        await axios.get(Url.LIKES_URL, config).then(function (response) {
             setLiked(!!response.data["message"])
             setNumberOfLikes(response.data["amount"])
+            setLikeId(response.data["message"])
         }) 
-    }   
+    };   
 
-    function createLike () {
-       axios.post(Url.LIKES_URL, {}, config)
-        .then(function (response) {
+    const createLike = async () => {
+        await axios.post(Url.LIKES_URL, {}, config).then(function (response) {
             setMessage(response.data["message"])
             setNumberOfLikes(response.data["amount"])
+            setLikeId(response.data["id"])
             setLiked(true)
+            setShowMessage(true);
         }) 
-    }
+    };
 
-    function deleteLike () {
-        axios.delete(Url.LIKES_URL, config).then(function (response) {
+    const deleteLike = async () => {
+        await axios.delete(`${Url.LIKES_URL}/${likeId}`, config).then(function (response) {
             setMessage(response.data["message"])
             setNumberOfLikes(response.data["amount"])
             setLiked(false)
+            setShowMessage(true);
         }) 
-    }
+    };
 
     return (
         <>

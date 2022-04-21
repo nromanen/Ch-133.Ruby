@@ -1,22 +1,27 @@
 # frozen_string_literal: true
 
 class LikesController < ApplicationController
-  before_action :authenticate_user!
-  
+  before_action :authenticate_user!, only: %i[create destroy]
+
+  def index
+    like = advert.likes.where(user_id: current_user.try(:id)).first 
+    render json: { message: like.try(:id), amount: advert.likes.size }
+  end
+
   def create
     like = advert.likes.new(user_id: current_user.id)
     if like.valid?
       like.save
       current_user.likes << like
-      render json: { message: "Was liked!", amount: advert.likes.size }
+      render json: { message: "Was liked!", amount: advert.likes.size, id: like.id }
     else
       wrond_message
     end
   end
 
   def destroy
-    like = advert.likes.where(user_id: current_user.id).first 
-    if self.liked?
+    like = advert.likes.where(id: params[:id]).first
+    if like.present?
       like.destroy()
       render json: { message: "Was unliked!", amount: advert.likes.size }
     else
@@ -27,18 +32,18 @@ class LikesController < ApplicationController
   private
 
   def advert_params
-    params.permit(:id)
+    params.permit(:advert_id, :id)
   end
 
   def advert
-    Advert.find(advert_params[:id])
+    Advert.find(advert_params[:advert_id])
   end
 
   def wrond_message
-    render json: { message: "Something went wrong", amount: current_user }
+    render json: { message: "Something went wrong", amount: advert.likes.size }
   end
   
   def liked?
-    !advert.likes.where(user_id: current_user.id).blank? if current_user
+    !advert.likes.where(user_id: current_user.try(:id)).blank?
   end
 end
