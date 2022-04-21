@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
     if params[:advert_id].present?
       @comments = Comment.find_by(advert_id: params[:advert_id])
       authorize @comments
-      render json: @comment, serializer: CommentSerializer
+      render json: @comments, serializer: CommentSerializer
     end
   end
 
