@@ -11,7 +11,7 @@ class AdvertsController < ApplicationController
     if @advert.save
       render json: @advert
     else
-      render json: current_user, status: :unprocessable_entity
+      render json: @advert.errors, status: :unprocessable_entity
     end
   end
 
