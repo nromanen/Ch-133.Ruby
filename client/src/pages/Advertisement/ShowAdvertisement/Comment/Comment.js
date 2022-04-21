@@ -16,8 +16,6 @@ const Comment = (comments) => {
     const [page, setPage] = useState(1);
     const noOfPages = Math.ceil(commentLength/itemsPerPage);
 
-    // console.log(Math.ceil(commentLength/itemsPerPage))
-
     Object.keys(commentObj).forEach(key => {
         text.push(commentObj[key])
     });
