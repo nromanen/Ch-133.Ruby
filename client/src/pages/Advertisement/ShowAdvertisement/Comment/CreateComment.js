@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useCallback} from "react";
 import axios from 'axios';
-import Message from '../../../../components/toster/message'
 import Cookies from 'universal-cookie';
 import { useParams } from "react-router-dom";
 import {baseShowAdvert} from "../../../../consts";
@@ -8,7 +7,6 @@ import { withTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import SendIcon from '@mui/icons-material/Send';
-import Input from '@mui/material/Input';
 import TextField from '@mui/material/TextField';
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import "../../../../i18n";

@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
-import Message from '../../../components/toster/message'
-import CustomButton from '../../../components/custom-button/custom-button'
-import Cookies from 'universal-cookie';
+import {teal} from "@mui/material/colors";
+import Avatar from '@mui/material/Avatar';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
 import { useParams } from "react-router-dom";
 import {baseShowAdvert} from "../../../consts";
 import Owner from "../../../pages/Advertisement/ShowAdvertisement/Owner/Owner"
@@ -12,7 +14,6 @@ import Comment from "../../../pages/Advertisement/ShowAdvertisement/Comment/Comm
 import CreateComment from "../../../pages/Advertisement/ShowAdvertisement/Comment/CreateComment"
 import "../../../i18n";
 import './ShowAdvertisement.scss'
-const cookies = new Cookies();
 
 const ShowAdvertisement = (props) => {
     let params = useParams();
@@ -27,20 +28,27 @@ const ShowAdvertisement = (props) => {
             .then((response)=>{
                 setResp(response.data.advert)
                 setOwner(response.data.advert.owner)
-                setComments(response.data.advert.comments)
+                setComments(response.data.advert.comments.map(function (comment, i) {
+                         return (
+                             <ListItem alignItems="flex-start">
+                                 <ListItemAvatar>
+                                     <Avatar alt={comment.author.author_name} src="/static/images/avatar/3.jpg" sx={{ bgcolor: teal[500] }}/>
+                                 </ListItemAvatar>
+                                 <ListItemText
+                                     primary={comment.author.author_name}
+                                     secondary={comment.text}/>
+                             </ListItem>
+                         )
+                         })
+                    );
             })
-        //     .catch(function (error) {
-        //         //setMessageText(error.response.data.message);
-        //         if (error.response.data.message === "Advert doesn't exist.") {
-        //             window.location = '/HomePage';
-        //         }
-        //     })
     }, [params.advertId]);
+
         return (
             <div className={'show-advertisement'}>
                 <div>
                         <Owner owner_name={owner.owner_name}></Owner>
-                        <Advert title={resp.title} text={resp.text}></Advert>
+                        <Advert title={resp.title} text={resp.text} image_url={resp.image_url}></Advert>
                 <div className={"like-and-comment"}>
                         <Like props={props}></Like>
                 </div>
