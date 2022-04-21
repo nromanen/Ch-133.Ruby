@@ -12,6 +12,13 @@
     "password": "пароль",
     "button": "Відправити"
   },
+  "userInfo" : {
+    "head": "Інфо користувача",
+    "firstName": "Ім'я",
+    "lastName": "Призвище",
+    "phone": "Телефон",
+    "button": "Відправити"
+  },
   "footer": {
     "company": "Компанія",
     "description": "Softserve навчальна програма"
