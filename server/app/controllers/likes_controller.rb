@@ -13,7 +13,7 @@ class LikesController < ApplicationController
     if like.valid?
       like.save
       current_user.likes << like
-      render json: { message: "Was liked!", amount: advert.likes.size, id: like.id }
+      render json: { message: I18n.t("liked"), amount: advert.likes.size, id: like.id }
     else
       wrond_message
     end
@@ -23,7 +23,7 @@ class LikesController < ApplicationController
     like = advert.likes.where(id: params[:id]).first
     if like.present?
       like.destroy()
-      render json: { message: "Was unliked!", amount: advert.likes.size }
+      render json: { message: I18n.t("unliked"), amount: advert.likes.size }
     else
       wrond_message
     end
@@ -40,7 +40,7 @@ class LikesController < ApplicationController
   end
 
   def wrond_message
-    render json: { message: "Something went wrong", amount: advert.likes.size }
+    render json: { message: I18n.t("wrongway"), amount: advert.likes.size }
   end
   
   def liked?

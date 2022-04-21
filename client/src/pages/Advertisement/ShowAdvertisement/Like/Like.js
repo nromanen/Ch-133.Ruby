@@ -22,9 +22,12 @@ const Like = (props) => {
     const [message, setMessage] = useState();
     const [likeId, setLikeId] = useState();
     const token = cookies.get('user-info');
+    const language = cookies.get('i18next');
     const config = {
         headers:{
             'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json', 
+            'X-lang': language
         }
     };
     const Url = {
