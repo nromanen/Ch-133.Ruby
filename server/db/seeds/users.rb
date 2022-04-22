@@ -6,7 +6,7 @@ admin = User.new(
   password_confirmation: ENV["ADMIN_PASSWORD"]
 );
 
-if admin.valid 
+if admin.valid? 
   admin.save
   admin.update_columns(role_id: admin_id, confirmed_at: Time.now.utc)
 end
