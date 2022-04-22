@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :adverts, dependent: :destroy
   has_many :likes, dependent: :destroy
-  belongs_to :role, optional: true 
+  belongs_to :role, optional: true
   delegate :name, to: :role, prefix: true
   has_one :user_info, dependent: :destroy
 
@@ -25,9 +25,11 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 8, maximum: 20 }, presence: true,
             format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/ }
   validates :nick_name, presence: true, uniqueness: true, length: { minimum: 3, maximum: 15 }
+
   validates :password_confirmation, length: { minimum: 8, maximum: 20 }, presence: true,
             format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/ }
   validates_confirmation_of :password
+
   def set_default
     if self.role.nil?
       role_user = Role.find_by(name: "User")
