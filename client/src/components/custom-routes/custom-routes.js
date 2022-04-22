@@ -9,6 +9,8 @@ import UserInfo from "../../pages/UserInfo/UserInfo";
 import CategoryNew from "../../pages/Category/CategoryNew";
 import Categories from "../../pages/Category/Categories";
 import RequireAuth from '../../auth.js'
+import ShowAdvertisement from "../../pages/Advertisement/ShowAdvertisement/ShowAdvertisement";
+import CreateComment from "../../pages/Advertisement/ShowAdvertisement/Comment/CreateComment";
 
 const CustomRoutes = () => {
   return (
@@ -20,7 +22,7 @@ const CustomRoutes = () => {
               <RequireAuth>
                 <CategoryNew/>
               </RequireAuth>
-            } 
+            }
           />
           <Route path="/categories" element={<Categories />} />
           <Route path="/sign_in" element={<SingIn />} />
@@ -30,8 +32,11 @@ const CustomRoutes = () => {
               <RequireAuth>
                 <UserInfo/>
               </RequireAuth>
-            } 
+            }
           />
+          <Route path="/users/:userId/user_infos" element={<UserInfo />} />
+          <Route path="/adverts/:advertId" element={<ShowAdvertisement />} />
+          <Route path="/adverts/:advertId/comments" element={<CreateComment />} />
         </Route>
       </Routes>
     </BrowserRouter>
