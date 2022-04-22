@@ -1,33 +1,35 @@
 import './header.scss';
 import '../../consts.js';
 import { useTranslation } from "react-i18next";
+import {useNavigate} from "react-router-dom";
 import Switcher from '../../components/switch-language/switch-language';
 import MenuList from '../../components/menuList';
 
 const Header = (props) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const menu = [
     {
       title: t("header.main"),
-      path: "#",
+      path: "/adverts",
     },
     {
       title: t("header.contact"),
-      path: "#",
+      path: "/contact",
     },
   ];
 
   return (
-    <header>
+    <header> 
       <div className="container header_content">
-        <a href="/" className="brand">React&Rails</a>
+        <a className="brand" onClick={ () => {navigate("/")} }>React&Rails</a>
         <nav>
           <ul>
             {
               menu.map(({ title, path }) => (
                  <li key={title}>
-                  <a href={path}>{title}</a>
+                  <a onClick={()=>{navigate(path)}}>{title}</a>
                  </li>
               ))
             }

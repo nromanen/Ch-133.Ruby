@@ -21,7 +21,6 @@ RSpec.describe User, type: :model do
   end
 
 
-
   it "is not valid without a nick_name" do
     subject.nick_name = nil
     expect(subject).to_not be_valid

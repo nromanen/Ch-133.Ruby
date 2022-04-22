@@ -1,4 +1,4 @@
-import React, { Component }  from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "../../pages/Layout";
 import SingIn from "../../pages/SingIn/SingIn";
@@ -10,13 +10,13 @@ import CategoryNew from "../../pages/Category/CategoryNew";
 import Categories from "../../pages/Category/Categories";
 import CategoryEdit from "../../pages/Category/CategoryEdit";
 import CreateAdvertisement from "../../pages/Advertisement/CreateAdvertisement";
-import RequireAuth from '../../signed_in.js';
+import RequireAuth from '../../auth.js'
 
 const CustomRoutes = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/categories/new" element={<CategoryNew />} />
           <Route path="/categories/edit/:id" element={<CategoryEdit />} />
@@ -26,10 +26,11 @@ const CustomRoutes = () => {
           <Route path="*" element={<NoPage />} />
           <Route path="/create_advert" element={<CreateAdvertisement/>}/>
           <Route path="/users/:userId/user_infos" element={
-            <RequireAuth>
-              <UserInfo/>
-            </RequireAuth>
-          } />
+              <RequireAuth>
+                <UserInfo/>
+              </RequireAuth>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>

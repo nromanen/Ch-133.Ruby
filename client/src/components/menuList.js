@@ -5,7 +5,6 @@ import MenuItem from '@mui/material/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import {useNavigate} from "react-router-dom";
 import jwt from 'jwt-decode';
-import axios from "axios";
 import Cookies from 'universal-cookie';
 import LoggedContext from '../context';
 import { useContext } from 'react';
@@ -13,8 +12,9 @@ import '../consts.js';
 import { useTranslation } from "react-i18next";
 
 export default function MenuPopupState() {
+    const button_unable_name = 'LOGIN';
     const { t } = useTranslation();
-    const [email, setEmail] = useState('LOGIN');
+    const [email, setEmail] = useState(button_unable_name);
     const navigate = useNavigate();
     const cookies = new Cookies();
     const { logged } = useContext(LoggedContext);
@@ -36,23 +36,16 @@ export default function MenuPopupState() {
     }
 
     useEffect(() => {
-      if(logged) {
+      if(localStorage.getItem('loged')) {
         getEmail()
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [logged]);
-
-    useEffect(() => {
-      if (token) {
-        getEmail()
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    });
 
     const logout = () => {
       cookies.remove('user-info')
       reqLogOut()
-      setEmail('LOGIN')
+      localStorage.clear();
+      setEmail(button_unable_name)
       navigate("/")
     }
 
@@ -63,7 +56,7 @@ export default function MenuPopupState() {
       navigate(resultUrl)
     }
 
-    if (email !== 'LOGIN') {
+    if (email !== button_unable_name) {
       return(
         <>
           <PopupState variant="popover" popupId="demo-popup-menu">
