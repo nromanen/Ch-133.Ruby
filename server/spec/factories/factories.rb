@@ -4,15 +4,11 @@ FactoryBot.define do
     name { "Sport" }
   end
 
-  factory :role do
-    name {'Admin'}
-  end
-
-  factory :user do
-    nick_name {'Testuser'}
-    email { 'testuser@gmail.com' }
-    password { 'Qwerty123' }
-    password_confirmation {'Qwerty123'}
+  factory :user do |user|
+    user.nick_name {'Testuser'}
+    user.email { 'testuser@gmail.com' }
+    user.password { 'Qwerty123' }
+    user.password_confirmation {'Qwerty123'}
   end
 
 end
