@@ -8,6 +8,7 @@ en:
   success: "The action was successful"
   rolechange: "Role was changed"
   wrongrole: "Wrong permission"
+  norole: "Such role doesn't exist"
   wrongway: "Hmm, something went wrong"
   phoneNotValid: "does not match format requirements"
   nameNotValid: "only allows letters"

@@ -15,6 +15,8 @@ class UsersController < ApplicationController
     authorize @user
     if @role.present?
       change_role(@user, @role)
+    else
+      render json: { message: I18n.t("norole") }, status: :unauthorized
     end
   end
 
@@ -27,8 +29,8 @@ class UsersController < ApplicationController
     render json: { message: I18n.t("wrongrole") }, status: :unauthorized
   end
 
-  def admin_check
-    if params[:role_name] == current_user.role_name
+  def admin_check(user)
+    if user.role_name == current_user.role_name
       User.where(role_id: current_user.role_id).count > 1
     else
       true
@@ -36,12 +38,12 @@ class UsersController < ApplicationController
   end
 
   def change_role(user, role)
-    if admin_check
-      user.update_attribute(:role_id, role)
+    if admin_check(user)
+      user.update_attribute(:role_id, role.id)
       user.role = role
       render json: { message: I18n.t("rolechange") }, status: :ok
     else
-      render json: { message: I18n.t("wrongrole") }, status: :unauthorized
+      render json: { message: I18n.t("wrongway") }, status: :unprocessable_entity
     end
   end
 end
