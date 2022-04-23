@@ -6,6 +6,8 @@ en:
   infoNotExist: "Info doesn't exist. Create it."
   userNotExist: "User doesn't exist."
   success: "The action was successful"
+  rolechange: "Role was changed"
+  wrongrole: "Wrong permission"
   wrongway: "Hmm, something went wrong"
   phoneNotValid: "does not match format requirements"
   nameNotValid: "only allows letters"
