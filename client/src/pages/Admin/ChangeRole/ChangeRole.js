@@ -11,12 +11,14 @@ import CustomizedMenus from './changeButton.js'
 import Cookies from 'universal-cookie';
 import "../../../i18n"; 
 import { baseUrlUsers }  from "../../../consts"; 
+import Message from '../../../components/toster/toster'
 const cookies = new Cookies();
 
 const ChangeRole = () => {
   const language = cookies.get('i18next');
   const [users, setUsers] = useState('');
   const [message, setMessage] = useState('');
+  const [showMessage, setShowMessage] = useState(false);
   let counter = 0;
   const token = cookies.get('user-info');
 
@@ -49,17 +51,21 @@ const ChangeRole = () => {
     }) 
   };  
 
-  const changeRole = async (id, counter, users) => {
+  const changeRole = async (id) => {
     let role = localStorage.getItem('changeRole');
-    let res = await axios.patch(`${Url.USER_URL}/${id}`, {"role_name": role}, configWithToken).then(function (response) {
-      console.log(response.data)
+    await axios.patch(`${Url.USER_URL}/${id}`, {"role_name": role}, configWithToken).then(function (response) {
       localStorage.removeItem('changeRole');
-    })
-    return id, users, res.data
+      setMessage(response.data["message"])
+    }).catch(function (error) {
+      setMessage(error.response.data['message'])
+    });
+    setShowMessage(true)
+    getUsers();
   };
 
   return(
     <>
+     <Message open={showMessage} text={message}/> 
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead>
@@ -77,13 +83,14 @@ const ChangeRole = () => {
           { users ? 
               users.map((user) => (
                 counter+=1,
-                console.log(message),
                 <TableRow
                   key={user.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell align="right">
-                    <CustomizedMenus change={() => changeRole(user.id, counter, users)} at={setMessage}/>
+                    <CustomizedMenus 
+                        change={() => changeRole(user.id)} 
+                      />
                     </TableCell>
                   <TableCell component="th" scope="row">
                     {user.id}

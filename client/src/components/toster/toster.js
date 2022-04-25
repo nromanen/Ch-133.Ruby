@@ -1,6 +1,4 @@
-import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import React, {useState, useEffect} from "react";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
@@ -11,6 +9,10 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function InstantMessaging (props) {
   const [open, setOpen] = React.useState(false);
 
+  useEffect(() => {
+    setOpen(props.open)
+  }, [props]);
+  
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -20,8 +22,14 @@ export default function InstantMessaging (props) {
 
   return (
     <>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} >
-        <Alert onClose={handleClose} severity={props.type}>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={props.type} 
+          style={{
+            color: '#232121',
+            backgroundColor: '#D3E6DB',
+            fontSize: '13px'
+          }}
+        >
           {props.text}
         </Alert>
       </Snackbar>

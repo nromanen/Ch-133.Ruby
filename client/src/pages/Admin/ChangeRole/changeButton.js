@@ -22,7 +22,6 @@ export default function CustomizedMenus(props) {
     setAnchorEl(null);
     localStorage.setItem('changeRole', role);
     props.change()
-    props.at("aaaa")
   };
 
   return (
