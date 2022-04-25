@@ -19,11 +19,18 @@ uk:
         last_name: "Призвище"
         phone: "Телефон"
   signed_up_and_unconfirmed: "Ви отримаєте листа з вказівками щодо підтвердження облікового запису протягом декількох хвилин."
-  password_confirmation: "Підтвердження паролю"
-  password_confirm_length: "не співпадає з паролем за довжиною"
-  password_validation: "має містити великі та малі букви, а також цифри"
-  password_confirm_validation: "має не вірний формат"
-  email_already_used: "Електронна пошта уже використовується"
-  email_format: "не відповідає формату пошти"
-  password_confirm: "не  збігається з паролем"
-  taken: "уже використовується"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            nick_name:
+              taken: уже використовується
+            password:
+              too_short: занадто короткий
+              invalid: має містити великі букви, цифри
+            email:
+              invalid: має не вірний формат
+            password_confirmation:
+              too_short: не співпадає за довжиною
+              invalid: має не вірний формат

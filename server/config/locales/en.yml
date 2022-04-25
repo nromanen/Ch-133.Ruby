@@ -28,9 +28,16 @@ en:
         invalid:
           phone: "does not match format requirements."
           letter: "only allows letters."
-  password_validation: "must include upper and lower case letters and digits"
-  password_confirm_validation: "has wrong format"
-  password_confirm_length: "doesn't match password by length"
-  email_format: "wrong format"
-  password_confirm: "Password confirmation does not match password"
-  taken: "already used"
+      models:
+        user:
+          attributes:
+            nick_name:
+              taken: already taken
+            password:
+              too_short: is too short, minimum 8 symbols
+              invalid: must include upper and lower case letters
+            email:
+              invalid: has wrong format
+            password_confirmation:
+              too_short: is too short, minimum 8 symbols
+              invalid: doesn't match password
