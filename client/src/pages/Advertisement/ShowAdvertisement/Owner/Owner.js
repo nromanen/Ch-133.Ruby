@@ -8,7 +8,7 @@ const Owner = (owner) => {
 
     return (
         <div className='owner-show'>
-            <Avatar alt={owner.owner_name} src={owner.owner_img} sx={{ bgcolor: teal[500] }} />
+            <Avatar src={owner.owner_img} sx={{ bgcolor: teal[500] }} />
             <div className='owner-show'>{owner.owner_name}</div>
         </div>
     )
