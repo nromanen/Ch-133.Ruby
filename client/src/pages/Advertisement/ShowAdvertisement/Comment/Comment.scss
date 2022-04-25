@@ -1,0 +1,20 @@
+.comment {
+  font-family: 'Red Hat Mono', monospace;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+  max-width: 500px;
+  margin: 0px auto;
+  padding: 5px 5px;
+  background: #fff;
+  text-align: center;
+}
+
+.bold {
+  font-family: 'Red Hat Mono', monospace;
+  border-bottom: 2px solid black;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+}

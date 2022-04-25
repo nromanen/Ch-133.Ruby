@@ -1,12 +1,20 @@
 import * as React from 'react';
 import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import Stack from '@mui/material/Stack';
 
-export default function DescriptionAlerts(props) {
-  return (
-      <Alert severity={props.type}>
-          <div dangerouslySetInnerHTML={{__html: props.text}} />
+export default function ActionAlerts(props) {
+  const [open, setOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    setOpen(true)
+  }, []);
+
+  if(open) {
+    return (
+      <Alert severity={props.type} onClose={() => {setOpen(false)}}>
+        {props.text}
       </Alert>
-  );
+    );
+  } else {
+    return(null);
+  }
 }
