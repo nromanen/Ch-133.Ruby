@@ -34,7 +34,7 @@ const ShowAdvertisement = (props) => {
         return (
             <div className={'show-advertisement'}>
                 <div>
-                        <Owner owner_name={owner.owner_name}></Owner>
+                        <Owner owner_name={owner.owner_name} owner_img={owner.owner_img}></Owner>
                         <Advert title={resp.title} text={resp.text} image_url={resp.image_url}></Advert>
                 <div className={"like-and-comment"}>
                         <Like props={props}></Like>
