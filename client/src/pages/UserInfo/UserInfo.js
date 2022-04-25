@@ -37,6 +37,7 @@ const UserInfo = (props) => {
 
     const handleSubmit = useCallback((event, value) => {
         event.preventDefault();
+
         const language = cookies.get('i18next');
         const config = {
             headers: { Authorization: `Bearer ${token}`, 'X-lang': language, 'Content-Type': 'application/json' }
@@ -48,6 +49,7 @@ const UserInfo = (props) => {
             "phone": phone,
             "image": image
         };
+        console.log('image1 ------', image);
         setDisabled(true);
         if (token_id === params.userId){
             axios.put(`${baseUrlUsers}/${params.userId}/user_infos`,
@@ -55,6 +57,7 @@ const UserInfo = (props) => {
                 config
             )
                 .then(function (response) {
+                    console.log('--------- response', response);
                     setText('User info was updated.');
                     setFirstName(response.data.info.data.attributes.first_name);
                     setLastName(response.data.info.data.attributes.last_name);
@@ -63,6 +66,7 @@ const UserInfo = (props) => {
                     setMsgType('success')
                 })
                 .catch(function (error) {
+                    console.log('--------- error', error);
                     if (error.response.status === 422){
                         setText(error.response.data.join('<br>'));
                         setMsgType('error')
@@ -70,7 +74,7 @@ const UserInfo = (props) => {
                 }).finally(() => setDisabled(false));
         }
 
-    }, [firstName, lastName, phone, params.userId, image, token, pictures]);
+    }, [firstName, lastName, phone, params.userId, image, token, pictures, msgType]);
 
     const onImage = async (failedImages, successImages) => {
         try {
@@ -79,6 +83,7 @@ const UserInfo = (props) => {
             const name = parts[1].split('=')[1];
             const data = parts[2].split(',')[1];
             setImage([mime, name, data]);
+            console.log("image --------------", image)
         } catch (error) {
             console.log('error in upload', error);}
     };
