@@ -10,13 +10,18 @@ uk:
   userNotExist: "Користувача не існує."
   success: "Дія пройшла успішно"
   wrongway: "Хмм, щось пішло не так"
-  phoneNotValid: "не вірний формат телефону."
-  nameNotValid: "допускаються тильки літери."
-  userInfoValidError: "У Вас немає прав, або інфо не існує."
   category: "Категорію"
   comment: "Коментар"
   signed_up_and_unconfirmed: "Ви отримаєте листа з вказівками щодо підтвердження облікового запису протягом декількох хвилин."
+  userInfoValidError: "У Вас немає прав, або інфо не існує."
   activerecord:
+    models:
+      user_info: info
+    attributes:
+      user_info:
+        first_name: "Ім'я"
+        last_name: "Призвище"
+        phone: "Телефон"
     errors:
       models:
         user:
