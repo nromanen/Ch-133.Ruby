@@ -19,7 +19,7 @@ const ChangeRole = () => {
   const [users, setUsers] = useState('');
   const [message, setMessage] = useState('');
   const [showMessage, setShowMessage] = useState(false);
-  let counter = 0;
+  const [typeMessage, setTypeMessage] = useState("success");
   const token = cookies.get('user-info');
 
   const Url = {
@@ -57,7 +57,7 @@ const ChangeRole = () => {
       localStorage.removeItem('changeRole');
       setMessage(response.data["message"])
     }).catch(function (error) {
-      setMessage(error.response.data['message'])
+      setMessage(error.response.data['message']) 
     });
     setShowMessage(true)
     getUsers();
@@ -82,7 +82,6 @@ const ChangeRole = () => {
           <TableBody>
           { users ? 
               users.map((user) => (
-                counter+=1,
                 <TableRow
                   key={user.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
