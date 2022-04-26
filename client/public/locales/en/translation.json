@@ -1,6 +1,6 @@
 {
   "header" : {
-    "main": "About the project",
+    "main": "Advertisements",
     "contact": "Contact us",
     "language": "Language",
     "info": "User info",
@@ -10,6 +10,13 @@
     "head": "Sing In",
     "email": "email",
     "password": "password",
+    "button": "Send"
+  },
+  "userInfo" : {
+    "head": "User info",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "phone": "Phone",
     "button": "Send"
   },
   "footer" : {
