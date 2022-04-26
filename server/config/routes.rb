@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :adverts do
     resources :comments
+    resources :likes, only: [:index, :create, :destroy]
   end
 
   resources :categories, :comments

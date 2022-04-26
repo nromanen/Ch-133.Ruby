@@ -17,7 +17,7 @@ class Advert < ApplicationRecord
   }
 
   def liked?
-    !!self.likes.find { |like| like.user_id == current_user.id }
+    # self.likes.find { |like| like.user_id == current_user.try(:id) } 
   end
 
   validates :title, :text, presence: true
@@ -25,11 +25,14 @@ class Advert < ApplicationRecord
 
 
   def image_url
-    url_for(self.image)
+    unless self.image.blank?
+      url_for(self.image)
+    end
   end
 
   def owner
     { owner_id: self.user.id,
-     owner_name: self.user.nick_name }
+     owner_name: self.user.nick_name,
+      owner_img: self.user.avatar }
   end
 end

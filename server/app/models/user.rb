@@ -61,4 +61,12 @@ class User < ApplicationRecord
       true
     end
   end
+
+  def avatar
+    if user_info.nil? || user_info.image_url.nil?
+      self.nick_name
+    else
+      user_info.image_url
+    end
+  end
 end
