@@ -1,10 +1,5 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
-import {teal} from "@mui/material/colors";
-import Avatar from '@mui/material/Avatar';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
 import { useParams } from "react-router-dom";
 import {baseShowAdvert} from "../../../consts";
 import Owner from "../../../pages/Advertisement/ShowAdvertisement/Owner/Owner"
