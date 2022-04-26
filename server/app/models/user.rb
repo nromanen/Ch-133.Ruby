@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  include Rails.application.routes.url_helpers
   before_validation :set_default
   
   # Include default devise modules. Others available are:
