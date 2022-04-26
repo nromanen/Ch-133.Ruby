@@ -19,6 +19,7 @@ class User < ApplicationRecord
   belongs_to :role, optional: true 
   delegate :name, to: :role, prefix: true
   has_one :user_info, dependent: :destroy
+  has_many :subscribes, dependent: :destroy
 
   validates :email, presence: true, uniqueness: { uniqueness: true, message: I18n.t("taken") },
             format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/ }

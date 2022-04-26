@@ -23,6 +23,9 @@ class CommentsController < ApplicationController
     authorize @comment
     if @comment.save
       render json: { message: I18n.t("created", name: I18n.t("comment")) }, status: :created
+
+        @advert = Advert.find(@comment.advert_id)
+        UserAdvertsMailer.new_comment(@comment, @advert, current_user).deliver_now
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
@@ -48,6 +51,6 @@ class CommentsController < ApplicationController
     end
 
     def comment_params
-      params.permit(:text, :page, :advert_id, :user_id)
+      params.require(:comment).permit(:text, :page, :advert_id, :user_id)
     end
 end

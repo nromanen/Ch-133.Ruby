@@ -20,9 +20,12 @@ Rails.application.routes.draw do
     resource :user_infos
   end
 
-  resources :adverts do
-    resources :comments
-  end
-
+  resources :adverts
+  resources :comments
   resources :categories
+
+  resources :subscribes
+  delete "/subscribes", to: "subscribes#destroy"
+  get "/subscribed", to: "subscribes#subscribed?"
+
 end
