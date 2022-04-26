@@ -10,8 +10,7 @@ class LikesController < ApplicationController
 
   def create
     like = advert.likes.new(user_id: current_user.id)
-    if like.valid?
-      like.save
+    if like.save
       current_user.likes << like
       render json: { message: I18n.t("liked"), amount: advert.likes.size, id: like.id }, status: :ok
     else
@@ -21,8 +20,7 @@ class LikesController < ApplicationController
 
   def destroy
     like = advert.likes.where(id: params[:id]).first
-    if like.present?
-      like.destroy()
+    if like.try(:destroy)
       render json: { message: I18n.t("unliked"), amount: advert.likes.size }, status: :ok
     else
       wrond_message
