@@ -8,4 +8,3 @@ export const getAllAdverts = window.baseUrl + 'adverts'
 window.createCategoryUrl = window.baseUrl + 'categories'
 window.singOutUrl = window.baseUrl + 'users/sign_out'
 export const baseShowAdvert = window.baseUrl + 'adverts'
-
