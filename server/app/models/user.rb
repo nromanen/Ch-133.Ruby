@@ -44,4 +44,12 @@ class User < ApplicationRecord
   def jwt_payload
     { "email" => self.email, "id" => self.id, "role" => self.role_name }
   end
+
+  def avatar
+    if user_info.nil? || user_info.image_url.nil?
+      self.nick_name
+    else
+      user_info.image_url
+    end
+  end
 end

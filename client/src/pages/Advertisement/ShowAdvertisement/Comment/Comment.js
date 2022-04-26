@@ -33,7 +33,7 @@ const Comment = (comments) => {
                             return (
                                 <ListItem alignItems="center">
                                     <ListItemAvatar>
-                                        <Avatar alt={comments.author.author_name} src="/static/images/avatar/3.jpg" sx={{ bgcolor: teal[500] }}/>
+                                        <Avatar alt={comments.author.author_name} src={comments.author.author_img} sx={{ bgcolor: teal[500] }}/>
                                     </ListItemAvatar>
                                     <ListItemText
                                         primary={comments.author.author_name}
