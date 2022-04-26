@@ -28,4 +28,10 @@ Rails.application.routes.draw do
   delete "/subscribes", to: "subscribes#destroy"
   get "/subscribed", to: "subscribes#subscribed?"
 
+  resources :adverts do
+    resources :comments
+    resources :likes, only: [:index, :create, :destroy]
+  end
+
+
 end

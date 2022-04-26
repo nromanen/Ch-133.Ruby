@@ -1,51 +1,95 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
-import Message from '../../../../components/toster/message'
+import Message from '../../../../components/toster/toster'
 import Cookies from 'universal-cookie';
 import { useParams } from "react-router-dom";
 import {baseShowAdvert} from "../../../../consts";
-import Checkbox from '@material-ui/core/Checkbox';
-import Favorite from '@material-ui/icons/Favorite';
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import "../../../../i18n";
-import './Like.scss'
-import Chip from '@mui/material/Chip';
-import IconButton from "@mui/material/IconButton";
+import  "../../../../consts";
+import  './Like.scss'
 const cookies = new Cookies();
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const Like = (props) => {
-    let params = useParams();
-    const [liked, setLiked] = useState('');
-    const [text, setText] = useState('');
-    const [severity, setSeverity] = useState('');
-    const { t } = props;
+    let { advertId } = useParams();
+    const [liked, setLiked] = useState(null);
+    const [numberOfLikes, setNumberOfLikes] = useState(0);
+    const [showMessage, setShowMessage] = useState(false);
+    const [message, setMessage] = useState();
+    const [likeId, setLikeId] = useState();
+    const token = cookies.get('user-info');
+    const language = cookies.get('i18next');
+    const config = {
+        headers:{
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json', 
+            'X-lang': language
+        }
+    };
+    const Url = {
+        LIKES_URL: `${baseShowAdvert}/${advertId}/likes`
+    }
 
-    // useEffect(()=>{
-    //     axios.get(`${baseShowAdvert}/${params.advertId}`)
-    //         .then((response)=>{
-    //             setLiked(response.data.advert.liked);
-    //         })
-    //         .catch(function (error) {
-    //             setText(error.response.data.message);
-    //             if (error.response.data.message === "Advert doesn't exist.") {
-    //                 window.location = '/HomePage';
-    //             }
-    //         })
-    // }, [params.advertId]);
+    useEffect(() => {
+        getIfLiked();
+    }, []);
 
+    function Like () {
+        if (liked) {
+            deleteLike();
+        }  else {
+            createLike();
+        } 
+    };
+
+    const getIfLiked = async () => {
+        await axios.get(Url.LIKES_URL, config).then(function (response) {
+            setLiked(!!response.data["message"])
+            setNumberOfLikes(response.data["amount"])
+            setLikeId(response.data["message"])
+        }) 
+    };   
+
+    const createLike = async () => {
+        await axios.post(Url.LIKES_URL, {}, config).then(function (response) {
+            setMessage(response.data["message"])
+            setNumberOfLikes(response.data["amount"])
+            setLikeId(response.data["id"])
+            setLiked(true)
+            setShowMessage(true);
+        }) 
+    };
+
+    const deleteLike = async () => {
+        await axios.delete(`${Url.LIKES_URL}/${likeId}`, config).then(function (response) {
+            setMessage(response.data["message"])
+            setNumberOfLikes(response.data["amount"])
+            setLiked(false)
+            setShowMessage(true);
+        }) 
+    };
 
     return (
-        <div className={'like'}>
-            {!!text ? <Message text={text} type={severity}/> : null}
-            <FormControlLabel
-                control={<Checkbox icon={<FavoriteBorder />}
-                                   checkedIcon={<Favorite />}
-                                   name="checkedH" />}
-                label="2"
-            />
-
-        </div>
+        <>
+           <Message open={showMessage} text={message}/> 
+           <div className="like">
+                <FormControlLabel
+                    control={
+                        <Checkbox {...label} 
+                            icon={<FavoriteBorder />} 
+                            checkedIcon={<Favorite />} 
+                            checked={liked} 
+                            onClick={Like}
+                        />
+                    }
+                    label={numberOfLikes}
+                />
+           </div>
+        </>
     )
 };
 
