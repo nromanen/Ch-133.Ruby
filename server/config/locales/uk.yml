@@ -2,14 +2,14 @@ uk:
   created: "%{name} було успішно створено"
   updated: "%{name} було успішно перезаписано"
   wronglogin: "Неправильний Email чи пароль"
+  liked: "Вам сподобалось!"
+  unliked: "Вам не сподобалось!"
   unconfirmed: "Будь ласка, підтвердіть вашу пошту"
+  noauth: "Ви не авторизовані"
   infoNotExist: "Інфо не існує."
   userNotExist: "Користувача не існує."
   success: "Дія пройшла успішно"
   wrongway: "Хмм, щось пішло не так"
-  phoneNotValid: "не вірний формат телефону."
-  nameNotValid: "допускаються тильки літери."
-  userInfoValidError: "У Вас немає прав, або інфо не існує."
   category: "Категорію"
   comment: "Коментар"
   advert: "Оголошення"
@@ -20,7 +20,15 @@ uk:
   deleted: "%{name} було успішно видалено"
   titleNotUnique": "Ця назва вже зайнята"
   signed_up_and_unconfirmed: "Ви отримаєте листа з вказівками щодо підтвердження облікового запису протягом декількох хвилин."
+  userInfoValidError: "У Вас немає прав, або інфо не існує."
   activerecord:
+    models:
+      user_info: info
+    attributes:
+      user_info:
+        first_name: "Ім'я"
+        last_name: "Призвище"
+        phone: "Телефон"
     errors:
       models:
         user:

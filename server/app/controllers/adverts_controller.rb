@@ -36,7 +36,6 @@ class AdvertsController < ApplicationController
     render json: { advert: AdvertSerializer.new(@advert).as_json }
   end
 
-
   # PATCH/PUT /averts/1
   def update
     @advert = Advert.find(params[:id])
@@ -70,9 +69,5 @@ class AdvertsController < ApplicationController
           content_type: params[:image][0],)
         @advert.image.attach(blob)
       end
-    end
-
-    def as_json
-      super()
     end
 end

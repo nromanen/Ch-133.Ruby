@@ -9,6 +9,10 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require "rspec/rails"
 # Add additional requires below this line. Rails is not loaded until this point!
 
+# Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f}
+require 'support/factory_bot'
+require "support/devise"
+require_relative 'support/controller_macros'
 # require 'capybara/email/rspec'
 require "devise"
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -35,6 +39,11 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  config.include Devise::Test::ControllerHelpers, type: :controller
+
+  config.include FactoryBot::Syntax::Methods
+
+  config.extend ControllerMacros, :type => :controller
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

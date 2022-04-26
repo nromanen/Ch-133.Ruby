@@ -17,7 +17,7 @@ class Advert < ApplicationRecord
   }
 
   def liked?
-    !!self.likes.find { |like| like.user_id == current_user.id }
+    # self.likes.find { |like| like.user_id == current_user.try(:id) } 
   end
   validates :text, presence: true, length: { minimum: 3, maximum: 4000 }
   validates :image, allow_blank: true, blob: { content_type: %w[image/png image/jpg image/jpeg image/webp], message: I18n.t("imageNotValid") }
@@ -34,7 +34,8 @@ class Advert < ApplicationRecord
 
   def owner
     { owner_id: self.user.id,
-     owner_name: self.user.nick_name }
+     owner_name: self.user.nick_name,
+      owner_img: self.user.avatar }
   end
 
 end

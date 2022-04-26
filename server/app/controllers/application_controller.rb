@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-
   include Pundit::Authorization
   before_action :set_locale
 
