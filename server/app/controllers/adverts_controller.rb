@@ -7,13 +7,7 @@ class AdvertsController < ApplicationController
   # POST /adverts
   def create
     @advert = current_user.adverts.new(advert_params)
-    if params[:image] != nil && params[:image] != 0
-      blob = ActiveStorage::Blob.create_and_upload!(
-        io: StringIO.new((Base64.decode64(params[:image][2]))),
-        filename: params[:image][1],
-        content_type: params[:image][0],)
-      @advert.image.attach(blob)
-    end
+    attach_64
     authorize @advert
     if @advert.save
       render json: { message: I18n.t("created", name: I18n.t("advert"))
@@ -26,10 +20,11 @@ class AdvertsController < ApplicationController
   # GET /adverts
   def index
     response = []
-    @adverts = paginate Advert.all.order("created_at ASC")
+    @adverts = paginate Advert.all.order("created_at DESC")
     @adverts.each do |advert|
       response << { title: advert.title, body: advert.text, imgUrl: advert.image_url,
-                    author: advert.user.nick_name, id: advert.id, category_id: advert.category_id, author_id: advert.user.id }
+                    author: advert.user.nick_name, id: advert.id, category_name: Category.find(advert.category_id).name,
+                    author_id: advert.user.id,  likes: advert.likes.length, liked: advert.liked? }
     end
     render json: response
   end
@@ -41,26 +36,17 @@ class AdvertsController < ApplicationController
     render json: { advert: AdvertSerializer.new(@advert).as_json }
   end
 
-  def like
-    @advert = Advert.find(params[:id])
-    Like.create(user_id: current_user.id, advert_id: @advert.id)
-    render json: @advert
-  end
 
   # PATCH/PUT /averts/1
   def update
     @advert = Advert.find(params[:id])
     authorize @advert
-    if @advert.present?
-      @advert.update(advert_params)
-      if @advert.save
-        render json: { message: I18n.t("updated", name: I18n.t("advert")) }, status: :ok
-      else
-        render json: @advert.errors, status: :unprocessable_entity
-      end
+    if @advert.update(advert_params)
+      attach_64
+      render json: { message: I18n.t("updated", name: I18n.t("advert")) }, status: :ok
     else
-      render json: {message: "No advert found", status: 404}
-      end
+      render json: @advert.errors, status: :unprocessable_entity
+    end
   end
 
   # DELETE /adverts/1
@@ -75,6 +61,17 @@ class AdvertsController < ApplicationController
     def advert_params
       params.require(:advert).permit(:title, :text, :category_id, :image, :page, :per_page)
     end
+
+    def attach_64
+      if params[:image] != nil && params[:image] != 0 && params[:image].kind_of?(Array)
+        blob = ActiveStorage::Blob.create_and_upload!(
+          io: StringIO.new((Base64.decode64(params[:image][2]))),
+          filename: params[:image][1],
+          content_type: params[:image][0],)
+        @advert.image.attach(blob)
+      end
+    end
+
     def as_json
       super()
     end
