@@ -17,7 +17,7 @@ class Advert < ApplicationRecord
   }
 
   def liked?
-    !!self.likes.find { |like| like.user_id == current_user.id }
+    # self.likes.find { |like| like.user_id == current_user.try(:id) } 
   end
 
   validates :title, :text, presence: true
