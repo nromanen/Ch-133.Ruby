@@ -5,6 +5,7 @@ en:
   liked: "Was liked!"
   unliked: "Was unliked!"
   unconfirmed: "Please, confirm your email"
+  noauth: "You not authorized"
   infoNotExist: "Info doesn't exist. Create it."
   userNotExist: "User doesn't exist."
   success: "The action was successful"
