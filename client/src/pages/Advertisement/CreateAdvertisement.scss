@@ -5,3 +5,9 @@
     text-align: center;
     padding-top: 50px;
 }
+.advertImg {
+    min-height: 250px;
+    background: no-repeat url('../../assets/img/noImgAdv.png');
+    background-size: contain;
+    background-position: center;
+}

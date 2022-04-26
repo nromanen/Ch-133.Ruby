@@ -3,7 +3,7 @@ import FormInput from '../../components/form-input/form-input'
 import CustomButton from '../../components/custom-button/custom-button'
 import axios from 'axios';
 import './CreateAdvertisement.scss';
-import {baseAdvertUrl, createAdvertUrl, getAllAdverts} from '../../consts';
+import {baseAdvertUrl} from '../../consts';
 import '../../consts.js'
 import ImageUploader from "react-images-upload";
 import {Dropdown} from "semantic-ui-react";

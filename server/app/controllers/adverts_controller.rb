@@ -28,7 +28,8 @@ class AdvertsController < ApplicationController
     response = []
     @adverts = paginate Advert.all.order("created_at ASC")
     @adverts.each do |advert|
-      response << { title: advert.title, body: advert.text, imgUrl: advert.image_url, author: advert.user.nick_name, id: advert.id }
+      response << { title: advert.title, body: advert.text, imgUrl: advert.image_url,
+                    author: advert.user.nick_name, id: advert.id, category_id: advert.category_id, author_id: advert.user.id }
     end
     render json: response
   end
@@ -50,11 +51,16 @@ class AdvertsController < ApplicationController
   def update
     @advert = Advert.find(params[:id])
     authorize @advert
-    if advert.update(advert_params)
-      render json: { message: I18n.t("updated", name: I18n.t("advert")) }, status: :ok
+    if @advert.present?
+      @advert.update(advert_params)
+      if @advert.save
+        render json: { message: I18n.t("updated", name: I18n.t("advert")) }, status: :ok
+      else
+        render json: @advert.errors, status: :unprocessable_entity
+      end
     else
-      render json: @advert.errors, status: :unprocessable_entity
-    end
+      render json: {message: "No advert found", status: 404}
+      end
   end
 
   # DELETE /adverts/1

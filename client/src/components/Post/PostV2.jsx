@@ -7,12 +7,19 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {useNavigate} from "react-router-dom";
 import './Post.scss'
+import Cookies from 'universal-cookie';
+import jwt from "jwt-decode";
+
+const cookies = new Cookies();
 
 export default function PostCard({ post: { title, body,
-    imgUrl, author, id }, index }) {
+    imgUrl, author, author_id, id }, index }) {
 
     let slash = "/adverts/";
     let navigate = useNavigate();
+    let token = cookies.get('user-info');
+    const decoded = jwt(token);
+    let token_id = decoded["id"];
 
     return (
         <div className={"Advertisement"}>
@@ -44,6 +51,9 @@ export default function PostCard({ post: { title, body,
                 </Typography>
             </CardContent>
             <CardActions>
+                { token_id === author_id &&
+                <Button size="small" onClick={() => {navigate(slash.concat(id, "/edit"))}}>Edit</Button>
+                }
                 <Button size="small" onClick={() => {navigate(slash.concat(id))}}>Learn More</Button>
             </CardActions>
         </Card>
