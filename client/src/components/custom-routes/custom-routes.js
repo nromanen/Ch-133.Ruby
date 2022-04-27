@@ -11,6 +11,8 @@ import Categories from "../../pages/Category/Categories";
 import RequireAuth from '../../auth.js'
 import ShowAdvertisement from "../../pages/Advertisement/ShowAdvertisement/ShowAdvertisement";
 import CreateComment from "../../pages/Advertisement/ShowAdvertisement/Comment/CreateComment";
+import ResetPasswordEmail from "../../pages/ResetPassword/ResetPasswordEmail";
+import ResetPassword from "../../pages/ResetPassword/ResetPassword";
 
 const CustomRoutes = () => {
   return (
@@ -37,6 +39,8 @@ const CustomRoutes = () => {
           <Route path="/users/:userId/user_infos" element={<UserInfo />} />
           <Route path="/adverts/:advertId" element={<ShowAdvertisement />} />
           <Route path="/adverts/:advertId/comments" element={<CreateComment />} />
+          <Route path="/send_email" element={<ResetPasswordEmail />} />
+          <Route path="/password/:resetPasswordToken" element={<ResetPassword />} />
         </Route>
       </Routes>
     </BrowserRouter>
