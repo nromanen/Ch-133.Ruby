@@ -83,6 +83,8 @@ jobs:
         run: heroku git:remote -a $HEROKU_APP_NAME_CLIENT
         env:
           HEROKU_APP_NAME_CLIENT: ${{ secrets.HEROKU_APP_NAME_CLIENT }}
+      - name: install one lib with problems
+        run: npm install react-images-upload --legacy-peer-deps
       - name: add lockfile for a client
         run: cd client && npm install --package-lock-only
       - name: client push
