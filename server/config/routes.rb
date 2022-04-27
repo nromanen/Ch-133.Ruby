@@ -20,8 +20,10 @@ Rails.application.routes.draw do
     resource :user_infos
   end
 
-  resources :adverts
   resources :comments
+  resources :adverts do
+    resources :likes, only: [:index, :create, :destroy]
+  end
   resources :categories
 
   resources :subscribes

@@ -36,12 +36,6 @@ class AdvertsController < ApplicationController
     render json: { advert: AdvertSerializer.new(@advert).as_json }
   end
 
-  def like
-    @advert = Advert.find(params[:id])
-    Like.create(user_id: current_user.id, advert_id: @advert.id)
-    render json: @advert
-  end
-
   # PATCH/PUT /averts/1
   def update
     @advert = Advert.find(params[:id])
@@ -65,5 +59,4 @@ class AdvertsController < ApplicationController
     def advert_params
       params.require(:advert).permit(:title, :text, :category_id, :image)
     end
-
 end
