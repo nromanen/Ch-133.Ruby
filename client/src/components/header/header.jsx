@@ -10,10 +10,6 @@ import Cookies from 'universal-cookie';
 const Header = (props) => {
   const cookies = new Cookies();
   const token = cookies.get('user-info');
-
-
-
-
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -30,9 +26,9 @@ const Header = (props) => {
   ];
 
   return (
-    <header> 
+    <header>
       <div className="container header_content">
-        <a className="brand" onClick={ () => {navigate("/")} }>React&Rails</a>
+        <a className="brand" onClick={ () => {navigate("/")} }>💫Read</a>
         <nav>
           <ul>
             {

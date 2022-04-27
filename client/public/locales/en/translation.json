@@ -4,7 +4,11 @@
     "contact": "Contact us",
     "language": "Language",
     "info": "User info",
-    "logout": "Logout"
+    "logout": "Logout",
+    "category": "Categories",
+    "signin": "Login",
+    "signup": "Create account",
+    "reset": "Reset password"
   },
   "singIn" : {
     "head": "Sing In",
