@@ -8,6 +8,9 @@ import Home from "../../pages/Home/Home";
 import UserInfo from "../../pages/UserInfo/UserInfo";
 import CategoryNew from "../../pages/Category/CategoryNew";
 import Categories from "../../pages/Category/Categories";
+import CreateAdvertisement from "../../pages/Advertisement/CreateAdvertisement";
+import Adverts from "../../pages/Advertisement/Adverts";
+import UpdateAdvertisement from "../../pages/Advertisement/UpdateAdvertisement";
 import RequireAuth from '../../auth.js'
 import ShowAdvertisement from "../../pages/Advertisement/ShowAdvertisement/ShowAdvertisement";
 import CreateComment from "../../pages/Advertisement/ShowAdvertisement/Comment/CreateComment";
@@ -37,6 +40,9 @@ const CustomRoutes = () => {
           <Route path="/users/:userId/user_infos" element={<UserInfo />} />
           <Route path="/adverts/:advertId" element={<ShowAdvertisement />} />
           <Route path="/adverts/:advertId/comments" element={<CreateComment />} />
+          <Route path="/create_advert" element={<CreateAdvertisement/>}/>
+          <Route path="/adverts" element={<Adverts/>}/>
+          <Route path="/adverts/:advertId/edit" element={<UpdateAdvertisement/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
