@@ -14,8 +14,6 @@ Rails.application.routes.draw do
     put "users/password/edit(.:format)" => "passwords#update"
   end
 
-  get "/all_categories", to: "categories#all"
-  get "/all_adverts", to: "adverts#all"
   resources :users do
     resource :user_infos
   end
