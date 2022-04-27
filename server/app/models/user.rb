@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :adverts, dependent: :destroy
   has_many :likes, dependent: :destroy
-  belongs_to :role, optional: true 
+  belongs_to :role, optional: true
   delegate :name, to: :role, prefix: true
   has_one :user_info, dependent: :destroy
   has_many :subscribes, dependent: :destroy

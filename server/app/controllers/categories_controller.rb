@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class CategoriesController < ApplicationController
+
   before_action :set_category, except: %i[ create index all ]
+
 
 
   def index
@@ -13,6 +15,7 @@ class CategoriesController < ApplicationController
       render json: { categories: @categories}, status: :ok
     end
   end
+
 
   def show
     render json: @category
