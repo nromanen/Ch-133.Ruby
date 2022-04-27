@@ -12,9 +12,10 @@ import FormInput from '../../../../components/form-input/form-input'
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import "../../../../i18n";
 import './Comment.scss'
+import './CreateComment.scss'
 const cookies = new Cookies();
 
-const CreateComment = (props) => {
+const CreateComment = ({onCommentCreate}) => {
     let params = useParams();
     let token = cookies.get('user-info');
     const [text, setText] = useState('');
@@ -38,12 +39,13 @@ const CreateComment = (props) => {
                     "text": text
                 }
         };
-        console.log(bodyParameters)
 
         axios.post(`${baseShowAdvert}/${params.advertId}/comments`, bodyParameters, config)
             .then((response)=>{
                 setMessage(response.data.message);
-                setSeverity("success")
+                setSeverity("success");
+                setText('');
+                onCommentCreate(response.data.comment)
             })
             .catch(function (error) {
                 setMessageText(error.response.data.message);
@@ -58,7 +60,7 @@ const CreateComment = (props) => {
         <div className={'create-comment'}>
             <Message open={showMessage} text={message}/>
             <form onSubmit={handleSubmit}>
-                <Box classNane={'create-comment'}>
+                <Box className={'create-comment'}>
                     <AddCommentIcon />
                     <FormInput name='comment' type='text' value={text}
                                required  handleChange={event => { setText(event.target.value)}}>

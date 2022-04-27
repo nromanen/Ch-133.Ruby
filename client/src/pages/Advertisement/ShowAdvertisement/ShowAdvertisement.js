@@ -13,9 +13,11 @@ const ShowAdvertisement = (props) => {
     let params = useParams();
     const [resp,setResp] = useState('');
     const [owner, setOwner] = useState('');
-    const [comments, setComments] = useState('');
+    const [comments, setComments] = useState([]);
 
-   console.log(comments)
+    const onCommentCreate = (comment) => {
+        setComments([comment, ...comments]);
+    };
 
     useEffect(()=>{
         axios.get(`${baseShowAdvert}/${params.advertId}`)
@@ -28,17 +30,13 @@ const ShowAdvertisement = (props) => {
 
         return (
             <div className={'show-advertisement'}>
-                <div>
-                        <Owner owner_name={owner.owner_name} owner_img={owner.owner_img}></Owner>
-                        <Advert title={resp.title} text={resp.text} image_url={resp.image_url}></Advert>
+                <Owner owner_name={owner.owner_name} owner_img={owner.owner_img}/>
+                <Advert title={resp.title} text={resp.text} image_url={resp.image_url}/>
                 <div className={"like-and-comment"}>
-                        <Like props={props}></Like>
+                    <Like props={props}/>
+                    <CreateComment onCommentCreate={onCommentCreate} />
                 </div>
-                    <div className={"like-and-comment"}>
-                        <CreateComment></CreateComment>
-                </div>
-                        <Comment comments={comments}></Comment>
-                </div>
+                <Comment comments={comments}/>
             </div>
         )
     };

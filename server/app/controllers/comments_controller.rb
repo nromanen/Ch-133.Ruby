@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build(comment_params)
     authorize @comment
     if @comment.save
-      render json: { message: I18n.t("created", name: I18n.t("comment")) }, status: :created
+      render json: { message: I18n.t("created", name: I18n.t("comment")), comment: @comment.as_json }, status: :created
     else
       render json: @comment.errors, status: :unprocessable_entity
     end

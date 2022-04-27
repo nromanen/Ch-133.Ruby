@@ -7,7 +7,7 @@ class Advert < ApplicationRecord
 
   belongs_to :user
   has_one :category
-  has_many :comments, dependent: :destroy
+  has_many :comments, -> { order(created_at: :desc) }, dependent: :destroy
   has_many :likes, dependent: :destroy
   enum status: {
     unpublished: 0,
