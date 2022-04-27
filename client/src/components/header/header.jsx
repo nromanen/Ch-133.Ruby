@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import Switcher from '../../components/switch-language/switch-language';
 import MenuList from '../../components/menuList';
 
-const Header = (props) => {
+const Header = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -21,9 +21,9 @@ const Header = (props) => {
   ];
 
   return (
-    <header> 
+    <header>
       <div className="container header_content">
-        <a className="brand" onClick={ () => {navigate("/")} }>React&Rails</a>
+        <a className="brand" onClick={ () => {navigate("/")} }>💫Read</a>
         <nav>
           <ul>
             {

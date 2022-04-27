@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "../../pages/Layout";
 import SingIn from "../../pages/SingIn/SingIn";
@@ -8,51 +8,50 @@ import Home from "../../pages/Home/Home";
 import UserInfo from "../../pages/UserInfo/UserInfo";
 import CategoryNew from "../../pages/Category/CategoryNew";
 import Categories from "../../pages/Category/Categories";
-import { RequireAuth, RequireAdmin, RequireNoAuth } from '../../auth.js'
+import { RequireAuth, RequireAdmin, RequireNoAuth } from "../../auth.js";
 import ShowAdvertisement from "../../pages/Advertisement/ShowAdvertisement/ShowAdvertisement";
 import CreateComment from "../../pages/Advertisement/ShowAdvertisement/Comment/CreateComment";
 import ChangeRole from "../../pages/Admin/ChangeRole/ChangeRole";
 
 const CustomRoutes = () => {
   return (
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/categories/new" element={
-              <RequireAuth>
-                <CategoryNew/>
-              </RequireAuth>
-            }
-          />
+          <Route path="/categories/new" element={<CategoryNew />} />
           <Route path="/categories" element={<Categories />} />
-          <Route path="/sign_in" element={
+          <Route
+            path="/sign_in"
+            element={
               <RequireNoAuth>
                 <SingIn />
               </RequireNoAuth>
-            } 
-          />
-          <Route path="/sign_up" element={
-            <RequireAuth>
-              <SignUp />
-            </RequireAuth>
-            } 
-          />
-          <Route path="*" element={<NoPage />} />
-          <Route path="/users/:userId/user_infos" element={
-              <RequireAuth>
-                <UserInfo/>
-              </RequireAuth>
             }
           />
+          <Route
+            path="/sign_up"
+            element={
+              <RequireNoAuth>
+                <SignUp />
+              </RequireNoAuth>
+            }
+          />
+          <Route path="*" element={<NoPage />} />
+          <Route path="/users/:userId/user_infos" element={<UserInfo />} />
           <Route path="/adverts/:advertId" element={<ShowAdvertisement />} />
-          <Route path="/adverts/:advertId/comments" element={<CreateComment />} />
-          <Route path="/admin/roles" element={
-            <RequireAdmin>
-              <ChangeRole />
-            </RequireAdmin>
-          } 
-        />
+          <Route
+            path="/adverts/:advertId/comments"
+            element={<CreateComment />}
+          />
+          <Route
+            path="/admin/roles"
+            element={
+              <RequireAdmin>
+                <ChangeRole />
+              </RequireAdmin>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>

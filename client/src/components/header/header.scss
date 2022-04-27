@@ -34,7 +34,7 @@ header {
 }
 
 .brand {
-  cursor: default;
+  cursor: pointer;
   text-decoration: none;
   color: #ffffff;
   font-size: 35px;
@@ -54,7 +54,7 @@ nav ul {
 }
 
 nav ul li a {
-  cursor: default;
+  cursor: pointer;
   color: #ffffff;
   padding: 22px 1em;
   font-size: 19px;
@@ -63,7 +63,7 @@ nav ul li a {
 }
 
 nav ul li a:hover{
-  color: #ADC9C5; 
+  color: #ADC9C5;
 }
 
 .spacer {

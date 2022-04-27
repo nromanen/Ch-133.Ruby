@@ -1,63 +1,57 @@
-import * as React from 'react';
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-
-const ITEM_HEIGHT = 48;
+import React, { useState, useEffect } from "react";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { baseUrlUsers } from "../../../consts";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import NativeSelect from "@mui/material/NativeSelect";
+import axios from "axios";
 
 export default function CustomizedMenus(props) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [selected, setSelected] = React.useState(null);
-  const open = Boolean(anchorEl);
+  const [roles, setRoles] = React.useState("");
+  const rolesUrl = `${window.baseUrl}/roles`;
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  useEffect(() => {
+    getRoles();
+  }, []);
+
+  const getRoles = async () => {
+    await axios.get(rolesUrl).then(function (response) {
+      setRoles(response.data);
+    });
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const changeRole = (role) => {
-    setAnchorEl(null);
-    localStorage.setItem('changeRole', role);
-    props.change()
+  const handleChange = (event) => {
+    localStorage.setItem("changeRole", event.target.value);
+    props.change();
   };
 
   return (
-    <div>
-      <IconButton
-        aria-label="more"
-        id="long-button"
-        aria-controls={open ? 'long-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
-        <MoreVertIcon />
-      </IconButton>
-      <Menu
-        id="long-menu"
-        MenuListProps={{
-          'aria-labelledby': 'long-button',
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
-            width: '20ch',
-          },
-        }}
-      >
-        <MenuItem onClick={() => changeRole("User")} disableRipple>
-          User
-        </MenuItem>
-        <MenuItem onClick={() => changeRole("Admin")} disableRipple>
-          Admin
-        </MenuItem>
-      </Menu>
-    </div>
+    <>
+      <FormControl>
+        <NativeSelect
+          inputProps={{
+            name: "age",
+            id: "uncontrolled-native",
+          }}
+          onChange={handleChange}
+        >
+          {roles
+            ? roles.map((role) =>
+                props.selected == role.name ? (
+                  <option value={role.name} selected={true} key={role.id}>
+                    {role.name}
+                  </option>
+                ) : (
+                  <option value={role.name} key={role.id}>
+                    {role.name}
+                  </option>
+                )
+              )
+            : null}
+        </NativeSelect>
+      </FormControl>
+    </>
   );
 }

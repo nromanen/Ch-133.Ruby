@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, :with => :handle_exception
 
   def index
-    @users = User.all
+    @users = User.all.sort_by{ |user| ActiveSupport::Inflector.transliterate(user.nick_name.downcase) }
     render json: @users
   end
 
