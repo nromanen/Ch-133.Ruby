@@ -2,6 +2,8 @@
 
 class ApplicationPolicy
   attr_reader :user, :record
+  ADMIN = "Admin"
+  MODERATOR = "Moderator"
 
   def initialize(user, record)
     @user = user
@@ -37,11 +39,11 @@ class ApplicationPolicy
   end
 
   def is_admin
-    @user.role.name == "Admin"
+    @user.role.name == ADMIN
   end
 
   def is_moderator
-    @user.role.name == "Moderator"
+    @user.role.name == MODERATOR
   end
 
   class Scope
