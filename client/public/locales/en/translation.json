@@ -45,7 +45,7 @@
   "signUp" : {
     "head": "Sign Up",
     "nick": "Nick",
-
+    "email": "Email",
     "password": "Password",
     "passwordConfirmation": "Password confirmation",
     "button": "Sign Up"

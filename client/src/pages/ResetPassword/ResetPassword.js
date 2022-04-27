@@ -12,15 +12,13 @@ import {useParams} from "react-router-dom";
 
 const ResetPassword = (props) => {
     let params = useParams();
-    //const [resetPasswordToken] = useState(params.resetPasswordToken)
     let { reset_password_token } = useParams();
     const [password, setPassword] = useState('');
     const [password_confirmation, setPasswordConfirmation] = useState('');
     const [text, setText] = useState('');
     const [severity, setSeverity] = useState('');
     const { t } = props;
-    //const [searchParams] = useSearchParams();
-    //searchParams.get("?reset_password_token")
+    
     const handleSubmit = useCallback((event, value) => {
         event.preventDefault();
         const cookies = new Cookies();
