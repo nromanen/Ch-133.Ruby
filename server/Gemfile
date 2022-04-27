@@ -22,7 +22,7 @@ gem "activestorage-validator"
 gem "pundit"
 gem "active_model_serializers"
 gem "uuid"
-gem "rails-i18n", "~> 7.0", ">= 7.0.1"
+gem "i18n", "~> 1.10"
 gem "will_paginate", "~> 3.3", ">= 3.3.1"
 gem "api-pagination"
 
