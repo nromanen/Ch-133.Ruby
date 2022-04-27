@@ -21,6 +21,10 @@ en:
   infoNotExist: "Info doesn't exist. Create it."
   userNotExist: "User doesn't exist."
   userInfoValidError: "U have no rights or info doesn't exist"
+  reset_password_success: "Password was successfully reset"
+  reset_password_failed: "Password reset failed"
+  reset_password_email_send: "Reset password instructions send"
+  reset_password_email_not_send: "Can't sent reset password instructions"
   activerecord:
     models:
       user_info: user_info

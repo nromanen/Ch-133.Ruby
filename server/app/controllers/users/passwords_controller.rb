@@ -9,9 +9,9 @@ module Users
       user = User.find_by(user_params)
       user.send_reset_password_instructions
       if successfully_sent?(user)
-        render json: { message: "Reset instruction sent" }, status: :ok
+        render json: { message: I18n.t("reset_password_email_send")}, status: :ok
       else
-        render json: { message: "Can't send reset instructions" }, status: :bad_request
+        render json: { message: I18n.t("reset_password_email_not_send") }, status: :bad_request
       end
     end
 
@@ -25,12 +25,12 @@ module Users
       if @user.persisted?
         if @user.reset_password_period_valid?
           @user.update(reset_params)
-          render json: { message: "Password for #{@user.nick_name} updated" }, status: :ok
+          render json: { message: I18n.t("reset_password_success")}, status: :ok
         else
           render json: @user.errors.full_message, status: :unprocessable_entity
         end
       else
-        render json: { message: "Can't update password" }, status: :forbidden
+        render json: { message: I18n.t("reset_password_failed")}, status: :forbidden
       end
     end
 
