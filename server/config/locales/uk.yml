@@ -12,6 +12,13 @@ uk:
   wrongway: "Хмм, щось пішло не так"
   category: "Категорію"
   comment: "Коментар"
+  advert: "Оголошення"
+  title: "Назва"
+  text: "Текст"
+  imageNotValid: "Неправильний формат фото"
+  imageTooLarge: "Картинка занадто велика"
+  deleted: "%{name} було успішно видалено"
+  titleNotUnique": "Ця назва вже зайнята"
   signed_up_and_unconfirmed: "Ви отримаєте листа з вказівками щодо підтвердження облікового запису протягом декількох хвилин."
   userInfoValidError: "У Вас немає прав, або інфо не існує."
   activerecord:

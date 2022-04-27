@@ -18,6 +18,15 @@ ru:
   nameNotValid: "разрешаються только буквы"
   lastNameNotValid: "разрешаються только буквы"
   userInfoValidError: "У Вас нету прав или инфо не существует."
+  category: "Категорию"
+  comment: "Коментарий"
+  advert: "Объявление"
+  title: "Название"
+  text: "Текст"
+  imageNotValid: "Неправильный формат фото"
+  imageTooLarge: "Картинка слишком большая"
+  deleted: "%{name} было успешно удалено"
+  titleNotUnique": "Это название уже занято"
   activerecord:
     models:
       user_info: user_info
@@ -26,3 +35,4 @@ ru:
         first_name: "Имя"
         last_name: "Фамилия"
         phone: "Телефон"
+
