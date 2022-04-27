@@ -1,6 +1,0 @@
-window.baseUrl = 'http://localhost:3000/'
-window.singInUrl = window.baseUrl + 'users/sign_in'
-export const signUpUrl = window.baseUrl + 'users'
-export const baseUrlUsers = window.baseUrl + 'users'
-window.createCategoryUrl = window.baseUrl + 'categories'
-window.singOutUrl = window.baseUrl + 'users/sign_out'

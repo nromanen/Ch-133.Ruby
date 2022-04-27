@@ -1,5 +1,0 @@
-Style/Documentation:
-  Enabled: false
-inherit_gem:
-  rubocop-rails_config:
-    - config/rails.yml
