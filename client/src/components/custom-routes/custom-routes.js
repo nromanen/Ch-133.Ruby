@@ -40,9 +40,9 @@ const CustomRoutes = () => {
           <Route path="/users/:userId/user_infos" element={<UserInfo />} />
           <Route path="/adverts/:advertId" element={<ShowAdvertisement />} />
           <Route path="/adverts/:advertId/comments" element={<CreateComment />} />
-          <Route path="/create_advert" element={<CreateAdvertisement/>}/>
+              <Route path="/create_advert" element={<RequireAuth><CreateAdvertisement/></RequireAuth>}/>
           <Route path="/adverts" element={<Adverts/>}/>
-          <Route path="/adverts/:advertId/edit" element={<UpdateAdvertisement/>}/>
+              <Route path="/adverts/:advertId/edit" element={<RequireAuth><UpdateAdvertisement/></RequireAuth>}/>
         </Route>
       </Routes>
     </BrowserRouter>

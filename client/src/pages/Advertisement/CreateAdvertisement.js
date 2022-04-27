@@ -12,6 +12,7 @@ import '../../consts.js'
 import {useNavigate} from "react-router-dom";
 import Message from '../../components/toster/message'
 import InstantMessaging from "../../components/toster/toster";
+import FormText from  "../../components/form-text/form-text"
 
 const cookies = new Cookies();
 
@@ -80,7 +81,7 @@ document.head.appendChild(styleLink);
        })
            .catch(function (error) {
                if (error.response.status === 422){
-                   console.log(error.response.data, "asdad")
+                   console.log(error.response.data.join(<br/>))
                    setMessage(error.response.data);
                }
            }).finally(() => {setDisabled(false)});
@@ -99,7 +100,7 @@ document.head.appendChild(styleLink);
                     <FormInput name='title' type='text' value={title}
                                handleChange={event => {setTitle(event.target.value)}}
                                label='Title' />
-                    <FormInput name='text' type='text' value={text} autoComplete="off"
+                    <FormText name='text' type='text' value={text} autoComplete="off"
                                handleChange={event => {setText(event.target.value)}}
                                label='Text' />
                     <Dropdown
