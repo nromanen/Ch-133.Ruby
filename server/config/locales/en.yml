@@ -51,3 +51,10 @@ en:
             password_confirmation:
               too_short: is too short, minimum 8 symbols
               invalid: doesn't match password
+  advert: "advert"
+  title: "title"
+  text: "text"
+  imageNotValid: "Image is not a valid format"
+  imageTooLarge: "Image is too large"
+  deleted: "%{name} was successfully deleted"
+  titleNotUnique": "Title has already been taken"

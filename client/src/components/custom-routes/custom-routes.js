@@ -9,6 +9,9 @@ import UserInfo from "../../pages/UserInfo/UserInfo";
 import CategoryNew from "../../pages/Category/CategoryNew";
 import Categories from "../../pages/Category/Categories";
 import { RequireAuth, RequireAdmin, RequireNoAuth } from "../../auth.js";
+import CreateAdvertisement from "../../pages/Advertisement/CreateAdvertisement";
+import Adverts from "../../pages/Advertisement/Adverts";
+import UpdateAdvertisement from "../../pages/Advertisement/UpdateAdvertisement";
 import ShowAdvertisement from "../../pages/Advertisement/ShowAdvertisement/ShowAdvertisement";
 import CreateComment from "../../pages/Advertisement/ShowAdvertisement/Comment/CreateComment";
 import ChangeRole from "../../pages/Admin/ChangeRole/ChangeRole";
@@ -52,6 +55,9 @@ const CustomRoutes = () => {
               </RequireAdmin>
             }
           />
+          <Route path="/create_advert" element={<CreateAdvertisement/>}/>
+          <Route path="/adverts" element={<Adverts/>}/>
+          <Route path="/adverts/:advertId/edit" element={<UpdateAdvertisement/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

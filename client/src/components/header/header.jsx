@@ -4,12 +4,17 @@ import { useTranslation } from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import Switcher from '../../components/switch-language/switch-language';
 import MenuList from '../../components/menuList';
+import CreateButton from "../create-button/create-button";
+import Cookies from 'universal-cookie';
 
-const Header = () => {
+const Header = (props) => {
+  const cookies = new Cookies();
+  const token = cookies.get('user-info');
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const menu = [
+
     {
       title: t("header.main"),
       path: "/adverts",
@@ -36,6 +41,7 @@ const Header = () => {
           </ul>
         </nav>
         <div className="spacer"></div>
+        { token != null && <CreateButton link={"/create_advert"}/>  }
         <Switcher/>
         <MenuList/>
       </div>

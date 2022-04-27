@@ -19,9 +19,11 @@ class Advert < ApplicationRecord
   def liked?
     # self.likes.find { |like| like.user_id == current_user.try(:id) } 
   end
-
-  validates :title, :text, presence: true
-  validates :image, blob: { content_type: %w[image/png image/jpg image/jpeg], size_range: 1..(10.megabytes) }
+  validates :text, presence: true, length: { minimum: 3, maximum: 4000 }
+  validates :image, allow_blank: true, blob: { content_type: %w[image/png image/jpg image/jpeg image/webp], message: I18n.t("imageNotValid") }
+  validates :image, allow_blank: true, blob: { size_range: 1..(5.megabytes), message: I18n.t("imageTooLarge") }
+  validates :title, uniqueness: true, presence: true
+  validates :category_id, presence: true
 
 
   def image_url
@@ -35,4 +37,5 @@ class Advert < ApplicationRecord
      owner_name: self.user.nick_name,
       owner_img: self.user.avatar }
   end
+
 end
