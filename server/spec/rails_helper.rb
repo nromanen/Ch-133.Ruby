@@ -13,6 +13,7 @@ require "rspec/rails"
 require 'support/factory_bot'
 require "support/devise"
 require_relative 'support/controller_macros'
+require_relative 'support/controller_helpers'
 # require 'capybara/email/rspec'
 require "devise"
 # Requires supporting ruby files with custom matchers and macros, etc, in
