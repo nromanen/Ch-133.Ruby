@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2022-04-28T07:25:33+00:00">2022-04-28T07:25:33+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2022-04-28T07:26:10+00:00">2022-04-28T07:26:10+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -337,7 +337,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#e0cb8d40001aa7674e14e9f9a78c944f5da3c8c2" class="src_link" title="app/models/user.rb">app/models/user.rb</a></td>
             <td class="red strong cell--number t-file__coverage">63.89 %</td>
-            <td class="cell--number">72</td>
+            <td class="cell--number">73</td>
             <td class="cell--number">36</td>
             <td class="cell--number">23</td>
             <td class="cell--number">13</td>
@@ -864,7 +864,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#e0cb8d40001aa7674e14e9f9a78c944f5da3c8c2" class="src_link" title="app/models/user.rb">app/models/user.rb</a></td>
             <td class="red strong cell--number t-file__coverage">63.89 %</td>
-            <td class="cell--number">72</td>
+            <td class="cell--number">73</td>
             <td class="cell--number">36</td>
             <td class="cell--number">23</td>
             <td class="cell--number">13</td>
@@ -10018,7 +10018,7 @@
 
             
 
-            <code class="ruby">  </code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -10029,7 +10029,7 @@
 
             
 
-            <code class="ruby">  def change_role(role_name)</code>
+            <code class="ruby">  def avatar</code>
           </li>
         </div>
       
@@ -10040,7 +10040,7 @@
 
             
 
-            <code class="ruby">    role = Role.find_by(name: role_name)</code>
+            <code class="ruby">    if user_info.nil? || user_info.image_url.nil?</code>
           </li>
         </div>
       
@@ -10051,18 +10051,18 @@
 
             
 
-            <code class="ruby">    if admin_check</code>
+            <code class="ruby">      self.nick_name</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="48">
+          <li class="never" data-hits="" data-linenumber="48">
             
             
 
             
 
-            <code class="ruby">      self.update_attribute(:role_id, role.id)</code>
+            <code class="ruby">    else</code>
           </li>
         </div>
       
@@ -10073,7 +10073,7 @@
 
             
 
-            <code class="ruby">      self.role = role</code>
+            <code class="ruby">      user_info.image_url</code>
           </li>
         </div>
       
@@ -10084,18 +10084,18 @@
 
             
 
-            <code class="ruby">    else</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="51">
+          <li class="never" data-hits="" data-linenumber="51">
             
             
 
             
 
-            <code class="ruby">      false</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -10106,89 +10106,67 @@
 
             
 
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="53">
-            
-            
-
-            
-
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="54">
-            
-            
-
-            
-
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="55">
+          <li class="covered" data-hits="1" data-linenumber="53">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  private</code>
+            <code class="ruby">  def change_role(role_name)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="56">
+          <li class="missed" data-hits="0" data-linenumber="54">
             
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">    role = Role.find_by(name: role_name)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="57">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="55">
+            
             
 
             
 
-            <code class="ruby">  def admin_check</code>
+            <code class="ruby">    if admin_check</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="58">
+          <li class="missed" data-hits="0" data-linenumber="56">
             
             
 
             
 
-            <code class="ruby">    if self.role_name == &quot;Admin&quot;</code>
+            <code class="ruby">      self.update_attribute(:role_id, role.id)</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="59">
+          <li class="missed" data-hits="0" data-linenumber="57">
             
             
 
             
 
-            <code class="ruby">      User.where(role_id: self.role_id).count &gt; 1</code>
+            <code class="ruby">      self.role = role</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="60">
+          <li class="never" data-hits="" data-linenumber="58">
             
             
 
@@ -10199,18 +10177,18 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="61">
+          <li class="missed" data-hits="0" data-linenumber="59">
             
             
 
             
 
-            <code class="ruby">      true</code>
+            <code class="ruby">      false</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="62">
+          <li class="never" data-hits="" data-linenumber="60">
             
             
 
@@ -10221,13 +10199,35 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="63">
+          <li class="never" data-hits="" data-linenumber="61">
             
             
 
             
 
             <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="62">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="63">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  private</code>
           </li>
         </div>
       
@@ -10249,7 +10249,7 @@
 
             
 
-            <code class="ruby">  def avatar</code>
+            <code class="ruby">  def admin_check</code>
           </li>
         </div>
       
@@ -10260,7 +10260,7 @@
 
             
 
-            <code class="ruby">    if user_info.nil? || user_info.image_url.nil?</code>
+            <code class="ruby">    if self.role_name == &quot;Admin&quot;</code>
           </li>
         </div>
       
@@ -10271,7 +10271,7 @@
 
             
 
-            <code class="ruby">      self.nick_name</code>
+            <code class="ruby">      User.where(role_id: self.role_id).count &gt; 1</code>
           </li>
         </div>
       
@@ -10293,7 +10293,7 @@
 
             
 
-            <code class="ruby">      user_info.image_url</code>
+            <code class="ruby">      true</code>
           </li>
         </div>
       
@@ -10321,6 +10321,17 @@
       
         <div>
           <li class="never" data-hits="" data-linenumber="72">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="73">
             
             
 
