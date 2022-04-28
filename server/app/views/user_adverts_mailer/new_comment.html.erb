@@ -50,10 +50,16 @@
                       <td style="padding-bottom:80px;padding-left:30px;padding-right:30px;padding-top:10px;">
                         <div style="font-family: sans-serif">
                           <div class="txtTinyMce-wrapper" style="font-size: 14px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 21px; color: #c7c5c5; line-height: 1.5;">
-                            <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 24px;"><span style="font-size:16px;">Hi <strong><u><%= @mail_target.nick_name %></u></strong>,</span></p>
+                            <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 24px;"><span style="font-size:16px;">Hi <strong><u><%= @user_author.nick_name %></u></strong>,</span></p>
                             <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;"> </p>
-                            <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 24px;"><span style="font-size:16px;">We have new <strong><span style="">information</span></strong> about <strong><span style="">post</span></strong></span></p>
-                            <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 24px;"><span style="font-size:16px;">that you interested in</span></p>
+                            <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 24px;"><span style="font-size:16px;">We have new <strong><span style="">information</span></strong> about <strong><span style="">your post</span></strong></span></p>
+                            <table border="0" cellpadding="0" cellspacing="0" class="image_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                              <tr>
+                                <td style="width:100%;padding-right:0px;padding-left:0px;padding-top:70px;">
+                                  <div align="center" style="line-height:10px"><img alt="<%= @advert.title %>" src="<%= @advert.image_url %>" style="display: block; height: auto; border: 0; width: 93px; max-width: 100%;" title="Check Icon" width="93"/></div>
+                                </td>
+                              </tr>
+                            </table>
                             <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;"> </p>
                             <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;"><span style="color:#000000;font-size:14px;"><%= @advert.text %></span></p>
                           </div>
@@ -82,13 +88,7 @@
                       <td style="padding-bottom:20px;padding-left:20px;padding-right:20px;padding-top:50px;">
                         <div style="font-family: sans-serif">
                           <div class="txtTinyMce-wrapper" style="font-size: 14px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 16.8px; color: #2f2f2f; line-height: 1.2;">
-                            <table border="0" cellpadding="0" cellspacing="0" class="image_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-                              <tr>
-                                <td style="width:100%;padding-right:0px;padding-left:0px;padding-top:70px;">
-                                  <div align="center" style="line-height:10px"><img alt="<%= @user.nick_name %>" src="<%= @advert.image_url %>>" style="display: block; height: auto; border: 0; width: 93px; max-width: 100%;" title="Check Icon" width="93"/></div>
-                                </td>
-                              </tr>
-                            </table>
+                            <p style="margin: 0; text-align: center; letter-spacing: 1px;"><strong><span style="font-size:18px;"><%= @user_comment.nick_name %></span></strong></p>
                             <p style="margin: 0; text-align: center; letter-spacing: 1px;"><strong><span style="font-size:18px;">Writed a comment:</span></strong></p>
                           </div>
                         </div>
@@ -178,8 +178,9 @@
           </td>
         </tr>
         </tbody>
-      </table>
-      <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-8" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+</table>
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-8" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
         <tbody>
         <tr>
           <td>
@@ -191,8 +192,14 @@
                     <tr>
                       <td>
                         <div style="font-family: sans-serif">
-                          <div class="txtTinyMce-wrapper" style="font-size: 12px; mso-line-height-alt: 14.399999999999999px; color: #cfceca; line-height: 1.2; font-family: Arial, Helvetica Neue, Helvetica, sans-serif;">
-                            <p style="margin: 0; font-size: 14px; text-align: center;"><span style="font-size:12px;">If you don`t want to receive updates from this post click here:</span></p>
+                          <div class="txtTinyMce-wrapper" style="font-size: 12px; mso-line-height-alt: 14.5px; color: #cfceca; line-height: 1.2; font-family: Arial, Helvetica Neue, Helvetica, sans-serif;">
+                            <p style="margin: 0; font-size: 14px; text-align: center;"><span style="font-size:12px;">If you don`t want to receive updates from our service, you can change it <a style="color: #cfceca" href="http://localhost:3001/users/<%= @user_author.id %>/user_infos">here:</a></span></p>
+                          </div>
+
+                          <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;"> </p>
+
+                          <div class="txtTinyMce-wrapper" style="font-size: 10px; mso-line-height-alt: 14.5px; color: #cfceca; line-height: 1.2; font-family: Arial, Helvetica Neue, Helvetica, sans-serif;">
+                            <p style="margin: 0; font-size: 10px; text-align: center;"><span style="font-size:10px;">Softserve навчальна програма Copyright © Ch-133.Ruby 2022.</span></p>
                           </div>
                         </div>
                       </td>
@@ -205,9 +212,5 @@
           </td>
         </tr>
         </tbody>
-      </table>
-    </td>
-  </tr>
-  </tbody>
-</table><!-- End -->
+</table>
 </body>

@@ -2,32 +2,28 @@
 
 class SubscribesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_subscriber
 
   def subscribed?
-    @subscribe = Subscribe.find_by(user_id: current_user.id, advert_id: params[:advert_id])
-    unless @subscribe.nil?
-      render json: true, status: :ok
-    end
+    render json: @subscribe.subscribed, status: :ok
   end
 
-  def create
-    @subscribe = current_user.subscribes.new(subscribe_params)
-    if @subscribe.save
-      render json: { message: I18n.t("created", name: "subscribe") }, status: :created
+  def update
+    if @subscribe.update(subscribe_params)
+      render json: { message: I18n.t("updated", name: "subscribe") }, status: :created
     else
       render json: @subscribe.errors.full_messages, status: :unprocessable_entity
     end
   end
 
-  def destroy
-    @subscribe = Subscribe.find_by(user_id: current_user.id, advert_id: params[:advert_id])
-    @subscribe.destroy
-  end
-
   private
 
+  def set_subscriber
+    @subscribe = Subscribe.find_by(user_id: current_user.id)
+  end
+
   def subscribe_params
-    params.require(:subscribe).permit(:advert_id)
+    params.require(:subscribe).permit(:subscribed)
   end
 
 end

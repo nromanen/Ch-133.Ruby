@@ -26,8 +26,7 @@ Rails.application.routes.draw do
   end
   resources :categories
 
-  resources :subscribes
-  delete "/subscribes", to: "subscribes#destroy"
+  patch "/subscribes", to: "subscribes#update"
   get "/subscribed", to: "subscribes#subscribed?"
 
 end

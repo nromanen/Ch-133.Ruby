@@ -27,13 +27,7 @@ const CustomRoutes = () => {
           <Route path="/sign_up" element={<SignUp />} />
           <Route path="*" element={<NoPage />} />
           <Route path="/create_advert" element={<CreateAdvertisement/>}/>
-          <Route path="/users/:userId/user_infos" element={
-              <RequireAuth>
-                <UserInfo/>
-              </RequireAuth>
-            }
-          />
-          <Route path="/users/:userId/user_infos" element={<UserInfo />} />
+          <Route path="/users/:userId/user_infos" element={<UserInfo/>}/>
           <Route path="/adverts/:advertId" element={<ShowAdvertisement />} />
           <Route path="/adverts/:advertId/comments" element={<CreateComment />} />
         </Route>

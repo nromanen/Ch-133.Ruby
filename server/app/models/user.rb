@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   before_validation :set_default
+  after_create :create_subscribe
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # devise :database_authenticatable, :registerable,
@@ -19,7 +20,7 @@ class User < ApplicationRecord
   belongs_to :role, optional: true 
   delegate :name, to: :role, prefix: true
   has_one :user_info, dependent: :destroy
-  has_many :subscribes, dependent: :destroy
+  has_one :subscribe, dependent: :destroy
 
   validates :email, presence: true, uniqueness: { uniqueness: true, message: I18n.t("taken") },
             format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/ }
@@ -51,4 +52,9 @@ class User < ApplicationRecord
       user_info.image_url
     end
   end
+
+  def create_subscribe
+    self.create_subscribe!
+  end
+
 end

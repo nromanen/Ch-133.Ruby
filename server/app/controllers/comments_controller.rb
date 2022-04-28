@@ -23,8 +23,7 @@ class CommentsController < ApplicationController
     authorize @comment
     if @comment.save
       begin
-        @advert = Advert.find(@comment.advert_id)
-        UserAdvertsMailer.new_comment(@comment, @advert, current_user).deliver_now
+        UserAdvertsMailer.new_comment(@comment).deliver_now
       ensure
         render json: { message: I18n.t("created", name: I18n.t("comment")) }, status: :created
       end
