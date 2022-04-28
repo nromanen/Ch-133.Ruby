@@ -12,7 +12,9 @@ import '../../consts.js'
 import {useNavigate} from "react-router-dom";
 import Message from '../../components/toster/message'
 import InstantMessaging from "../../components/toster/toster";
-import FormText from  "../../components/form-text/form-text"
+import FormText from  "../../components/form-text/form-text";
+import { withTranslation } from 'react-i18next'
+import "../../i18n";
 
 const cookies = new Cookies();
 
@@ -31,6 +33,7 @@ document.head.appendChild(styleLink);
     const [categories, setCategories] = useState(null);
     const language = cookies.get('i18next');
     const [open, setOpen] = React.useState(false);
+    const { t } = props;
 
       let token = cookies.get('user-info');
       let navigate = useNavigate();
@@ -81,8 +84,8 @@ document.head.appendChild(styleLink);
        })
            .catch(function (error) {
                if (error.response.status === 422){
-                   console.log(error.response.data.join(<br/>))
-                   setMessage(error.response.data);
+                   console.log(error.response.data.join(', \n'))
+                   setMessage(error.response.data.join(', \n'));
                }
            }).finally(() => {setDisabled(false)});
       }, [title, text, category_id, image, token]);
