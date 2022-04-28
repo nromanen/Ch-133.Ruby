@@ -6,7 +6,9 @@ require "rails_helper"
 RSpec.describe Advert, type: :model do
 
   before(:all) do
-    @advert1 = create(:advert)
+    @user = create(:user)
+    @category = create (:category)
+    @advert1 = create(:advert, user_id: @user.id, category_id: @category.id)
   end
 
 
@@ -58,6 +60,8 @@ RSpec.describe Advert, type: :model do
 
   after(:all) do
     @advert1.destroy
+    @user.destroy
+    @category.destroy
   end
 end
 

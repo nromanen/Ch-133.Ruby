@@ -99,7 +99,7 @@ const UpdateAdvertisement = (props) => {
             .catch(function (error) {
                 if (error.response.status === 422){
                     console.log(error.response.data)
-                    setMessage(error.response.data.join('<br>'));
+                    setMessage(error.response.data.join(', \n'));
                 }
             }).finally(() => {setDisabled(false)});
     }, [title, text, category_id, image, token]);
