@@ -15,6 +15,8 @@ import Message from '../../components/toster/message'
 import InstantMessaging from "../../components/toster/toster";
 import { useParams } from "react-router-dom";
 import CardMedia from '@mui/material/CardMedia';
+import { withTranslation } from 'react-i18next'
+import "../../i18n";
 
 
 const cookies = new Cookies();
@@ -35,6 +37,7 @@ const UpdateAdvertisement = (props) => {
     const language = cookies.get('i18next');
     const [open, setOpen] = React.useState(false);
     const [advert, setAdvert] = useState(null);
+    const {t} = props;
 
     let token = cookies.get('user-info');
     let navigate = useNavigate();
@@ -112,7 +115,7 @@ const UpdateAdvertisement = (props) => {
     return (
         <div className='create-post'>
             { message  ? <Message text={message} type={"error"}/> : null }
-            <h2>Edit your advert</h2>
+            <h2>{t("Advert.updateHeader")}</h2>
             <div className={"advertImg"}>
                 <CardMedia
                     component="img"
@@ -124,13 +127,13 @@ const UpdateAdvertisement = (props) => {
             <form onSubmit={onUpdatePost} >
                 <FormInput name='title' type='text' value={title} autoComplete="off"
                            handleChange={event => {setTitle(event.target.value)}}
-                           label='Title' />
+                           label={t("Advert.title")} />
                 <FormText name='text' type='text' value={text} autoComplete="off"
                            handleChange={event => {setText(event.target.value)}}
-                           label='Text' />
+                           label={t("Advert.text")} />
 
                 <Dropdown
-                    placeholder='Choose new category'
+                    placeholder={t("Advert.categories")}
                     fluid
                     selection
                     onChange={handleDropdown}
@@ -139,14 +142,14 @@ const UpdateAdvertisement = (props) => {
                     onChange={onImage}
                     withIcon={false}
                     withPreview={true}
-                    buttonText="Choose images"
+                    buttonText={t("Advert.choseImage")}
                     imgExtension={[".jpg", ".png", ".jpeg", ".webp"]}
                 />
-                <CustomButton  disabled={disabled} type='submit'>Update</CustomButton>
+                <CustomButton  disabled={disabled} type='submit'>{t("Advert.updateButton")}</CustomButton>
             </form>
             <InstantMessaging open = {open} type="success" text={message} />
         </div>
     );
 }
 
-export default UpdateAdvertisement
+export default withTranslation()(UpdateAdvertisement)

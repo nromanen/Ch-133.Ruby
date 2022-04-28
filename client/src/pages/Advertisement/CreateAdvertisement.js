@@ -98,16 +98,16 @@ document.head.appendChild(styleLink);
      return (
             <div className='create-post'>
                 { message  ? <Message text={message} type={"error"}/> : null }
-                <h2>Create your advertisement!</h2>
+                <h2>{t("Advert.head")}</h2>
                 <form onSubmit={onCreatePost} >
                     <FormInput name='title' type='text' value={title}
                                handleChange={event => {setTitle(event.target.value)}}
-                               label='Title' />
+                               label={t("Advert.title")} />
                     <FormText name='text' type='text' value={text} autoComplete="off"
                                handleChange={event => {setText(event.target.value)}}
-                               label='Text' />
+                               label={t("Advert.text")} />
                     <Dropdown
-                        placeholder='Categories'
+                        placeholder={t("Advert.categories")}
                         fluid
                         selection
                         onChange={handleDropdown}
@@ -116,14 +116,14 @@ document.head.appendChild(styleLink);
                         onChange={onImage}
                         withIcon={false}
                         withPreview={true}
-                        buttonText="Choose images"
+                        buttonText={t("Advert.choseImage")}
                         imgExtension={[".jpg", ".png", ".jpeg", ".webp"]}
                     />
-                    <CustomButton  disabled={disabled} type='submit'>Create Advert</CustomButton>
+                    <CustomButton  disabled={disabled} type='submit'>{t("Advert.button")}</CustomButton>
                 </form>
                 <InstantMessaging open = {open} type="success" text={message} />
             </div>
         );
     }
 
-export default CreateAdvertisement
+export default withTranslation()(CreateAdvertisement)
