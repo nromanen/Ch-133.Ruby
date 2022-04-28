@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class AdvertPolicy < ApplicationPolicy
   def create?
     @user.present?

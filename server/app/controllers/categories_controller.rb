@@ -2,14 +2,13 @@
 
 class CategoriesController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
-  before_action :set_category, except: %i[ create index ]
+  before_action :set_category, except: %i[ create index]
 
 
   def index
     @categories = Category.paginate(page: params[:page], per_page: params[:per_page]).order('name ASC')
     render json: { categories: @categories, pages: @categories.total_pages }
   end
-
 
   def create
     @category = Category.new(category_params)

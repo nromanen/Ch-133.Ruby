@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { List, Divider, Box } from "@material-ui/core";
 import './Comment.scss'
 import Pagination from "@material-ui/lab/Pagination";
@@ -12,7 +12,7 @@ const Comment = (comments) => {
     let text = new Array();
     const commentObj = comments.comments
     const commentLength = commentObj.length
-    const itemsPerPage = 5;
+    const itemsPerPage = 3;
     const [page, setPage] = useState(1);
     const noOfPages = Math.ceil(commentLength/itemsPerPage);
 
@@ -26,18 +26,18 @@ const Comment = (comments) => {
 
     return (
         <div className={'comment'}>
-            <List>
+            <List className={"comment-area"}>
                 {text
                     .slice((page - 1) * itemsPerPage, page * itemsPerPage)
-                    .map(function (comments, i) {
+                    .map(function (comment) {
                             return (
                                 <ListItem alignItems="center">
                                     <ListItemAvatar>
-                                        <Avatar alt={comments.author.author_name} src="/static/images/avatar/3.jpg" sx={{ bgcolor: teal[500] }}/>
+                                        <Avatar alt={comment.author.author_name} src={comment.author.author_img} sx={{ bgcolor: teal[500] }}/>
                                     </ListItemAvatar>
                                     <ListItemText
-                                        primary={comments.author.author_name}
-                                        secondary={comments.text}/>
+                                        primary={comment.author.author_name}
+                                        secondary={comment.text}/>
                                 </ListItem>
                             )
                         }
