@@ -56,6 +56,14 @@ class User < ApplicationRecord
     end
   end
 
+  def avatar
+    if user_info.nil? || user_info.image_url.nil?
+      self.nick_name
+    else
+      user_info.image_url
+    end
+  end
+
   private
 
   def admin_check
@@ -63,14 +71,6 @@ class User < ApplicationRecord
       User.where(role_id: self.role_id).count > 1
     else
       true
-    end
-  end
-
-  def avatar
-    if user_info.nil? || user_info.image_url.nil?
-      self.nick_name
-    else
-      user_info.image_url
     end
   end
 

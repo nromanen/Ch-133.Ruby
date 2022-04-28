@@ -60,7 +60,7 @@ const CustomRoutes = () => {
           />
           <Route path="/create_advert" element={<CreateAdvertisement/>}/>
           <Route path="/adverts" element={<Adverts/>}/>
-          <Route path="/adverts/:advertId/edit" element={<UpdateAdvertisement/>}/>
+          {/*<Route path="/adverts/:advertId/edit" element={<UpdateAdvertisement/>}/>*/}
           <Route path="/send_email" element={<ResetPasswordEmail />} />
           <Route path="/password/:resetPasswordToken" element={<ResetPassword />} />
         </Route>
