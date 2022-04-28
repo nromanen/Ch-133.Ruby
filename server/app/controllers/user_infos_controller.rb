@@ -21,13 +21,7 @@ class UserInfosController < ApplicationController
 
     if user.user_info.nil?
       user_inf = user.create_user_info(user_info_params)
-      unless params[:image].nil?
-        blob = ActiveStorage::Blob.create_and_upload!(
-            io: StringIO.new((Base64.decode64(params[:image][2]))),
-            filename: params[:image][1],
-            content_type: params[:image][0],)
-        user_inf.image.attach(blob)
-      end
+      attach_img
       if user_inf.save
         render json: { info: UserInfosSerializer.new(user.user_info).as_json }, status: 200
       else
@@ -38,13 +32,7 @@ class UserInfosController < ApplicationController
         render json: { message: I18n.t("userInfoValidError") }, status: 403
       else
         if user.user_info.update(user_info_params)
-          unless params[:image].nil?
-            blob = ActiveStorage::Blob.create_and_upload!(
-                io: StringIO.new((Base64.decode64(params[:image][2]))),
-                filename: params[:image][1],
-                content_type: params[:image][0],)
-            user.user_info.image.attach(blob)
-          end
+          attach_img
           render json: { info: UserInfosSerializer.new(user.user_info).as_json }, status: 200
         else
           render json: user.user_info.errors.full_messages, status: :unprocessable_entity
@@ -52,6 +40,16 @@ class UserInfosController < ApplicationController
       end
     end
 
+  end
+
+  def attach_img
+    unless params[:image].nil?
+      blob = ActiveStorage::Blob.create_and_upload!(
+          io: StringIO.new((Base64.decode64(params[:image][2]))),
+          filename: params[:image][1],
+          content_type: params[:image][0],)
+      current_user.user_info.image.attach(blob)
+    end
   end
 
   private
