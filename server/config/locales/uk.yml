@@ -47,6 +47,7 @@ uk:
               too_short: занадто короткий
               invalid: має містити великі букви, цифри
             email:
+              taken: уже використовується
               invalid: має не вірний формат
             password_confirmation:
               too_short: не співпадає за довжиною

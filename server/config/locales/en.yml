@@ -51,6 +51,7 @@ en:
               too_short: is too short, minimum 8 symbols
               invalid: must include upper and lower case letters
             email:
+              taken: already taken
               invalid: has wrong format
             password_confirmation:
               too_short: is too short, minimum 8 symbols
