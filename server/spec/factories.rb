@@ -31,7 +31,6 @@ kQVWrJQGqJe9vNHojr5jzZI9YmWsuETXSdujeVeKQDtP7w+GLNaoLNb4KGElt0b0kjfWkkbizt4k7LjR
   factory :advert do
     title "Test"
     text "testtesttesttesttesttest"
-    category_id "359fcf95-6a37-4b68-b06d-56117bfe0434"
     after(:build) do |advert|
       blob = ActiveStorage::Blob.create_and_upload!(
         io: StringIO.new((Base64.decode64("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="))),

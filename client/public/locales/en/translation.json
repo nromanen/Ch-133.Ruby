@@ -21,7 +21,8 @@
     "firstName": "First name",
     "lastName": "Last name",
     "phone": "Phone",
-    "button": "Send"
+    "button": "Send",
+    "choose": "Сhoose"
   },
   "footer" : {
     "company": "Company",

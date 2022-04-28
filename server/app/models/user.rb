@@ -21,7 +21,7 @@ class User < ApplicationRecord
   delegate :name, to: :role, prefix: true
   has_one :user_info, dependent: :destroy
 
-  validates :email, presence: true, uniqueness: { uniqueness: true, message: I18n.t("taken") },
+  validates :email, presence: true, uniqueness: { uniqueness: true},
             format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/ }
   validates :password, length: { minimum: 8, maximum: 20 }, presence: true,
             format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/ }

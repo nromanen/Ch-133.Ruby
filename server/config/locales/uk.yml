@@ -53,6 +53,7 @@ uk:
               too_short: занадто короткий
               invalid: має містити великі букви, цифри
             email:
+              taken: уже використовується
               invalid: має не вірний формат
               taken: уже використовується
             password_confirmation:
