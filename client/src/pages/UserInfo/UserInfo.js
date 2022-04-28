@@ -68,7 +68,7 @@ const UserInfo = (props) => {
                 .catch(function (error) {
                     console.log('--------- error', error);
                     if (error.response.status === 422){
-                        setText(error.response.data.join('<br>'));
+                        setText(error.response.data.join('. \n'));
                         setMsgType('error')
                     }
                 }).finally(() => setDisabled(false));
