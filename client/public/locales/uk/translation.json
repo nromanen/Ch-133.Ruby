@@ -53,5 +53,16 @@
     "password": "Пароль",
     "passwordConfirmation": "Підтвердження паролю",
     "button": "Зареєструватись"
+  },
+  "resetPasswordEmail" : {
+    "head": "Надіслати лист для скидання паролю",
+    "email": "Адреса електроноої пошти",
+    "button": "Відправити"
+  },
+  "resetPassword" : {
+    "head": "Скинути пароль",
+    "password": "Пароль",
+    "passwordConfirmation": "Підтвердження паролю",
+    "button": "Відправити"
   }
 }

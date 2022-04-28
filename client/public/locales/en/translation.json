@@ -53,5 +53,16 @@
     "password": "Password",
     "passwordConfirmation": "Password confirmation",
     "button": "Sign Up"
+  },
+  "resetPasswordEmail" : {
+    "head": "Send reset password instructions",
+    "email": "Email",
+    "button": "Send"
+  },
+  "resetPassword" : {
+    "head": "Reset password",
+    "password": "Password",
+    "passwordConfirmation": "Password confirmation",
+    "button": "Send"
   }
 }
