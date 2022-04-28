@@ -6,7 +6,9 @@ RSpec.describe "AdvertsController", type: :request do
   include ControllerHelpers
 
   before(:all) do
-    @advert = create(:advert)
+    @user = create(:user)
+    @category = create (:category)
+    @advert = create(:advert, user_id: @user.id, category_id: @category.id)
   end
 
   before(:each) do
@@ -30,12 +32,10 @@ RSpec.describe "AdvertsController", type: :request do
     expect(response.body).to include("deleted")
   end
 
-  # it "image attaches" do
-  #   attach_64, params: {advert: {image: %w[image/png Test.png iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=]}}
-  # end
-
   after(:all) do
     @advert.destroy
+    @user.destroy
+    @category.destroy
   end
 end
 
