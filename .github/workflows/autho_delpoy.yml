@@ -7,7 +7,7 @@ jobs:
     name: RSpec
     runs-on: ubuntu-latest
     env:
-      RUBY_VERSION: '3.0.3'
+      RUBY_VERSION: '3.0'
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
@@ -24,7 +24,7 @@ jobs:
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1.103.0
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
       - name: Create env file
