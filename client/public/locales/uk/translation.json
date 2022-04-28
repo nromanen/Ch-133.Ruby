@@ -21,7 +21,8 @@
     "firstName": "Ім'я",
     "lastName": "Призвище",
     "phone": "Телефон",
-    "button": "Відправити"
+    "button": "Відправити",
+    "choose": "Вибрати"
   },
   "footer": {
     "company": "Компанія",
