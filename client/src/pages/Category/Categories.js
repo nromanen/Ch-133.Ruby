@@ -2,12 +2,12 @@ import React, {useEffect, useMemo, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import Cookies from 'universal-cookie';
 
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import './Categories.scss'
 import '../../consts.js'
 import {Dropdown, List, Pagination, Icon} from 'semantic-ui-react';
 import axios from "axios";
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
 import "../../i18n";
 import { useTranslation } from "react-i18next";
 import jwt from 'jwt-decode';

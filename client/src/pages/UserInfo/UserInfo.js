@@ -13,7 +13,10 @@ import jwt from 'jwt-decode';
 import { withTranslation } from 'react-i18next';
 import "../../i18n";
 import ImageUploader from "react-images-upload";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 const cookies = new Cookies();
+
 
 
 
@@ -34,6 +37,10 @@ const UserInfo = (props) => {
     const [disabled, setDisabled] = useState(false);
     const [text, setText] = useState(null);
     const [msgType, setMsgType] = useState('error');
+
+    const [subscribed, setSubscribed] = useState(null)
+    const [subscribedTitle, setTitleSubscribed] = useState("")
+    const [oppositeSubscribed, setOppositeTitleSubscribed] = useState("")
 
     const handleSubmit = useCallback((event, value) => {
         event.preventDefault();
@@ -107,7 +114,43 @@ const UserInfo = (props) => {
                     window.location = '/HomePage';
                 }
             })
+
+        const config = {
+            headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+        };
+        axios.get(`${window.baseUrl}subscribed`, config)
+            .then((response)=> {
+                if (response.data){
+                    setTitleSubscribed('Subscribe')
+                    setOppositeTitleSubscribed('Unsubscribe')
+                    setSubscribed(response.data)
+                }
+                else{
+                    setTitleSubscribed('Unsubscribed')
+                    setOppositeTitleSubscribed('Subscribe')
+                }
+            })
     }, [params.userId]);
+
+    const handleSubscribe = (e) => {
+        confirmAlert({
+            title: `${oppositeSubscribed}`,
+            message: `You sure you want to ${oppositeSubscribed}?`,
+            buttons: [ {label: "Yes", onClick: () => changeSubscribe()}, {label: "No"} ]
+        });
+    }
+
+    const changeSubscribe = (e) => {
+        axios.patch(`${window.baseUrl}subscribes`, {"subscribed": !subscribed},
+            {headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }})
+            .then((res) => {
+                alert("Success");
+                window.location.reload();
+            })
+            .catch((err) => {
+                alert(err.response.data.message);
+            });
+    }
 
     return (
         <div className={'user-info-page'}>
@@ -137,6 +180,10 @@ const UserInfo = (props) => {
                     maxFileSize={5242880}
                 />
                 { !!showBtnSend  ? <CustomButton disabled={disabled} type='submit'>Send</CustomButton> : null }
+                <p></p>
+                { !!showBtnSend  ? <CustomButton disabled={disabled} onClick={(e) => handleSubscribe(e)} type='submit'>{oppositeSubscribed}</CustomButton> : null }
+                <p> </p>
+                <p> </p>
 
             </form>
         </div>
