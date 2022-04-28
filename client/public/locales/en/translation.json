@@ -23,6 +23,19 @@
     "phone": "Phone",
     "button": "Send"
   },
+  "Advert": {
+    "head": "Create your advert!",
+    "title": "Title",
+    "text": "Text",
+    "button": "Create",
+    "learMore": "Learn more",
+    "edit": "Edit",
+    "categories": "Categories",
+    "choseImage": "Choose image",
+    "updateButton": "Update",
+    "updateHeader": "Edit your advert!",
+    "createButton": "Create an advert"
+  },
   "footer" : {
     "company": "Company",
     "description": "Softserve education system"

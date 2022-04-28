@@ -23,6 +23,19 @@
     "phone": "Телефон",
     "button": "Відправити"
   },
+  "Advert": {
+    "head": "Створіть своє оголошення!",
+    "title": "Назва",
+    "text": "Текст",
+    "button": "Створити",
+    "learMore": "Ще",
+    "edit": "Редагувати",
+    "categories": "Категорії",
+    "choseImage": "Оберіть картинку",
+    "updateButton": "Оновити",
+    "updateHeader": "Відредагуйте своє оголошення!",
+    "createButton": "Створити оголошення"
+  },
   "footer": {
     "company": "Компанія",
     "description": "Softserve навчальна програма"
