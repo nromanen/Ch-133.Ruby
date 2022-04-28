@@ -46,6 +46,14 @@ class User < ApplicationRecord
     { "email" => self.email, "id" => self.id, "role" => self.role_name }
   end
 
+  def avatar
+    if user_info.nil? || user_info.image_url.nil?
+      self.nick_name
+    else
+      user_info.image_url
+    end
+  end
+
   def change_role(role_name)
     role = Role.find_by(name: role_name)
     if admin_check
@@ -53,14 +61,6 @@ class User < ApplicationRecord
       self.role = role
     else
       false
-    end
-  end
-
-  def avatar
-    if user_info.nil? || user_info.image_url.nil?
-      self.nick_name
-    else
-      user_info.image_url
     end
   end
 

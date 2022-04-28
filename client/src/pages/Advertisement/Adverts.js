@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import PostCard from "../../components/Post/PostV2";
+import PostCard from "../../components/Post/Post";
 import axios from "axios";
 import {baseAdvertUrl} from "../../consts";
 import { StyledEngineProvider } from '@mui/material/styles';
 import { Grid } from '@material-ui/core'
 import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from '@mui/material/CircularProgress';
+import "../../i18n";
+import Cookies from "universal-cookie";
 
+const cookies = new Cookies();
 const useStyles = makeStyles({
     gridContainer: {
         paddingLeft: "40px",
@@ -19,12 +22,20 @@ const Adverts = (props) => {
     const [page, setPage] = useState(1);
     const [fetching, setFetching] = useState(true);
     const [hasMore, setHasMore] = useState(true);
+    const language = cookies.get('i18next');
+    const token = cookies.get('user-info');
+    const config = {
+        headers:{
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            'X-lang': language
+        }
+    };
 
 
     useEffect( ()=> {
         if (fetching && hasMore) {
-            console.log("fetching")
-             axios.get(`${baseAdvertUrl}` + `?page=${page}&per_page=${4}`).then(function (response) {
+             axios.get(`${baseAdvertUrl}` + `?page=${page}&per_page=${4}`, config).then(function (response) {
                 setAdv([...advertisements, ...response.data]);
                 setPage(prevState => prevState + 1);
                 setHasMore(response.data.length > 0);

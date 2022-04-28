@@ -22,9 +22,13 @@ class AdvertsController < ApplicationController
     response = []
     @adverts = paginate Advert.all.order("created_at DESC")
     @adverts.each do |advert|
-      response << { title: advert.title, body: advert.text, imgUrl: advert.image_url,
-                    author: advert.user.nick_name, id: advert.id, category_name: Category.find(advert.category_id).name,
-                    author_id: advert.user.id,  likes: advert.likes.length, liked: advert.liked? }
+      response << { title: advert.title,
+        body: advert.text,
+        imgUrl: advert.image_url, author: advert.user.nick_name,
+        id: advert.id, category_name: Category.find(advert.category_id).name,
+        author_id: advert.user.id,  likes: advert.likes.length,
+        liked: liked(advert)
+        }
     end
     render json: response
   end
@@ -59,6 +63,14 @@ class AdvertsController < ApplicationController
   private
     def advert_params
       params.require(:advert).permit(:title, :text, :category_id, :image, :page, :per_page)
+    end
+
+    def liked(advert)
+      unless current_user.blank?
+        !!advert.likes.find { |like| like.user_id == current_user.id }
+      else
+        false
+      end
     end
 
     def attach_64
