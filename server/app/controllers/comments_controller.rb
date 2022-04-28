@@ -8,8 +8,9 @@ class CommentsController < ApplicationController
   def index
     if params[:advert_id].present?
       @comments = Comment.find_by(advert_id: params[:advert_id])
+      @comments = @comments
       authorize @comments
-      render json: @comments, serializer: CommentSerializer
+      render json: { comments: @comments, serializer: CommentSerializer }
     end
   end
 
@@ -22,7 +23,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build(comment_params)
     authorize @comment
     if @comment.save
-      render json: { message: I18n.t("created", name: I18n.t("comment")) }, status: :created
+      render json: { message: I18n.t("created", name: I18n.t("comment")), comment: @comment.as_json }, status: :created
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
@@ -43,11 +44,11 @@ class CommentsController < ApplicationController
   end
 
   private
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 
-    def comment_params
-      params.permit(:text, :page, :advert_id, :user_id)
-    end
+  def comment_params
+    params.require(:comment).permit(:text, :page, :per_page, :advert_id)
+  end
 end
