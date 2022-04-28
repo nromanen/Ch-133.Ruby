@@ -4,7 +4,11 @@
     "contact": "Contact us",
     "language": "Language",
     "info": "User info",
-    "logout": "Logout"
+    "logout": "Logout",
+    "category": "Categories",
+    "signin": "Login",
+    "signup": "Create account",
+    "reset": "Reset password"
   },
   "singIn" : {
     "head": "Sing In",
@@ -42,11 +46,11 @@
     "buttonText": "ADVERTS",
     "buttonText0": "GO"
   },
-  "singUp" : {
+  "signUp" : {
     "head": "Sign Up",
-    "nick": "nick",
-    "email": "email",
-    "password": "password",
+    "nick": "Nick",
+    "email": "Email",
+    "password": "Password",
     "passwordConfirmation": "Password confirmation",
     "button": "Sign Up"
   },
@@ -62,5 +66,16 @@
     "no": "No",
     "sure?": "Are you sure to do this?",
     "successDelete": "Deleted successfully!"
+  },
+  "resetPasswordEmail" : {
+    "head": "Send reset password instructions",
+    "email": "Email",
+    "button": "Send"
+  },
+  "resetPassword" : {
+    "head": "Reset password",
+    "password": "Password",
+    "passwordConfirmation": "Password confirmation",
+    "button": "Send"
   }
 }

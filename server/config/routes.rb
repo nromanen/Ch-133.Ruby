@@ -6,25 +6,25 @@ Rails.application.routes.draw do
                sessions: "users/sessions",
                registrations: "users/registrations",
                confirmations: "users/confirmations",
-               unlocks: "users/unlocks"
+               unlocks: "users/unlocks",
+               passwords: "users/passwords"
              }
 
   devise_scope :user do
-    post "/send_email" => "passwords#create"
-    put "users/password/edit(.:format)" => "passwords#update"
+    post "send_email" => "users/passwords#create"
+    patch "users/password/:reset_password_token" => "users/passwords#update"
   end
-
-  get "/all_categories", to: "categories#all"
 
   resources :users do
     resource :user_infos
   end
 
-  resources :comments
   resources :adverts do
+    resources :comments
     resources :likes, only: [:index, :create, :destroy]
   end
-  resources :categories
+
+  resources :categories, :comments, :roles
 
   patch "/subscribes", to: "subscribes#update"
   get "/subscribed", to: "subscribes#subscribed?"

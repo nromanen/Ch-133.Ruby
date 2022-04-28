@@ -73,6 +73,7 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    api-pagination (5.0.0)
     ast (2.4.2)
     aws_cf_signer (0.1.3)
     bcrypt (3.1.17)
@@ -138,6 +139,8 @@ GEM
     irb (1.4.1)
       reline (>= 0.3.0)
     jsonapi-renderer (0.2.2)
+    jsonapi-serializer (2.2.0)
+      activesupport (>= 4.2)
     jwt (2.3.0)
     loofah (2.15.0)
       crass (~> 1.0.2)
@@ -317,6 +320,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   activestorage-validator
+  api-pagination
   bootsnap
   cloudinary
   debug
@@ -324,8 +328,8 @@ DEPENDENCIES
   devise-jwt (~> 0.9.0)
   dotenv-rails
   factory_bot_rails (~> 6.2)
-  fast_jsonapi
   i18n (~> 1.10)
+  jsonapi-serializer
   oj (~> 3.3, >= 3.3.5)
   pg (= 1.3.0.rc3)
   puma (~> 5.0)

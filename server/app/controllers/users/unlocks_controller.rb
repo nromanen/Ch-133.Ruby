@@ -6,7 +6,7 @@ module Users
       self.resource = resource_class.unlock_access_by_token(params[:unlock_token])
       yield resource if block_given?
 
-      respond_with_navigational(resource) { redirect_to after_unlock_path_for(resource) }
+      respond_with_navigational(resource) { redirect_to after_unlock_path_for(resource), allow_other_host: true }
     end
 
     protected
