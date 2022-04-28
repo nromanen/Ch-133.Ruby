@@ -35,8 +35,8 @@
           null,
           1,
           1,
-          19,
-          19,
+          22,
+          22,
           null,
           null,
           1,
@@ -182,7 +182,7 @@
           1,
           null,
           null,
-          5,
+          9,
           null,
           null,
           1,
@@ -192,6 +192,89 @@
           null,
           1,
           0,
+          null,
+          null
+        ]
+      },
+      "/home/runner/work/Ch-133.Ruby/Ch-133.Ruby/server/app/controllers/users/confirmations_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          2,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/runner/work/Ch-133.Ruby/Ch-133.Ruby/server/app/controllers/users/registrations_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          2,
+          2,
+          null,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          2,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/runner/work/Ch-133.Ruby/Ch-133.Ruby/server/app/controllers/users/unlocks_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          2,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
           null,
           null
         ]
@@ -569,72 +652,6 @@
         "branches": {
         }
       },
-      "/home/runner/work/Ch-133.Ruby/Ch-133.Ruby/server/app/controllers/users/confirmations_controller.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/runner/work/Ch-133.Ruby/Ch-133.Ruby/server/app/controllers/users/registrations_controller.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
       "/home/runner/work/Ch-133.Ruby/Ch-133.Ruby/server/app/controllers/users/sessions_controller.rb": {
         "lines": [
           null,
@@ -702,29 +719,6 @@
           0,
           0,
           0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/runner/work/Ch-133.Ruby/Ch-133.Ruby/server/app/controllers/users/unlocks_controller.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
           0,
           0,
           0,
@@ -1106,6 +1100,6 @@
         }
       }
     },
-    "timestamp": 1651097402
+    "timestamp": 1651128360
   }
 }
