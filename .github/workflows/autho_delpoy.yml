@@ -7,7 +7,7 @@ jobs:
     name: RSpec
     runs-on: ubuntu-latest
     env:
-      RUBY_VERSION: '3.0'
+      RUBY_VERSION: 3.0.3
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
