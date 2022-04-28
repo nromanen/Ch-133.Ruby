@@ -10,7 +10,7 @@ const Advert = (resp) => {
             <div className={'post-text'}>
                 <h4>{resp.text}</h4>
                 <div className={'post-image'}>
-                    <img src={resp.image_url} alt="im"></img>
+                    <img src={resp.image_url} />
                 </div>
             </div>
         </div>

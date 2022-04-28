@@ -73,6 +73,7 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    api-pagination (5.0.0)
     ast (2.4.2)
     aws_cf_signer (0.1.3)
     bcrypt (3.1.17)
@@ -118,8 +119,11 @@ GEM
     dry-core (0.7.1)
       concurrent-ruby (~> 1.0)
     erubi (1.10.0)
-    fast_jsonapi (1.5)
-      activesupport (>= 4.2)
+    factory_bot (4.11.1)
+      activesupport (>= 3.0.0)
+    factory_bot_rails (4.11.1)
+      factory_bot (~> 4.11.1)
+      railties (>= 3.0.0)
     ffi (1.15.5-x64-mingw32)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -133,6 +137,8 @@ GEM
     irb (1.4.1)
       reline (>= 0.3.0)
     jsonapi-renderer (0.2.2)
+    jsonapi-serializer (2.2.0)
+      activesupport (>= 4.2)
     jwt (2.3.0)
     loofah (2.15.0)
       crass (~> 1.0.2)
@@ -203,9 +209,6 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
-    rails-i18n (7.0.3)
-      i18n (>= 0.7, < 2)
-      railties (>= 6.0.0, < 8)
     railties (7.0.2.3)
       actionpack (= 7.0.2.3)
       activesupport (= 7.0.2.3)
@@ -311,24 +314,26 @@ GEM
 
 PLATFORMS
   x64-mingw32
+
 DEPENDENCIES
   active_model_serializers
   activestorage-validator
+  api-pagination
   bootsnap
   cloudinary
   debug
   devise (~> 4.8, >= 4.8.1)
   devise-jwt (~> 0.9.0)
   dotenv-rails
-  fast_jsonapi
+  factory_bot_rails
   i18n (~> 1.10)
+  jsonapi-serializer
   oj (~> 3.3, >= 3.3.5)
   pg (= 1.3.0.rc3)
   puma (~> 5.0)
   pundit
   rack-cors
   rails (~> 7.0.1)
-  rails-i18n (~> 7.0, >= 7.0.1)
   rspec-rails (~> 5.0, >= 5.0.1)
   rubocop
   rubocop-rails (~> 2.13, >= 2.13.2)
@@ -341,5 +346,5 @@ DEPENDENCIES
 RUBY VERSION
    ruby 3.0.3p157
 
-BUNDLED WITH  
+BUNDLED WITH
    2.3.5

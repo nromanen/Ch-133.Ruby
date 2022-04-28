@@ -2,18 +2,47 @@ uk:
   created: "%{name} було успішно створено"
   updated: "%{name} було успішно перезаписано"
   wronglogin: "Неправильний Email чи пароль"
+  liked: "Вам сподобалось!"
+  unliked: "Вам не сподобалось!"
   unconfirmed: "Будь ласка, підтвердіть вашу пошту"
+  noauth: "Ви не авторизовані"
   infoNotExist: "Інфо не існує."
   userNotExist: "Користувача не існує."
   success: "Дія пройшла успішно"
+  rolechange: "Роль була змінена"
+  wrongrole: "Неправильний дозвіл"
+  lastadmin: "Не можна змінити роль останнього адміна"
   wrongway: "Хмм, щось пішло не так"
-  phoneNotValid: "не вірний формат телефону."
-  nameNotValid: "допускаються тильки літери."
-  userInfoValidError: "У Вас немає прав, або інфо не існує."
   category: "Категорію"
   comment: "Коментар"
+  advert: "Оголошення"
+  title: "Назва"
+  text: "Текст"
+  imageNotValid: "Неправильний формат фото"
+  imageTooLarge: "Картинка занадто велика"
+  deleted: "%{name} було успішно видалено"
+  titleNotUnique": "Ця назва вже зайнята"
   signed_up_and_unconfirmed: "Ви отримаєте листа з вказівками щодо підтвердження облікового запису протягом декількох хвилин."
+  userInfoValidError: "У Вас немає прав, або інфо не існує."
+  reset_password_success: "Пароль успішно скинуто"
+  reset_password_failed: "Не вдалось скинути пароль"
+  reset_password_email_send: "Лист для скидання паролю надіслано на пошту"
+  reset_password_email_not_send: "Не вдалось надіслати лист"
   activerecord:
+    models:
+      user_info: info
+      advert: advert
+    attributes:
+      user_info:
+        first_name: "Ім'я"
+        last_name: "Призвище"
+        phone: "Телефон"
+        image: "Картинка"
+      advert:
+        title: "Назва"
+        text: "Текст"
+        category_id: "Категорія"
+        image: "Картинка"
     errors:
       models:
         user:
@@ -25,6 +54,30 @@ uk:
               invalid: має містити великі букви, цифри
             email:
               invalid: має не вірний формат
+              taken: уже використовується
             password_confirmation:
               too_short: не співпадає за довжиною
+              invalid: має не вірний формат
+        advert:
+          attributes:
+            title:
+              taken: уже використовується
+            text:
+              too_short: занадто короткий
+            category_id:
+              blank: не має бути пустою
+            image:
+              content_type: має не вірний формат
+        user_info:
+          attributes:
+            image:
+              content_type: має не вірний формат
+            phone:
+              too_short: занадто короткий
+              invalid: має не вірний формат
+            first_name:
+              too_short: занадто коротке
+              invalid: має не вірний формат
+            last_name:
+              too_short: занадто коротке
               invalid: має не вірний формат

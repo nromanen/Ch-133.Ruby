@@ -7,7 +7,7 @@ export default function ActionAlerts(props) {
   React.useEffect(() => {
     setOpen(true)
   }, []);
-  
+
   if(open) {
     return (
       <Alert severity={props.type} onClose={() => {setOpen(false)}}>

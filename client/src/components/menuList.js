@@ -9,6 +9,7 @@ import Cookies from 'universal-cookie';
 import LoggedContext from '../context';
 import { useContext } from 'react';
 import '../consts.js';
+import './menuList.scss';
 import { useTranslation } from "react-i18next";
 
 export default function MenuPopupState() {
@@ -62,7 +63,7 @@ export default function MenuPopupState() {
           <PopupState variant="popover" popupId="demo-popup-menu">
             {(popupState) => (
               <React.Fragment>
-                <Button variant="contained" {...bindTrigger(popupState)} style={{
+                <Button className={"log_btn"} variant="contained" {...bindTrigger(popupState)} style={{
                   backgroundColor: '#5ba19a',
                   color: '#fffff'
                 }}>
@@ -70,6 +71,7 @@ export default function MenuPopupState() {
                 </Button>
                 <Menu {...bindMenu(popupState)}>
                   <MenuItem onClick={goInfo}>{t("header.info")}</MenuItem>
+                  <MenuItem onClick={()=>navigate("/categories")}>{t("header.category")}</MenuItem>
                   <MenuItem onClick={logout}>{t("header.logout")}</MenuItem>
                 </Menu>
               </React.Fragment>
@@ -79,13 +81,25 @@ export default function MenuPopupState() {
       );
     } else {
       return(
-        <Button variant="contained" style={{
-          backgroundColor: '#5ba19a',
-          color: '#fffff'
-        }}
-            onClick={()=>navigate("/sign_in")}>
-          {email}
-        </Button>
+        <>
+          <PopupState variant="popover" popupId="demo-popup-menu">
+            {(popupState) => (
+              <React.Fragment>
+                <Button className={"log_btn"} variant="contained" {...bindTrigger(popupState)} style={{
+                  backgroundColor: '#5ba19a',
+                  color: '#fffff'
+                }}>
+                  {email}
+                </Button>
+                <Menu {...bindMenu(popupState)}>
+                  <MenuItem onClick={()=>navigate("/sign_in")}>{t("header.signin")}</MenuItem>
+                  <MenuItem onClick={()=>navigate("/sign_up")}>{t("header.signup")}</MenuItem>
+                  <MenuItem onClick={()=>navigate("/send_email")}>{t("header.reset")}</MenuItem>
+                </Menu>
+              </React.Fragment>
+            )}
+          </PopupState>
+        </>
       );
     }
 }

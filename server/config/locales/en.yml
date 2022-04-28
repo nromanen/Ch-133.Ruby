@@ -2,19 +2,51 @@ en:
   created: "%{name} was successfully created"
   updated: "%{name} was successfully updated"
   wronglogin: "Wrong Email or Password"
+  liked: "Was liked!"
+  unliked: "Was unliked!"
   unconfirmed: "Please, confirm your email"
+  noauth: "You not authorized"
   infoNotExist: "Info doesn't exist. Create it."
   userNotExist: "User doesn't exist."
   success: "The action was successful"
+  rolechange: "Role was changed"
+  wrongrole: "Wrong permission"
+  lastadmin: "Can not remove the last admin"
   wrongway: "Hmm, something went wrong"
   phoneNotValid: "does not match format requirements"
   nameNotValid: "only allows letters"
-  userInfoValidError: "U have no rights or info doesn't exist"
+  lastNameNotValid: "only allows letters"
+  success: "The action was successful"
+  wrongway: "Hmm, something went wrong"
   category: "Category"
   comment: "Comment"
   signed_up_and_unconfirmed: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
+  infoNotExist: "Info doesn't exist. Create it."
+  userNotExist: "User doesn't exist."
+  userInfoValidError: "U have no rights or info doesn't exist"
+  reset_password_success: "Password was successfully reset"
+  reset_password_failed: "Password reset failed"
+  reset_password_email_send: "Reset password instructions send"
+  reset_password_email_not_send: "Can't sent reset password instructions"
   activerecord:
+    models:
+      user_info: user_info
+    attributes:
+      user_info:
+        first_name: "First name"
+        last_name: "Last name"
+        phone: "Phone"
+      advert:
+        title: "Title"
+        text: "Text"
+        category_id: "Category"
+        image: "Image"
     errors:
+      format: "%{attribute} %{message}"
+      messages:
+        invalid:
+          phone: "does not match format requirements."
+          letter: "only allows letters."
       models:
         user:
           attributes:
@@ -25,6 +57,37 @@ en:
               invalid: must include upper and lower case letters
             email:
               invalid: has wrong format
+              taken: already taken
             password_confirmation:
               too_short: is too short, minimum 8 symbols
               invalid: doesn't match password
+        advert:
+          attributes:
+            title:
+              taken: already taken
+            text:
+              too_short: is too short
+            category_id:
+              blank: must be chosen
+            image:
+              content_type: has wrong format
+        user_info:
+          attributes:
+            image:
+              content_type: has wrong format
+            phone:
+              too_short: is too short
+              invalid: has wrong format
+            first_name:
+              too_short: is too short
+              invalid: has wrong format
+            last_name:
+              too_short: is too short
+              invalid: has wrong format
+  advert: "advert"
+  title: "title"
+  text: "text"
+  imageNotValid: "Image is not a valid format"
+  imageTooLarge: "Image is too large"
+  deleted: "%{name} was successfully deleted"
+  titleNotUnique": "Title has already been taken"

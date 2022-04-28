@@ -4,12 +4,23 @@
     "contact": "Contact us",
     "language": "Language",
     "info": "User info",
-    "logout": "Logout"
+    "logout": "Logout",
+    "category": "Categories",
+    "signin": "Login",
+    "signup": "Create account",
+    "reset": "Reset password"
   },
   "singIn" : {
     "head": "Sing In",
     "email": "email",
     "password": "password",
+    "button": "Send"
+  },
+  "userInfo" : {
+    "head": "User info",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "phone": "Phone",
     "button": "Send"
   },
   "footer" : {
@@ -42,5 +53,16 @@
     "password": "Password",
     "passwordConfirmation": "Password confirmation",
     "button": "Sign Up"
+  },
+  "resetPasswordEmail" : {
+    "head": "Send reset password instructions",
+    "email": "Email",
+    "button": "Send"
+  },
+  "resetPassword" : {
+    "head": "Reset password",
+    "password": "Password",
+    "passwordConfirmation": "Password confirmation",
+    "button": "Send"
   }
 }
