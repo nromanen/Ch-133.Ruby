@@ -2,8 +2,8 @@ require "rails_helper"
 
 describe Category, type: :model do
   subject do
-    FactoryBot.create(:category, name: 'Sports')
-    FactoryBot.create(:category, name: 'Cars')
+    FactoryBot.create(:category, name: 'Testww')
+    FactoryBot.create(:category, name: 'Testqq')
   end
 
   it "Has valid name" do

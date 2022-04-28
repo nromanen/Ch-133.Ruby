@@ -7,19 +7,19 @@ describe 'Categories', type: :request do
 
     before do
       @role = Role.where(name: "Admin").first
-      @user = FactoryBot.create(:user, email: "admin@rspec.fctrbt", nick_name: "rspecadmin", confirmed_at: 1.day.ago, role: @role)
+      @user = FactoryBot.create(:user, email: "admin@rspec.fctrbt", nick_name: "rspaecadmin", confirmed_at: 1.day.ago, role: @role)
       login_as @user
     end
 
     it 'create new category' do
-      post '/categories', params: { category: { name: 'Test' } }
+      post '/categories', params: { category: { name: 'ASDASDASD' } }
       expect(response).to have_http_status(:created)
     end
 
-    let!(:category) { FactoryBot.create(:category, name: 'Cars') }
+    let!(:category) { FactoryBot.create(:category, name: 'KLJLKJKLJL') }
 
     it 'update category' do
-      patch "/categories/#{category.id}", params: { category: { name: 'Test' } }
+      patch "/categories/#{category.id}", params: { category: { name: 'ASDASDASD' } }
       expect(response).to have_http_status(:ok)
     end
 
@@ -49,35 +49,30 @@ describe 'Categories', type: :request do
 
     before(:each) do
       @role = Role.where(name: "User").first
-      @user = FactoryBot.create(:user, email: "user@rspec.fctrbt", nick_name: "user", confirmed_at: 1.day.ago, role: @role)
+      @user = FactoryBot.create(:user, email: "usesr@rspec.fctrbt", nick_name: "usASDASDASDer", confirmed_at: 1.day.ago, role: @role)
       login_as @user
     end
 
     it 'not allowed to create' do
-      post '/categories', params: { category: { name: 'Test' } }
+      post '/categories', params: { category: { name: 'ASDASDASDawdwa' } }
       expect(response).to have_http_status(:forbidden)
     end
 
     it 'return all categories' do
-      FactoryBot.create(:category, name: 'Sports')
+      FactoryBot.create(:category, name: 'ASDASDASDa')
       get '/categories'
       expect(response).to have_http_status(:ok)
-      expect(JSON.parse(response.body).size).to eq(1)
+      expect(JSON.parse(response.body).size).to eq(2)
     end
 
     it 'return single category' do
-      category = FactoryBot.create(:category, name: 'Sports')
+      category = FactoryBot.create(:category, name: 'ASDASDASDa')
       get "/categories/#{category.id}"
       expect(response).to have_http_status(:ok)
     end
 
-    it 'return custom all categories get' do
-      get '/all_categories'
-      expect(response).to have_http_status(:ok)
-    end
-
     it 'return first page of categories' do
-      FactoryBot.create(:category, name: 'Sports')
+      FactoryBot.create(:category, name: 'ASDASDASDasww')
       get '/categories', params: {page: 1}
       expect(response).to have_http_status(:ok)
       expect(JSON.parse(response.body).size).to eq(2)
