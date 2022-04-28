@@ -24,5 +24,5 @@ Rails.application.routes.draw do
     resources :likes, only: [:index, :create, :destroy]
   end
 
-  resources :categories, :comments
+  resources :categories, :comments, :roles
 end

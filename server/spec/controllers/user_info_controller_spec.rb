@@ -4,7 +4,7 @@ RSpec.describe UserInfosController, type: :request  do
   include Warden::Test::Helpers
 
   describe "show action" do
-    it "renders show template if user exist" do
+    it "renders show template if user exist", error: true do
       @user = create(:user)
       @info = create(:user_info, user_id: @user.id)
       get "/users/#{@user.id}/user_infos"
@@ -57,7 +57,7 @@ RSpec.describe UserInfosController, type: :request  do
 
     end
 
-    it "update user info if it exist" do
+    it "update user info if it exist", error: true do
       @user = create(:user)
       @info = create(:user_info, user_id: @user.id)
       login_as(@user)
@@ -171,7 +171,7 @@ DPHTUIxI3ol9O7ELBuCMo1JLyf5ImtEYmLjZt4p9J+75MgbjGpYcECSBF3RjGAMR0uoyNN23giCQAMYo
       expect(response).to have_http_status(:unprocessable_entity)
     end
 
-    it "not valid2" do
+    it "not valid2", error: true do
       @user = create(:user)
       @info = create(:user_info, user_id: @user.id)
       login_as(@user)

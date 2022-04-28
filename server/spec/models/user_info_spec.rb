@@ -32,7 +32,7 @@ RSpec.describe UserInfo, type: :model do
     expect(subject).to_not be_valid
   end
 
-  it "if image blank" do
+  it "if image blank", error: true do
     expect(@info.image_url).to_not be_nil
   end
 
