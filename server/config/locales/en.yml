@@ -36,6 +36,11 @@ en:
         first_name: "First name"
         last_name: "Last name"
         phone: "Phone"
+      advert:
+        title: "Title"
+        text: "Text"
+        category_id: "Category"
+        image: "Image"
     errors:
       format: "%{attribute} %{message}"
       messages:
@@ -55,6 +60,16 @@ en:
             password_confirmation:
               too_short: is too short, minimum 8 symbols
               invalid: doesn't match password
+        advert:
+          attributes:
+            title:
+              taken: already taken
+            text:
+              too_short: is too short
+            category_id:
+              blank: must be chosen
+            image:
+              content_type: has wrong format
   advert: "advert"
   title: "title"
   text: "text"
