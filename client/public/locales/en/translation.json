@@ -21,7 +21,21 @@
     "firstName": "First name",
     "lastName": "Last name",
     "phone": "Phone",
-    "button": "Send"
+    "button": "Send",
+    "choose": "Сhoose"
+  },
+  "Advert": {
+    "head": "Create your advert!",
+    "title": "Title",
+    "text": "Text",
+    "button": "Create",
+    "learMore": "Learn more",
+    "edit": "Edit",
+    "categories": "Categories",
+    "choseImage": "Choose image",
+    "updateButton": "Update",
+    "updateHeader": "Edit your advert!",
+    "createButton": "Create an advert"
   },
   "footer" : {
     "company": "Company",

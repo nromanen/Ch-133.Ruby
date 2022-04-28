@@ -9,6 +9,7 @@ import Cookies from 'universal-cookie';
 import LoggedContext from '../context';
 import { useContext } from 'react';
 import '../consts.js';
+import './menuList.scss';
 import { useTranslation } from "react-i18next";
 
 export default function MenuPopupState() {
@@ -62,7 +63,7 @@ export default function MenuPopupState() {
           <PopupState variant="popover" popupId="demo-popup-menu">
             {(popupState) => (
               <React.Fragment>
-                <Button variant="contained" {...bindTrigger(popupState)} style={{
+                <Button className={"log_btn"} variant="contained" {...bindTrigger(popupState)} style={{
                   backgroundColor: '#5ba19a',
                   color: '#fffff'
                 }}>
@@ -84,7 +85,7 @@ export default function MenuPopupState() {
           <PopupState variant="popover" popupId="demo-popup-menu">
             {(popupState) => (
               <React.Fragment>
-                <Button variant="contained" {...bindTrigger(popupState)} style={{
+                <Button className={"log_btn"} variant="contained" {...bindTrigger(popupState)} style={{
                   backgroundColor: '#5ba19a',
                   color: '#fffff'
                 }}>

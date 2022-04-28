@@ -21,7 +21,21 @@
     "firstName": "Ім'я",
     "lastName": "Призвище",
     "phone": "Телефон",
-    "button": "Відправити"
+    "button": "Відправити",
+    "choose": "Вибрати"
+  },
+  "Advert": {
+    "head": "Створіть своє оголошення!",
+    "title": "Назва",
+    "text": "Текст",
+    "button": "Створити",
+    "learMore": "Ще",
+    "edit": "Редагувати",
+    "categories": "Категорії",
+    "choseImage": "Оберіть картинку",
+    "updateButton": "Оновити",
+    "updateHeader": "Відредагуйте своє оголошення!",
+    "createButton": "Створити оголошення"
   },
   "footer": {
     "company": "Компанія",

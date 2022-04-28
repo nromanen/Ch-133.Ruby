@@ -56,7 +56,7 @@ const UserInfo = (props) => {
             "phone": phone,
             "image": image
         };
-        console.log('image1 ------', image);
+
         setDisabled(true);
         if (token_id === params.userId){
             axios.put(`${baseUrlUsers}/${params.userId}/user_infos`,
@@ -64,7 +64,6 @@ const UserInfo = (props) => {
                 config
             )
                 .then(function (response) {
-                    console.log('--------- response', response);
                     setText('User info was updated.');
                     setFirstName(response.data.info.data.attributes.first_name);
                     setLastName(response.data.info.data.attributes.last_name);
@@ -73,9 +72,8 @@ const UserInfo = (props) => {
                     setMsgType('success')
                 })
                 .catch(function (error) {
-                    console.log('--------- error', error);
                     if (error.response.status === 422){
-                        setText(error.response.data.join('<br>'));
+                        setText(error.response.data.join('. \n'));
                         setMsgType('error')
                     }
                 }).finally(() => setDisabled(false));
@@ -90,7 +88,7 @@ const UserInfo = (props) => {
             const name = parts[1].split('=')[1];
             const data = parts[2].split(',')[1];
             setImage([mime, name, data]);
-            console.log("image --------------", image)
+
         } catch (error) {
             console.log('error in upload', error);}
     };
@@ -175,12 +173,12 @@ const UserInfo = (props) => {
                     onChange={onImage}
                     withIcon={false}
                     withPreview={true}
-                    buttonText="Choose images"
+                    buttonText={t("userInfo.choose")}
                     imgExtension={[".jpg", ".gif", ".png", ".gif"]}
                     maxFileSize={5242880}
                 />
-                { !!showBtnSend  ? <CustomButton disabled={disabled} type='submit'>Send</CustomButton> : null }
-                <p></p>
+                { !!showBtnSend  ? <CustomButton disabled={disabled} type='submit'>{t("userInfo.button")}</CustomButton> : null }
+                <p> </p>
                 { !!showBtnSend  ? <CustomButton disabled={disabled} onClick={(e) => handleSubscribe(e)} type='submit'>{oppositeSubscribed}</CustomButton> : null }
                 <p> </p>
                 <p> </p>

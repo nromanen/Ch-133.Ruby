@@ -17,6 +17,7 @@ import CreateComment from "../../pages/Advertisement/ShowAdvertisement/Comment/C
 import ResetPasswordEmail from "../../pages/ResetPassword/ResetPasswordEmail";
 import ResetPassword from "../../pages/ResetPassword/ResetPassword";
 import ChangeRole from "../../pages/Admin/ChangeRole/ChangeRole";
+import UpdateAdvertisement from "../../pages/Advertisement/UpdateAdvertisement"
 
 const CustomRoutes = () => {
   return (

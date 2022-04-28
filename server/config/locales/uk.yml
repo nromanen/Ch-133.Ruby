@@ -31,11 +31,18 @@ uk:
   activerecord:
     models:
       user_info: info
+      advert: advert
     attributes:
       user_info:
         first_name: "Ім'я"
         last_name: "Призвище"
         phone: "Телефон"
+        image: "Картинка"
+      advert:
+        title: "Назва"
+        text: "Текст"
+        category_id: "Категорія"
+        image: "Картинка"
     errors:
       models:
         user:
@@ -46,7 +53,32 @@ uk:
               too_short: занадто короткий
               invalid: має містити великі букви, цифри
             email:
+              taken: уже використовується
               invalid: має не вірний формат
+              taken: уже використовується
             password_confirmation:
               too_short: не співпадає за довжиною
+              invalid: має не вірний формат
+        advert:
+          attributes:
+            title:
+              taken: уже використовується
+            text:
+              too_short: занадто короткий
+            category_id:
+              blank: не має бути пустою
+            image:
+              content_type: має не вірний формат
+        user_info:
+          attributes:
+            image:
+              content_type: має не вірний формат
+            phone:
+              too_short: занадто короткий
+              invalid: має не вірний формат
+            first_name:
+              too_short: занадто коротке
+              invalid: має не вірний формат
+            last_name:
+              too_short: занадто коротке
               invalid: має не вірний формат
