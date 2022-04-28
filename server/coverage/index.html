@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2022-04-28T11:37:45+03:00">2022-04-28T11:37:45+03:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2022-04-28T11:44:34+03:00">2022-04-28T11:44:34+03:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,7 +23,7 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="red">
-  17.36%
+  17.43%
 </span>
 
      </span>
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>743</b> relevant lines,
+    <b>740</b> relevant lines,
     <span class="green"><b>129</b> lines covered</span> and
-    <span class="red"><b>614</b> lines missed. </span>
+    <span class="red"><b>611</b> lines missed. </span>
     (<span class="red">
-  17.36%
+  17.43%
 </span>
 )
   </div>
@@ -172,10 +172,10 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#1fd29a7904403cd534bdcb53dbe752395d20fcb2" class="src_link" title="app/controllers/user_infos_controller.rb">app/controllers/user_infos_controller.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
-            <td class="cell--number">67</td>
-            <td class="cell--number">61</td>
+            <td class="cell--number">65</td>
+            <td class="cell--number">58</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">61</td>
+            <td class="cell--number">58</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -500,7 +500,7 @@
     <span class="group_name">Controllers</span>
     (<span class="covered_percent">
       <span class="red">
-  7.89%
+  7.94%
 </span>
 
      </span>
@@ -520,11 +520,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>469</b> relevant lines,
+    <b>466</b> relevant lines,
     <span class="green"><b>37</b> lines covered</span> and
-    <span class="red"><b>432</b> lines missed. </span>
+    <span class="red"><b>429</b> lines missed. </span>
     (<span class="red">
-  7.89%
+  7.94%
 </span>
 )
   </div>
@@ -627,10 +627,10 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#1fd29a7904403cd534bdcb53dbe752395d20fcb2" class="src_link" title="app/controllers/user_infos_controller.rb">app/controllers/user_infos_controller.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
-            <td class="cell--number">67</td>
-            <td class="cell--number">61</td>
+            <td class="cell--number">65</td>
+            <td class="cell--number">58</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">61</td>
+            <td class="cell--number">58</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -5145,9 +5145,9 @@
     
 
     <div class="t-line-summary">
-      <b>61</b> relevant lines.
+      <b>58</b> relevant lines.
       <span class="green"><b>0</b> lines covered</span> and
-      <span class="red"><b>61</b> lines missed.</span>
+      <span class="red"><b>58</b> lines missed.</span>
     </div>
 
     
@@ -5417,7 +5417,7 @@
 
             
 
-            <code class="ruby">      unless params[:image].nil?</code>
+            <code class="ruby">      attach_img</code>
           </li>
         </div>
       
@@ -5428,7 +5428,7 @@
 
             
 
-            <code class="ruby">        blob = ActiveStorage::Blob.create_and_upload!(</code>
+            <code class="ruby">      if user_inf.save</code>
           </li>
         </div>
       
@@ -5439,7 +5439,7 @@
 
             
 
-            <code class="ruby">            io: StringIO.new((Base64.decode64(params[:image][2]))),</code>
+            <code class="ruby">        render json: { info: UserInfosSerializer.new(user.user_info).as_json }, status: 200</code>
           </li>
         </div>
       
@@ -5450,7 +5450,7 @@
 
             
 
-            <code class="ruby">            filename: params[:image][1],</code>
+            <code class="ruby">      else</code>
           </li>
         </div>
       
@@ -5461,7 +5461,7 @@
 
             
 
-            <code class="ruby">            content_type: params[:image][0],)</code>
+            <code class="ruby">        render json: user_inf.errors.full_messages, status: :unprocessable_entity</code>
           </li>
         </div>
       
@@ -5472,7 +5472,7 @@
 
             
 
-            <code class="ruby">        user_inf.image.attach(blob)</code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
@@ -5483,7 +5483,7 @@
 
             
 
-            <code class="ruby">      end</code>
+            <code class="ruby">    else</code>
           </li>
         </div>
       
@@ -5494,7 +5494,7 @@
 
             
 
-            <code class="ruby">      if user_inf.save</code>
+            <code class="ruby">      if User.find(params[:user_id]).id != user.user_info.user_id</code>
           </li>
         </div>
       
@@ -5505,7 +5505,7 @@
 
             
 
-            <code class="ruby">        render json: { info: UserInfosSerializer.new(user.user_info).as_json }, status: 200</code>
+            <code class="ruby">        render json: { message: I18n.t(&quot;userInfoValidError&quot;) }, status: 403</code>
           </li>
         </div>
       
@@ -5527,7 +5527,7 @@
 
             
 
-            <code class="ruby">        render json: user_inf.errors.full_messages, status: :unprocessable_entity</code>
+            <code class="ruby">        if user.user_info.update(user_info_params)</code>
           </li>
         </div>
       
@@ -5538,7 +5538,7 @@
 
             
 
-            <code class="ruby">      end</code>
+            <code class="ruby">          attach_img</code>
           </li>
         </div>
       
@@ -5549,7 +5549,7 @@
 
             
 
-            <code class="ruby">    else</code>
+            <code class="ruby">          render json: { info: UserInfosSerializer.new(user.user_info).as_json }, status: 200</code>
           </li>
         </div>
       
@@ -5560,7 +5560,7 @@
 
             
 
-            <code class="ruby">      if User.find(params[:user_id]).id != user.user_info.user_id</code>
+            <code class="ruby">        else</code>
           </li>
         </div>
       
@@ -5571,7 +5571,7 @@
 
             
 
-            <code class="ruby">        render json: { message: I18n.t(&quot;userInfoValidError&quot;) }, status: 403</code>
+            <code class="ruby">          render json: user.user_info.errors.full_messages, status: :unprocessable_entity</code>
           </li>
         </div>
       
@@ -5582,7 +5582,7 @@
 
             
 
-            <code class="ruby">      else</code>
+            <code class="ruby">        end</code>
           </li>
         </div>
       
@@ -5593,7 +5593,7 @@
 
             
 
-            <code class="ruby">        if user.user_info.update(user_info_params)</code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
@@ -5604,18 +5604,18 @@
 
             
 
-            <code class="ruby">          unless params[:image].nil?</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="42">
+          <li class="never" data-hits="" data-linenumber="42">
             
             
 
             
 
-            <code class="ruby">            blob = ActiveStorage::Blob.create_and_upload!(</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -5626,18 +5626,18 @@
 
             
 
-            <code class="ruby">                io: StringIO.new((Base64.decode64(params[:image][2]))),</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="44">
+          <li class="never" data-hits="" data-linenumber="44">
             
             
 
             
 
-            <code class="ruby">                filename: params[:image][1],</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -5648,7 +5648,7 @@
 
             
 
-            <code class="ruby">                content_type: params[:image][0],)</code>
+            <code class="ruby">  def attach_img</code>
           </li>
         </div>
       
@@ -5659,7 +5659,7 @@
 
             
 
-            <code class="ruby">            user.user_info.image.attach(blob)</code>
+            <code class="ruby">    unless params[:image].nil?</code>
           </li>
         </div>
       
@@ -5670,7 +5670,7 @@
 
             
 
-            <code class="ruby">          end</code>
+            <code class="ruby">      blob = ActiveStorage::Blob.create_and_upload!(</code>
           </li>
         </div>
       
@@ -5681,7 +5681,7 @@
 
             
 
-            <code class="ruby">          render json: { info: UserInfosSerializer.new(user.user_info).as_json }, status: 200</code>
+            <code class="ruby">          io: StringIO.new((Base64.decode64(params[:image][2]))),</code>
           </li>
         </div>
       
@@ -5692,7 +5692,7 @@
 
             
 
-            <code class="ruby">        else</code>
+            <code class="ruby">          filename: params[:image][1],</code>
           </li>
         </div>
       
@@ -5703,7 +5703,7 @@
 
             
 
-            <code class="ruby">          render json: user.user_info.errors.full_messages, status: :unprocessable_entity</code>
+            <code class="ruby">          content_type: params[:image][0],)</code>
           </li>
         </div>
       
@@ -5714,7 +5714,7 @@
 
             
 
-            <code class="ruby">        end</code>
+            <code class="ruby">      current_user.user_info.image.attach(blob)</code>
           </li>
         </div>
       
@@ -5725,7 +5725,7 @@
 
             
 
-            <code class="ruby">      end</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -5736,7 +5736,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -5758,34 +5758,12 @@
 
             
 
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="56">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="57">
-            
-            
-
-            
-
             <code class="ruby">  private</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="58">
+          <li class="missed" data-hits="0" data-linenumber="56">
             
             
 
@@ -5796,7 +5774,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="59">
+          <li class="missed" data-hits="0" data-linenumber="57">
             
             
 
@@ -5807,7 +5785,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="60">
+          <li class="missed" data-hits="0" data-linenumber="58">
             
             
 
@@ -5818,7 +5796,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="61">
+          <li class="missed" data-hits="0" data-linenumber="59">
             
             
 
@@ -5829,7 +5807,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="62">
+          <li class="missed" data-hits="0" data-linenumber="60">
             
             
 
@@ -5840,7 +5818,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="63">
+          <li class="missed" data-hits="0" data-linenumber="61">
             
             
 
@@ -5851,7 +5829,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="64">
+          <li class="missed" data-hits="0" data-linenumber="62">
             
             
 
@@ -5862,7 +5840,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="65">
+          <li class="missed" data-hits="0" data-linenumber="63">
             
             
 
@@ -5873,7 +5851,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="66">
+          <li class="never" data-hits="" data-linenumber="64">
             
             
 
@@ -5884,7 +5862,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="67">
+          <li class="missed" data-hits="0" data-linenumber="65">
             
             
 
