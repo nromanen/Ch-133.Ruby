@@ -22,7 +22,6 @@ kQVWrJQGqJe9vNHojr5jzZI9YmWsuETXSdujeVeKQDtP7w+GLNaoLNb4KGElt0b0kjfWkkbizt4k7LjR
     password_confirmation { "qwerty111" }
     confirmed_at { 1.day.ago }
     nick_name { "testUser" }
-    role_id { "e59d61a4-6807-4f38-9795-4931d3db9eb0" }
   end
 
   factory :advert do

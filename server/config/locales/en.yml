@@ -55,6 +55,19 @@ en:
             password_confirmation:
               too_short: is too short, minimum 8 symbols
               invalid: doesn't match password
+        user_info:
+          attributes:
+            image:
+              content_type: has wrong format
+            phone:
+              too_short: is too short
+              invalid: has wrong format
+            first_name:
+              too_short: is too short
+              invalid: has wrong format
+            last_name:
+              too_short: is too short
+              invalid: has wrong format
   advert: "advert"
   title: "title"
   text: "text"
