@@ -6,7 +6,7 @@ module Users
       self.resource = resource_class.confirm_by_token(params[:confirmation_token])
       yield resource if block_given?
 
-      respond_with_navigational(resource) { redirect_to after_confirmation_path_for(resource_name, resource) }
+      respond_with_navigational(resource) { redirect_to after_confirmation_path_for(resource_name, resource), allow_other_host: true }
     end
 
     protected

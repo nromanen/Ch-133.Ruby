@@ -12,4 +12,13 @@ class Comment < ApplicationRecord
       author_name: self.user.nick_name,
       author_img: self.user.avatar }
   end
+
+  def as_json
+    {
+        id: id,
+        text: text,
+        author: author
+    }
+  end
+
 end

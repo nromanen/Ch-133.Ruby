@@ -32,7 +32,12 @@ function CookieRefresh() {
     const clear = async () => {
       await promise
     }
-    navigate("/adverts")
+    let admin = localStorage.getItem('role');
+    if (admin == "Admin") {
+      navigate("/admin/roles")
+    } else {
+      navigate("/adverts")
+    }
     clear()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

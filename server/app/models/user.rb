@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   before_validation :set_default
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # devise :database_authenticatable, :registerable,
@@ -48,4 +49,25 @@ class User < ApplicationRecord
       user_info.image_url
     end
   end
+
+  def change_role(role_name)
+    role = Role.find_by(name: role_name)
+    if admin_check
+      self.update_attribute(:role_id, role.id)
+      self.role = role
+    else
+      false
+    end
+  end
+
+  private
+
+  def admin_check
+    if self.role_name == "Admin"
+      User.where(role_id: self.role_id).count > 1
+    else
+      true
+    end
+  end
+
 end

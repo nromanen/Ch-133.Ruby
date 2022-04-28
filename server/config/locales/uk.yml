@@ -9,6 +9,9 @@ uk:
   infoNotExist: "Інфо не існує."
   userNotExist: "Користувача не існує."
   success: "Дія пройшла успішно"
+  rolechange: "Роль була змінена"
+  wrongrole: "Неправильний дозвіл"
+  lastadmin: "Не можна змінити роль останнього адміна"
   wrongway: "Хмм, щось пішло не так"
   category: "Категорію"
   comment: "Коментар"
@@ -21,6 +24,10 @@ uk:
   titleNotUnique": "Ця назва вже зайнята"
   signed_up_and_unconfirmed: "Ви отримаєте листа з вказівками щодо підтвердження облікового запису протягом декількох хвилин."
   userInfoValidError: "У Вас немає прав, або інфо не існує."
+  reset_password_success: "Пароль успішно скинуто"
+  reset_password_failed: "Не вдалось скинути пароль"
+  reset_password_email_send: "Лист для скидання паролю надіслано на пошту"
+  reset_password_email_not_send: "Не вдалось надіслати лист"
   activerecord:
     models:
       user_info: info

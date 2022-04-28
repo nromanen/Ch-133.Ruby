@@ -1,14 +1,13 @@
 .like {
-  font-family: 'Red Hat Mono', monospace;
-  display: inline-flex;
+  font-family: "Red Hat Mono", monospace;
+  display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: baseline;
-  max-width: 300px;
   margin: 0px auto;
   padding: 5px 5px;
   background: #fff;
-  text-align: right;
+  width: 100%;
 }
 
 .bold {
