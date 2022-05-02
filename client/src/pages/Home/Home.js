@@ -1,4 +1,5 @@
 import InfoTiles from './components/cards/cards';
+import TopButton from "../../components/topButton";
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import {useNavigate} from "react-router-dom"
@@ -61,6 +62,7 @@ const Home = () => {
         <BigText/>
       </Paper>
       <InfoTiles/>
+      <TopButton/>
     </>
   );
 };

@@ -19,10 +19,6 @@ const Header = (props) => {
       title: t("header.main"),
       path: "/adverts",
     },
-    {
-      title: t("header.contact"),
-      path: "/contact",
-    },
   ];
 
   return (
@@ -41,9 +37,11 @@ const Header = (props) => {
           </ul>
         </nav>
         <div className="spacer"></div>
+
+
         { token != null && <CreateButton link={"/create_advert"}/>  }
-        <Switcher/>
         <MenuList/>
+        <Switcher/>
       </div>
     </header>
   );

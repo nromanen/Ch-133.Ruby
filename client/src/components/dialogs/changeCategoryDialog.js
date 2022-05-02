@@ -1,49 +1,52 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import FormInput from "../../components/form-input/form-input";
-import CustomButton from "../../components/custom-button/custom-button";
 import Message from "../../components/toster/message";
 import Cookies from "universal-cookie";
-import "./CategoryPage.scss";
 import "../../consts.js";
 import axios from "axios";
 import ImageUploader from "react-images-upload";
-const cookies = new Cookies();
+import { forwardRef, useImperativeHandle } from "react";
 
-export default function NewCategory() {
+const EditCategory = forwardRef((props, ref) => {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [showMessage, setShowMessage] = useState(false);
   const [messageStyle, setMessageStyle] = useState("error");
   const [image, setImage] = useState(null);
-  const token = cookies.get("user-info");
-  const language = cookies.get("i18next");
-  const label = "New category";
+  const label = "Edit category";
+  const cookies = new Cookies();
 
-  const configWithToken = {
-    headers: {
-      "Content-Type": "application/json",
-      "X-lang": language,
-      Authorization: `Bearer ${token}`,
+  useImperativeHandle(ref, () => ({
+    changeCategory() {
+      axios
+        .put(
+          `${window.createCategoryUrl}/${props.id}`,
+          { name: name, image: image },
+          getCredentials()
+        )
+        .then(function (response) {
+          setShowMessage(true);
+          setMessage(response.data["message"]);
+          setMessageStyle("success");
+          props.change();
+        })
+        .catch(function (error) {
+          setShowMessage(true);
+          setMessage(JSON.stringify(error.response.data));
+        });
     },
-  };
+  }));
 
-  const Submit = (event) => {
-    event.preventDefault();
-    axios
-      .post(
-        window.createCategoryUrl,
-        { name: name, image: image },
-        configWithToken
-      )
-      .then(function (response) {
-        setShowMessage(true);
-        setMessage(response.data["message"]);
-        setMessageStyle("success");
-      })
-      .catch(function (error) {
-        setShowMessage(true);
-        setMessage(JSON.stringify(error.response.data));
-      });
+  const getCredentials = () => {
+    const token = cookies.get("user-info");
+    const language = cookies.get("i18next");
+    return {
+      headers: {
+        "Content-Type": "application/json",
+        "X-lang": language,
+        Authorization: `Bearer ${token}`,
+      },
+    };
   };
 
   const onImage = async (failedImages, successImages) => {
@@ -62,7 +65,7 @@ export default function NewCategory() {
     <div className="category">
       {showMessage ? <Message text={message} type={messageStyle} /> : null}
       <h2>{label}</h2>
-      <form onSubmit={Submit}>
+      <form>
         <FormInput
           name="name"
           type="name"
@@ -71,7 +74,6 @@ export default function NewCategory() {
             setName(event.target.value);
           }}
         />
-        <CustomButton type="submit">Create</CustomButton>
         <ImageUploader
           withPreview={true}
           withIcon={true}
@@ -84,4 +86,6 @@ export default function NewCategory() {
       </form>
     </div>
   );
-}
+});
+
+export default EditCategory;
