@@ -4,7 +4,7 @@ class Category < ApplicationRecord
   before_validation :capitalize_name
 
   #will_paginate gem
-  self.per_page = 10
+  #self.per_page = 10
 
   has_many :adverts, dependent: :nullify
 

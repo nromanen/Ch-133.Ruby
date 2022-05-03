@@ -2,7 +2,8 @@
 
 class User < ApplicationRecord
   before_validation :set_default
-  
+  after_create :create_subscribe
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # devise :database_authenticatable, :registerable,
@@ -20,6 +21,7 @@ class User < ApplicationRecord
   belongs_to :role, optional: true
   delegate :name, to: :role, prefix: true
   has_one :user_info, dependent: :destroy
+  has_one :subscribe, dependent: :destroy
 
   validates :email, presence: true, uniqueness: { uniqueness: true},
             format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/ }
@@ -30,8 +32,10 @@ class User < ApplicationRecord
             format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/ }
   validates_confirmation_of :password
   def set_default
-    role_user = Role.find_by(name: "User")
-    self.role = role_user
+    if self.role.nil?
+      role_user = Role.find_by(name: "User")
+      self.role = role_user
+    end
   end
 
   def get_advert_count
@@ -68,6 +72,10 @@ class User < ApplicationRecord
     else
       true
     end
+  end
+
+  def create_subscribe
+    self.create_subscribe!
   end
 
 end

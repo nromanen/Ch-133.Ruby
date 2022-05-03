@@ -18,8 +18,8 @@ kQVWrJQGqJe9vNHojr5jzZI9YmWsuETXSdujeVeKQDtP7w+GLNaoLNb4KGElt0b0kjfWkkbizt4k7LjR
 
   factory :user do
     email { "testUser@gmail.com" }
-    password { "qwerty111" }
-    password_confirmation { "qwerty111" }
+    password { "Qwerty123" }
+    password_confirmation { "Qwerty123" }
     confirmed_at { 1.day.ago }
     nick_name { "testUser" }
   end
@@ -29,8 +29,8 @@ kQVWrJQGqJe9vNHojr5jzZI9YmWsuETXSdujeVeKQDtP7w+GLNaoLNb4KGElt0b0kjfWkkbizt4k7LjR
   end
 
   factory :advert do
-    title "Test"
-    text "testtesttesttesttesttest"
+    title {"Test"}
+    text {"testtesttesttesttesttest"}
     after(:build) do |advert|
       blob = ActiveStorage::Blob.create_and_upload!(
         io: StringIO.new((Base64.decode64("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="))),

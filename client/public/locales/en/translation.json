@@ -68,6 +68,19 @@
     "passwordConfirmation": "Password confirmation",
     "button": "Sign Up"
   },
+  "category" : {
+    "create": "Create",
+    "createCategory": "Creating Category",
+    "name": "Name",
+    "edit": "Edit",
+    "editCategory": "Editing Category",
+    "all": "All Categories",
+    "delete": "Category deleting",
+    "yes": "Yes",
+    "no": "No",
+    "sure?": "Are you sure to do this?",
+    "successDelete": "Deleted successfully!"
+  },
   "resetPasswordEmail" : {
     "head": "Send reset password instructions",
     "email": "Email",

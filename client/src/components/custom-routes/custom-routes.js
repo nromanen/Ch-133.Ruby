@@ -8,6 +8,7 @@ import Home from "../../pages/Home/Home";
 import UserInfo from "../../pages/UserInfo/UserInfo";
 import CategoryNew from "../../pages/Category/CategoryNew";
 import Categories from "../../pages/Category/Categories";
+import CategoryEdit from "../../pages/Category/CategoryEdit";
 import { RequireAuth, RequireAdmin, RequireNoAuth } from "../../auth.js";
 import CreateAdvertisement from "../../pages/Advertisement/CreateAdvertisement";
 import Adverts from "../../pages/Advertisement/Adverts";
@@ -25,6 +26,7 @@ const CustomRoutes = () => {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/categories/new" element={<CategoryNew />} />
+          <Route path="/categories/edit/:id" element={<CategoryEdit />} />
           <Route path="/categories" element={<Categories />} />
           <Route
             path="/sign_in"
@@ -46,7 +48,7 @@ const CustomRoutes = () => {
           <Route path="/users/:userId/user_infos" element={<UserInfo />} />
           <Route path="/adverts/:advertId" element={<ShowAdvertisement />} />
           <Route path="/create_advert" element={<RequireAuth><CreateAdvertisement/></RequireAuth>}/>
-          <Route path="/adverts/:advertId/edit" element={<RequireAuth><UpdateAdvertisement/></RequireAuth>}/>
+          {/*<Route path="/adverts/:advertId/edit" element={<RequireAuth><UpdateAdvertisement/></RequireAuth>}/>*/}
           <Route
             path="/adverts/:advertId/comments"
             element={<CreateComment />}

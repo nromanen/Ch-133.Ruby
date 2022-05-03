@@ -26,6 +26,8 @@ module AdvertApp
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
     config.i18n.default_locale = :en
 
+    config.factory_bot.definition_file_paths = ["spec/factories"]
+
 
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0

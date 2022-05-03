@@ -25,4 +25,8 @@ Rails.application.routes.draw do
   end
 
   resources :categories, :comments, :roles
+
+  patch "/subscribes", to: "subscribes#update"
+  get "/subscribed", to: "subscribes#subscribed?"
+
 end

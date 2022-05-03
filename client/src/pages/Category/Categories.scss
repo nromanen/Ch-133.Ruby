@@ -1,6 +1,6 @@
 .categories {
   font-family: 'Red Hat Mono', monospace;
-  display: flex;
+  display: block;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -18,4 +18,19 @@
   font-weight: bold;
   color: black;
   text-align: center;
+}
+
+.icon {
+  float: right;
+  color: red;
+  background: none;
+  border: none;
+  position: sticky;
+  cursor: pointer;
+}
+
+.inbox {
+  border: none;
+  background: none;
+  margin-top: 10px;
 }
