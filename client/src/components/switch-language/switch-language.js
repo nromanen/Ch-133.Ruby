@@ -23,7 +23,6 @@ const Switcher = () => {
 
   return (
     <div className="switcher">
-      <span>{t("header.language")}</span>{" "}
       <select onChange={handleChangeLocale} value={language} className="switcher-rignt">
         {languages.map(({ name, code }) => (
           <option key={code} value={code}>

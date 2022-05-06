@@ -25,7 +25,6 @@ function CookieRefresh() {
       navigate("/sign_in")
     ), time);
   }).then(
-    result => console.log(result),
   );
 
   useEffect(() => {

@@ -48,7 +48,6 @@ document.head.appendChild(styleLink);
 
      const onImage = async (failedImages, successImages) => {
          try {
-             console.log('successImages', successImages);
              const parts = successImages[0].split(';');
              const mime = parts[0].split(':')[1];
              const name = parts[1].split('=')[1];
