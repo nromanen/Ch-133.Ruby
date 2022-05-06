@@ -50,7 +50,20 @@ class CategoriesController < ApplicationController
 
   def destroy
     authorize @category
-    @category.destroy
+    if @category.adverts.present?
+      render json: {
+               message: 'Can not delete',
+             },
+             status: :ok,
+             status: :unprocessable_entity
+    else
+      @category.destroy
+      render json: {
+               message: 'Was destroyed',
+             },
+             status: :ok,
+             status: :unprocessable_entity
+    end
   end
 
   private

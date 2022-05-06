@@ -6,10 +6,12 @@ class AdvertsController < ApplicationController
 
   # POST /adverts
   def create
+    @category = Category.find(params[:category_id])
     @advert = current_user.adverts.new(advert_params)
     attach_64
     authorize @advert
     if @advert.save
+      @advert.category = category
       render json: { message: I18n.t("created", name: I18n.t("advert"))
       }, status: 200
     else
