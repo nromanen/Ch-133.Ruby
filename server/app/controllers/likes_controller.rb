@@ -4,8 +4,8 @@ class LikesController < ApplicationController
   before_action :authenticate_user!, only: %i[create destroy]
 
   def index
-    like = advert.likes.where(user_id: current_user.try(:id)).first 
-    render json: { message: like.try(:id), amount: advert.likes.size }
+    like = advert.likes.where(user_id: current_user.try(:id)).first
+    render json: { message: like.try(:id), amount: advert.likes.size }, status: :ok
   end
 
   def create
@@ -40,7 +40,7 @@ class LikesController < ApplicationController
   def wrond_message
     render json: { message: I18n.t("wrongway"), amount: advert.likes.size }, status: :unprocessable_entity
   end
-  
+
   def liked?
     !advert.likes.where(user_id: current_user.try(:id)).blank?
   end
