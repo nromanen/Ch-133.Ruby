@@ -1,0 +1,1 @@
+@category = Category.create!(name: "Other")

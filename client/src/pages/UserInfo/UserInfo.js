@@ -13,10 +13,7 @@ import jwt from 'jwt-decode';
 import { withTranslation } from 'react-i18next';
 import "../../i18n";
 import ImageUploader from "react-images-upload";
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
 const cookies = new Cookies();
-
 
 
 
@@ -38,10 +35,6 @@ const UserInfo = (props) => {
     const [text, setText] = useState(null);
     const [msgType, setMsgType] = useState('error');
 
-    const [subscribed, setSubscribed] = useState(null)
-    const [subscribedTitle, setTitleSubscribed] = useState("")
-    const [oppositeSubscribed, setOppositeTitleSubscribed] = useState("")
-
     const handleSubmit = useCallback((event, value) => {
         event.preventDefault();
 
@@ -56,7 +49,7 @@ const UserInfo = (props) => {
             "phone": phone,
             "image": image
         };
-
+        console.log('image1 ------', image);
         setDisabled(true);
         if (token_id === params.userId){
             axios.put(`${baseUrlUsers}/${params.userId}/user_infos`,
@@ -64,6 +57,7 @@ const UserInfo = (props) => {
                 config
             )
                 .then(function (response) {
+                    console.log('--------- response', response);
                     setText('User info was updated.');
                     setFirstName(response.data.info.data.attributes.first_name);
                     setLastName(response.data.info.data.attributes.last_name);
@@ -72,6 +66,7 @@ const UserInfo = (props) => {
                     setMsgType('success')
                 })
                 .catch(function (error) {
+                    console.log('--------- error', error);
                     if (error.response.status === 422){
                         setText(error.response.data.join('. \n'));
                         setMsgType('error')
@@ -88,7 +83,7 @@ const UserInfo = (props) => {
             const name = parts[1].split('=')[1];
             const data = parts[2].split(',')[1];
             setImage([mime, name, data]);
-
+            console.log("image --------------", image)
         } catch (error) {
             console.log('error in upload', error);}
     };
@@ -112,43 +107,7 @@ const UserInfo = (props) => {
                     window.location = '/HomePage';
                 }
             })
-
-        const config = {
-            headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
-        };
-        axios.get(`${window.baseUrl}subscribed`, config)
-            .then((response)=> {
-                if (response.data){
-                    setTitleSubscribed('Subscribe')
-                    setOppositeTitleSubscribed('Unsubscribe')
-                    setSubscribed(response.data)
-                }
-                else{
-                    setTitleSubscribed('Unsubscribed')
-                    setOppositeTitleSubscribed('Subscribe')
-                }
-            })
     }, [params.userId]);
-
-    const handleSubscribe = (e) => {
-        confirmAlert({
-            title: `${oppositeSubscribed}`,
-            message: `You sure you want to ${oppositeSubscribed}?`,
-            buttons: [ {label: "Yes", onClick: () => changeSubscribe()}, {label: "No"} ]
-        });
-    }
-
-    const changeSubscribe = (e) => {
-        axios.patch(`${window.baseUrl}subscribes`, {"subscribed": !subscribed},
-            {headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }})
-            .then((res) => {
-                alert("Success");
-                window.location.reload();
-            })
-            .catch((err) => {
-                alert(err.response.data.message);
-            });
-    }
 
     return (
         <div className={'user-info-page'}>
@@ -173,15 +132,11 @@ const UserInfo = (props) => {
                     onChange={onImage}
                     withIcon={false}
                     withPreview={true}
-                    buttonText={t("userInfo.choose")}
+                    buttonText="Choose images"
                     imgExtension={[".jpg", ".gif", ".png", ".gif"]}
                     maxFileSize={5242880}
                 />
-                { !!showBtnSend  ? <CustomButton disabled={disabled} type='submit'>{t("userInfo.button")}</CustomButton> : null }
-                <p> </p>
-                { !!showBtnSend  ? <CustomButton disabled={disabled} onClick={(e) => handleSubscribe(e)} type='submit'>{oppositeSubscribed}</CustomButton> : null }
-                <p> </p>
-                <p> </p>
+                { !!showBtnSend  ? <CustomButton disabled={disabled} type='submit'>Send</CustomButton> : null }
 
             </form>
         </div>

@@ -28,5 +28,6 @@ Rails.application.routes.draw do
 
   patch "/subscribes", to: "subscribes#update"
   get "/subscribed", to: "subscribes#subscribed?"
+  post "/pdf_info", to: "subscribes#pdf_info"
 
 end

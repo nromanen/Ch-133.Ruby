@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
   before_validation :set_default
-  after_create :create_subscribe
+  after_create :create_subscribe, :create_userinfo
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -76,6 +76,10 @@ class User < ApplicationRecord
 
   def create_subscribe
     self.create_subscribe!
+  end
+
+  def create_userinfo
+    self.create_user_info!(first_name: "", last_name: "", phone: "")
   end
 
 end

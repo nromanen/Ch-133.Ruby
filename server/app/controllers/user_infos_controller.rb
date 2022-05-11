@@ -45,21 +45,21 @@ class UserInfosController < ApplicationController
   def attach_img
     unless params[:image].nil?
       blob = ActiveStorage::Blob.create_and_upload!(
-          io: StringIO.new((Base64.decode64(params[:image][2]))),
-          filename: params[:image][1],
-          content_type: params[:image][0],)
+        io: StringIO.new((Base64.decode64(params[:image][2]))),
+        filename: params[:image][1],
+        content_type: params[:image][0],)
       current_user.user_info.image.attach(blob)
     end
   end
 
   private
-    def user_info_params
-      params.require(:user_info).permit(
-        :first_name,
-        :last_name,
-        :phone,
-        :image
-      )
-    end
+  def user_info_params
+    params.require(:user_info).permit(
+      :first_name,
+      :last_name,
+      :phone,
+      :image
+    )
+  end
 
 end

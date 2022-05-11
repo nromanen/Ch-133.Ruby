@@ -25,6 +25,9 @@ gem "uuid"
 gem "i18n", "~> 1.10"
 gem "will_paginate", "~> 3.3", ">= 3.3.1"
 gem "api-pagination"
+gem 'prawn', '~> 2.4'
+gem 'prawn-table', '~> 0.2.2'
+gem 'prawn-emoji', '~> 5.3'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]

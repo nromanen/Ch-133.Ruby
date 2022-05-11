@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class SubscribesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_subscriber
+  before_action :authenticate_user!#, except: %i[ pdf_info ]
+  before_action :set_subscriber#, except: %i[ pdf_info ]
 
   def subscribed?
     render json: @subscribe.subscribed, status: :ok
@@ -16,6 +16,20 @@ class SubscribesController < ApplicationController
     end
   end
 
+  def pdf_info
+    @user = current_user
+    @requested_at = @user.subscribe.pdf_requested_at
+    if (@user.subscribe.pdf_requested_at).nil? || @user.subscribe.pdf_requested_at < Time.now-1.day
+      puts @requested_at
+      @types = params[:types]
+      UserAdvertsMailer.pdf_info_send(@user, @types).deliver_now
+      @subscribe.update(pdf_requested_at: Time.now)
+      render json: { message: "success"}, status: :ok
+    else
+      render json: { message: (@requested_at + 1.day) }, status: :service_unavailable
+    end
+  end
+
   private
 
   def set_subscriber
@@ -23,7 +37,7 @@ class SubscribesController < ApplicationController
   end
 
   def subscribe_params
-    params.require(:subscribe).permit(:subscribed)
+    params.permit(:subscribed, :types)
   end
 
 end
